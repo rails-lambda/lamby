@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    lamby (0.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.11.3)
+    rake (12.3.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler
+  lamby!
+  minitest
+  rake
+
+BUNDLED WITH
+   1.17.3
