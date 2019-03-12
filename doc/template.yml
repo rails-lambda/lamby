@@ -1,0 +1,85 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Hello Rails Lambda
+
+Parameters:
+
+  RailsEnv:
+    Type: String
+    Default: development
+    AllowedValues:
+      - development
+      - test
+      - staging
+      - production
+
+Resources:
+
+  RailsApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref RailsEnv
+      EndpointConfiguration: EDGE
+      DefinitionBody:
+        swagger: 2.0
+        info: { title: !Ref 'AWS::StackName' }
+        basePath: !Join [ '', [ '/', !Ref RailsEnv ] ]
+        schemes: [ 'https' ]
+        paths:
+          /:
+            get:
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsFunction.Arn}:live/invocations
+                httpMethod: POST
+                type: aws_proxy
+          /{resource+}:
+            x-amazon-apigateway-any-method:
+              parameters:
+                - name: resource
+                  in: path
+                  required: true
+                  type: string
+              x-amazon-apigateway-integration:
+                uri:
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsFunction.Arn}:live/invocations
+                httpMethod: POST
+                type: aws_proxy
+        x-amazon-apigateway-binary-media-types:
+          - '*/*'
+
+  RailsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: app.handler
+      Runtime: ruby2.5
+      MemorySize: 512
+      Timeout: 30
+      Environment:
+        Variables:
+          RAILS_ENV: !Ref RailsEnv
+      Events:
+        Root:
+          Type: Api
+          Properties:
+            Path: /
+            Method: GET
+            RestApiId: !Ref RailsApi
+        RailsAppAll:
+          Type: Api
+          Properties:
+            Path: /{resource+}
+            Method: ANY
+            RestApiId: !Ref RailsApi
+      AutoPublishAlias: live
+
+Outputs:
+
+  RailsApiUrl:
+    Description: API Gateway Endpoint
+    Value: !Sub "https://${RailsApi}.execute-api.${AWS::Region}.amazonaws.com/${RailsEnv}/"
+
+  RailsFunctionArn:
+    Description: Lambda Function ARN
+    Value: !GetAtt RailsFunction.Arn
