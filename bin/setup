@@ -5,3 +5,4 @@ IFS=$'\n\t'
 set -vx
 
 bundle install
+pipenv install

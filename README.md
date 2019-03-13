@@ -151,15 +151,16 @@ Below is a list of bin scripts we recommend creating for your AWS SAM & Rails pr
 
 #### bin/bootstrap
 
-The current Docker image for Lambda's Ruby runtime is only compatible with Bundler prior to version 2.0.0. So this bootstrap makes sure the latest 1.x bundler is installed and used.
+Provisions required dependencies for local development, including:
+  * The proper ruby version via [rbenv](https://github.com/rbenv/rbenv) & [ruby-build](https://github.com/rbenv/ruby-build)
+  * The proper python version via [pyenv](https://github.com/pyenv/pyenv) & [pipenv](https://pipenv.readthedocs.io/en/latest/)
+
+_Note: This is currently scoped to macOS._
 
 ```shell
-#!/bin/bash
-set -e
-
-gem uninstall -aIx bundler
-gem install bundler -v 1.17.3
+./bin/bootstrap
 ```
+
 
 #### bin/setup
 
