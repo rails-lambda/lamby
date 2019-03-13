@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (0.1.0)
+    lamby (0.2.0)
       activesupport
       rack
 
