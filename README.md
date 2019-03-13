@@ -1,7 +1,7 @@
 
 # Lamby
 
-<img src="https://git.io/fhjSv" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" /><h3>Simple Rails & AWS Lambda Integration using Rack</h3>
+<img src="https://user-images.githubusercontent.com/2381/54278425-af365680-4568-11e9-972a-6b73e0a44bb5.jpg" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" /><h3>Simple Rails & AWS Lambda Integration using Rack</h3>
 
 The goal of this project is to provide minimal code along with comprehensive documentation to get your Rails application running under AWS Lambda.
 
