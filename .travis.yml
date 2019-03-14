@@ -1,7 +1,11 @@
 ---
-sudo: false
+if: branch = master OR type = pull_request
 language: ruby
 cache: bundler
 rvm:
   - 2.5.3
-before_install: gem install bundler -v 1.17.3
+before_install:
+  - sudo gem install bundler -v 1.17.3
+  - bin/setup
+script:
+  - bin/test
