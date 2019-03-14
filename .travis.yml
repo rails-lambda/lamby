@@ -8,6 +8,9 @@ services:
   - docker # for samlocal
 before_install:
   - bin/setup
+cache:
+  directories:
+    - /home/linuxbrew
 jobs:
   include:
     - stage: test
