@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo gem install bundler -v 1.17.3
+
+# Install linuxbrew
+export HOMEBREW_FORCE_VENDOR_RUBY=true
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
+echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+
+# Make a CI-only brewfile. Casks cannot be installed on linux.
+export CI_BREWFILE="$HOME/CI-Brewfile"
+cat Brewfile | grep -E "^(tap|brew)" >> "$CI_BREWFILE"

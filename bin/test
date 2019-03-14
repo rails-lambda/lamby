@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
 set -e
+SUITE=$1
 
-bundle exec rake test
+if [ -e "$SUITE" ]; then
+  echo "$SUITE"
+  aws --version
+  sam --version
+else
+  bundle exec rake test
+fi

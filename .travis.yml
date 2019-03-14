@@ -4,8 +4,19 @@ language: ruby
 cache: bundler
 rvm:
   - 2.5.3
+services:
+  - docker # for samlocal
 before_install:
-  - sudo gem install bundler -v 1.17.3
   - bin/setup
-script:
-  - bin/test
+jobs:
+  include:
+    - stage: test
+      name: Units
+    - stage: test
+      name: Integration
+      before_install:
+        - source bin/cibuild
+        - bin/bootstrap
+        - bin/setup
+      script: bin/test integration
+script: bin/test
