@@ -17,3 +17,4 @@ echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
 # Make a CI-only brewfile. Casks cannot be installed on linux.
 export CI_BREWFILE="$HOME/CI-Brewfile"
 cat Brewfile | grep -E "^(tap|brew)" >> "$CI_BREWFILE"
+eval "$(pyenv init -)"

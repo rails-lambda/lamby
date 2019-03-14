@@ -1,12 +1,12 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e90ffb3268e39f48a61a46d3b09fe56bb9447190af124f7e6ec4947a6b87873e"
+            "sha256": "efa6057a311e3d0be0c3581699a2cd48ae79cfee2998a4dcb7c74a736d2b3525"
         },
         "pipfile-spec": 6,
         "requires": {
             "awscli": "*",
-            "python_version": "3.7"
+            "python_version": "3.6"
         },
         "sources": [
             {

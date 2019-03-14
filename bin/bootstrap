@@ -11,6 +11,8 @@ if [ -f $BREWFILE ]; then
     brew bundle --file="$BREWFILE" --verbose
   }
 fi
+echo "testing available pythons"
+python-build --definitions
 
 brew bootstrap-pyenv-python
 brew bootstrap-rbenv-ruby
