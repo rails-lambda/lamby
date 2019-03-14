@@ -1,5 +1,5 @@
 
-# Lamby
+# Lamby [![Build Status](https://travis-ci.com/customink/lamby.svg?branch=master)](https://travis-ci.com/customink/lamby)
 
 <img src="https://user-images.githubusercontent.com/2381/54278425-af365680-4568-11e9-972a-6b73e0a44bb5.jpg" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" /><h3>Simple Rails & AWS Lambda Integration using Rack</h3>
 
