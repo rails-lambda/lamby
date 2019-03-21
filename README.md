@@ -21,6 +21,17 @@ This gem's code will focus mainly on converting API Gateway `event` and `context
 * [Contributing](#contributing)
 * [Code of Conduct](#code-of-conduct)
 
+### Additional Documentation
+
+In order to provide minimal code and ultimate flexibility for any type of Rails application on Lambda, optional or advanced features require that you write additional CloudFormation code or perform AWS Console actions to get the desired results.
+
+To that end, we are using our GitHub issues along with the `[docs]` label as a project-focused Stack Overflow where we encourage you to participate in and ask questions. Here are a few high level docs now that may interests most users. Also, [browse all docs](https://github.com/customink/lamby/issues?q=is%3Aissue+is%3Aopen+label%3Adocs) or open a new `[question]` issue and we would be glad to help!
+
+* [Custom Domain Name, Edge/Regional, & CloudFront](https://github.com/customink/lamby/issues/10)
+* [API Gateway Permissions & CloudWatch Logs](https://github.com/customink/lamby/issues/6)
+
+### Our Todo List
+
 The following are code and/or documentation items we are currently working on. Please open an issue and suggest a new one if you do not see it here. Thanks!
 
 * [ ] Encrypted Session Secret via AWS System Manager Parameter Store.
