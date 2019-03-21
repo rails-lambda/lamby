@@ -106,7 +106,7 @@ end
 
 #### Create SAM Template
 
-Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md) `template.yaml` file that expresses your function's resources and how it receives events from API Gateway. Please use this full [doc/template.yml](doc/template.yml) file hosted here as a starting point. The basic template accomplishes the following.
+Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md) `template.yaml` file that expresses your function's resources and how it receives events from API Gateway. Please use this full [doc/template.yaml](doc/template.yaml) file hosted here as a starting point. The basic template accomplishes the following.
 
 * Defines a `RailsEnv` input parameter.
   - Applies this to the `RAILS_ENV` environment variable.
@@ -340,7 +340,7 @@ We need our API Gateway to use both a root path and a greedy proxy path to forwa
 
 ## About AWS SAM and CloudFormation
 
-AWS SAM is shorthand for the [Serverless Application Model](https://github.com/awslabs/serverless-application-model) and it is a superset of CloudFormation - a language that describes and provisions your infrastructure using code. As your application grows and requires additional AWS resources, learning how to express this in your `template.yml` is critical. We recommend the following links when needing to learn both SAM and CloudFormation.
+AWS SAM is shorthand for the [Serverless Application Model](https://github.com/awslabs/serverless-application-model) and it is a superset of CloudFormation - a language that describes and provisions your infrastructure using code. As your application grows and requires additional AWS resources, learning how to express this in your `template.yaml` is critical. We recommend the following links when needing to learn both SAM and CloudFormation.
 
 * [AWS Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md)
 * [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
