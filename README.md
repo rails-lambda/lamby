@@ -226,7 +226,7 @@ fi
 Uses both the [sam package](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-package.html) and [sam deploy](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-deploy.html) commands to ship your Lambda stack to AWS. It also:
 
 * Uses or sets the `RAILS_ENV` variable. Defaults to `development`.
-* Uses or sets the `CF_BUCKET_NAME` variable. This is the name of the S3 bucket that holds your deploy artifacts.
+* Uses or sets the `CLOUDFORMATION_BUCKET` variable. This is the name of the S3 bucket that holds your deploy artifacts.
 * Sets the `SKIP_LOCAL_BUNDLE` environment variable used by build.
 
 ```shell
@@ -234,7 +234,7 @@ Uses both the [sam package](https://docs.aws.amazon.com/serverless-application-m
 set -e
 
 export RAILS_ENV=${RAILS_ENV:="development"}
-export CF_BUCKET_NAME=${CF_BUCKET_NAME:="mycloudformationbucket.example.org"}
+export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="mycloudformationbucket.example.org"}
 export SKIP_LOCAL_BUNDLE="1"
 
 ./bin/build
@@ -242,7 +242,7 @@ export SKIP_LOCAL_BUNDLE="1"
 sam package \
     --template-file ./.aws-sam/build/template.yaml \
     --output-template-file ./.aws-sam/build/packaged.yaml \
-    --s3-bucket $CF_BUCKET_NAME \
+    --s3-bucket $CLOUDFORMATION_BUCKET \
     --s3-prefix "my-app-${RAILS_ENV}"
 
 sam deploy \
