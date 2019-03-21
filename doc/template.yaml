@@ -19,7 +19,7 @@ Resources:
     Type: AWS::Serverless::Api
     Properties:
       StageName: !Ref RailsEnv
-      EndpointConfiguration: EDGE
+      EndpointConfiguration: REGIONAL
       DefinitionBody:
         swagger: 2.0
         info: { title: !Ref 'AWS::StackName' }
@@ -27,7 +27,7 @@ Resources:
         schemes: [ 'https' ]
         paths:
           /:
-            get:
+            x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 uri:
                   Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsFunction.Arn}:live/invocations
@@ -59,12 +59,13 @@ Resources:
       Environment:
         Variables:
           RAILS_ENV: !Ref RailsEnv
+      FunctionName: !Join [ '', [ 'hello-rails-', !Ref RailsEnv, '-', !Ref 'AWS::Region' ] ]
       Events:
         Root:
           Type: Api
           Properties:
             Path: /
-            Method: GET
+            Method: ANY
             RestApiId: !Ref RailsApi
         RailsAppAll:
           Type: Api

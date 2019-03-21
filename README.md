@@ -23,8 +23,6 @@ This gem's code will focus mainly on converting API Gateway `event` and `context
 
 The following are code and/or documentation items we are currently working on. Please open an issue and suggest a new one if you do not see it here. Thanks!
 
-* [ ] Ensure Rack integration is solid and high quality.
-  - Cookies, Sessions, Query Params, Forms, etc.
 * [ ] Encrypted Session Secret via AWS System Manager Parameter Store.
 * [ ] Better Gemfile usage for development and/or test groups.
 * [ ] Hooking up Rails asset precompile to a S3 bucket and using an asset host.
@@ -233,21 +231,23 @@ Uses both the [sam package](https://docs.aws.amazon.com/serverless-application-m
 #!/bin/bash
 set -e
 
-export RAILS_ENV=${RAILS_ENV:="development"}
-export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="mycloudformationbucket.example.org"}
 export SKIP_LOCAL_BUNDLE="1"
+export RAILS_ENV=${RAILS_ENV:="development"}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:=us-east-1}
+export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="mycloudformationbucket.example.org"}
 
 ./bin/build
 
 sam package \
-    --template-file ./.aws-sam/build/template.yaml \
-    --output-template-file ./.aws-sam/build/packaged.yaml \
-    --s3-bucket $CLOUDFORMATION_BUCKET \
-    --s3-prefix "my-app-${RAILS_ENV}"
+  --region ${AWS_DEFAULT_REGION} \
+  --template-file ./.aws-sam/build/template.yaml \
+  --output-template-file ./.aws-sam/build/packaged.yaml \
+  --s3-bucket $CLOUDFORMATION_BUCKET \
+  --s3-prefix "my-app-${RAILS_ENV}"
 
 sam deploy \
     --template-file ./.aws-sam/build/packaged.yaml \
-    --stack-name "my-app-${RAILS_ENV}" \
+    --stack-name "hello-rails-${RAILS_ENV}-${AWS_DEFAULT_REGION}" \
     --capabilities "CAPABILITY_IAM" \
     --parameter-overrides \
       RailsEnv=${RAILS_ENV}
