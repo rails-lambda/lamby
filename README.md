@@ -27,7 +27,7 @@ gem 'lamby'
 Create an `app.rb` file that will be the source for the Lambda's handler. Example:
 
 ```ruby
-ENV['SECRET_KEY_BASE'] = '...' # Temporary hack, see TODO list below.
+ENV['SECRET_KEY_BASE'] = '...' # Temporary hack, see TODO list in projects tab.
 require_relative 'config/boot'
 require 'lamby'
 require_relative 'config/application'
@@ -66,7 +66,7 @@ $ echo '/vendor/bundle' >> .gitignore
 
 #### Get Running
 
-To run your Lambda locally or deploy it, please read the following docs. 
+To run your Lambda locally or deploy it, please read the following docs.
 
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
@@ -94,22 +94,6 @@ AWS SAM is shorthand for the [Serverless Application Model](https://github.com/a
 
 * [AWS Serverless Application Model (SAM)](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md)
 * [AWS CloudFormation User Guide](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
-
-
-## Our Todo List
-
-The following are code and/or documentation items we are currently working on. Please open an issue and suggest a new one if you do not see it here. Thanks!
-
-* [ ] Encrypted Session Secret via AWS System Manager Parameter Store.
-* [ ] Better Gemfile usage for development and/or test groups.
-* [ ] Hooking up Rails asset precompile to a S3 bucket and using an asset host.
-* [ ] Ensure Rails tagged UUID logging matches APIGateway/Lambda IDs in CloudWatch.
-* [ ] Documentation around using ImageMagick and Lambda Layers.
-  - https://twitter.com/clare_liguori/status/1087861037712400385
-  - https://github.com/mthenw/awesome-layers
-* [ ] Explore how New Relic could be used if at all.
-* [ ] Add `isBase64Encoded` to response as needed.
-* [ ] Better Railtie hooks, and gem structure. Tests.
 
 
 ## Contributing
