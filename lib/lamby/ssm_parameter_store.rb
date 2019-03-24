@@ -9,6 +9,14 @@ module Lamby
 
     attr_reader :path, :params
 
+    class << self
+
+      def dotenv(path)
+        new(path).get!.to_dotenv
+      end
+
+    end
+
     def initialize(path, options = {})
       @path = path
       @params = []
@@ -28,7 +36,7 @@ module Lamby
     def get!
       get_all!
       get_history! if label.present?
-      params
+      self
     end
 
     def label
@@ -46,7 +54,7 @@ module Lamby
     private
 
     def dotenv_file
-      @options[:dotenv_file] || ENV['LAMBY_DOTENV_FILE'] || Rails.root.join(".env.#{Rails.env}")
+      @options[:dotenv_file] || ENV['LAMBY_SSM_PARAMS_FILE'] || Rails.root.join(".env.#{Rails.env}")
     end
 
     def dotenv_contents

@@ -30,8 +30,8 @@ class SsmParameterStoreTest < LambySpec
 
   it 'debug' do
     skip unless debug?
-    puts klass.new(path).get!.inspect
-    puts klass.new(path, label: 'live').get!.inspect
+    puts klass.new(path).get!.params.inspect
+    puts klass.new(path, label: 'live').get!.params.inspect
   end
 
 
