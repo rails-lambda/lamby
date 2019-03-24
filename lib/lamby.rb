@@ -16,4 +16,6 @@ module Lamby
     Handler.call(app, event, context)
   end
 
+  autoload :SsmParameterStore, 'lamby/ssm_parameter_store'
+
 end

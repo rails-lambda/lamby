@@ -16,7 +16,10 @@ GEM
     concurrent-ruby (1.1.4)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    metaclass (0.0.4)
     minitest (5.11.3)
+    mocha (1.8.0)
+      metaclass (~> 0.0.1)
     rack (2.0.6)
     rake (12.3.2)
     thread_safe (0.3.6)
@@ -30,6 +33,7 @@ DEPENDENCIES
   bundler
   lamby!
   minitest
+  mocha
   rake
 
 BUNDLED WITH
