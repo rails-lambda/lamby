@@ -7,6 +7,7 @@ require 'lamby/sam_helpers'
 require 'lamby/rack'
 require 'lamby/debug'
 require 'lamby/handler'
+require 'rails/railtie'
 require 'lamby/railtie'
 
 module Lamby

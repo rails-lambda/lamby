@@ -1,5 +1,3 @@
-require 'rails/railtie'
-
 module Lamby
   class Railtie < ::Rails::Railtie
 
