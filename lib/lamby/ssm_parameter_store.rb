@@ -40,7 +40,7 @@ module Lamby
     end
 
     def label
-      @options[:label]
+      ENV['LAMBY_SSM_PARAMS_LABEL'] || @options[:label]
     end
 
     def client
