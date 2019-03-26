@@ -27,7 +27,6 @@ gem 'lamby'
 Create an `app.rb` file that will be the source for the Lambda's handler. Example:
 
 ```ruby
-ENV['SECRET_KEY_BASE'] = '...' # Temporary hack, see TODO list in projects tab.
 require_relative 'config/boot'
 require 'lamby'
 require_relative 'config/application'
@@ -70,6 +69,7 @@ To run your Lambda locally or deploy it, please read the following docs.
 
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
+* [Environments & Configuration](https://github.com/customink/lamby/issues/28)
 
 ## Additional Documentation
 
@@ -79,6 +79,7 @@ To that end, we are using our GitHub issues along with the `[docs]` label as a p
 
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
+* [Environments & Configuration](https://github.com/customink/lamby/issues/28)
 * [Custom Domain Name, Edge/Regional, & CloudFront](https://github.com/customink/lamby/issues/10)
 * [API Gateway Permissions & CloudWatch Logs](https://github.com/customink/lamby/issues/6)
 * [How Does Lamby Work?](https://github.com/customink/lamby/issues/12)
