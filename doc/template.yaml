@@ -59,7 +59,7 @@ Resources:
       Environment:
         Variables:
           RAILS_ENV: !Ref RailsEnv
-      FunctionName: !Join [ '', [ 'hello-rails-', !Ref RailsEnv, '-', !Ref 'AWS::Region' ] ]
+      FunctionName: !Join [ '', [ 'myapp-', !Ref RailsEnv, '-', !Ref 'AWS::Region' ] ]
       Events:
         Root:
           Type: Api
