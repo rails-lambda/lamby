@@ -69,7 +69,6 @@ To run your Lambda locally or deploy it, please read the following docs.
 
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
-* [Environments & Configuration](https://github.com/customink/lamby/issues/28)
 
 ## Additional Documentation
 
@@ -77,9 +76,15 @@ In order to provide minimal code and ultimate flexibility for any type of Rails 
 
 To that end, we are using our GitHub issues along with the `[docs]` label as a project-focused Stack Overflow where we encourage you to participate in and ask questions. Here are a few high level docs now that may interests most users. Also, [browse all docs](https://github.com/customink/lamby/issues?q=is%3Aissue+is%3Aopen+label%3Adocs) or open a new `[question]` issue and we would be glad to help!
 
+#### Local AWS Dependencies
+
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
+
+#### Other Guides Just For You!
+
 * [Environments & Configuration](https://github.com/customink/lamby/issues/28)
+* [Asset Hosts & Precompiling](https://github.com/customink/lamby/issues/29)
 * [Custom Domain Name, Edge/Regional, & CloudFront](https://github.com/customink/lamby/issues/10)
 * [API Gateway Permissions & CloudWatch Logs](https://github.com/customink/lamby/issues/6)
 * [How Does Lamby Work?](https://github.com/customink/lamby/issues/12)
