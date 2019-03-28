@@ -16,10 +16,10 @@ end
 
 #### Add The Gem
 
-Add the Lamby gem to your Rails project's `Gemfile`.
+Add the Lamby gem to your Rails project's `Gemfile`. Recommend only requiring Lamby in your `app.rb` so your local development or test logs still work.
 
 ```ruby
-gem 'lamby'
+gem 'lamby', require: false
 ```
 
 #### Create Handler
