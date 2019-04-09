@@ -5,7 +5,7 @@ module Lamby
 
     LAMBDA_EVENT = 'lambda.event'.freeze
     LAMBDA_CONTEXT = 'lambda.context'.freeze
-    HTTP_X_APIGWSTAGE = 'HTTP_X_APIGWSTAGE'.freeze
+    HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze
 
     attr_reader :event, :context
 
@@ -48,6 +48,8 @@ module Lamby
     def env_headers
       headers.transform_keys do |key|
         "HTTP_#{key.to_s.upcase.tr '-', '_'}"
+      end.tap do |hdrs|
+        hdrs[HTTP_X_REQUESTID] = request_id
       end
     end
 
@@ -82,6 +84,10 @@ module Lamby
 
     def server_protocol
       event.dig('requestContext', 'protocol') || 'HTTP/1.1'
+    end
+
+    def request_id
+      context.aws_request_id
     end
 
   end
