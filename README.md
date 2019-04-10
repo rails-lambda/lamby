@@ -111,4 +111,4 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/custom
 
 ## Code of Conduct
 
-Everyone interacting in the Lamby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/metaskills/lamby/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Lamby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/customink/lamby/blob/master/CODE_OF_CONDUCT.md).
