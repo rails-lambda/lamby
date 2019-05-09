@@ -1,5 +1,12 @@
 # Keep A Changelog!
 
+## v0.4.0
+
+#### Fixed
+
+* File uploads in #33 using `CONTENT_TYPE` and `CONTENT_LENGTH`.
+
+
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
 ## v0.3.2
