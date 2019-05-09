@@ -40,8 +40,8 @@ module Lamby
       }.tap do |env|
         ct = content_type
         cl = content_length
-        env[::Rack::CONTENT_TYPE] = ct if ct
-        env[::Rack::CONTENT_LENGTH] = cl if cl
+        env['CONTENT_TYPE'] = ct if ct
+        env['CONTENT_LENGTH'] = cl if cl
       end
     end
 
@@ -54,12 +54,12 @@ module Lamby
     end
 
     def content_type
-      headers.delete('Content-Type') || headers.delete('content-type')
+      headers.delete('Content-Type') || headers.delete('content-type') || headers.get_header('CONTENT_TYPE')
     end
 
     def content_length
       bytesize = body.bytesize.to_s if body
-      headers.delete('Content-Length') || headers.delete('content-length') || bytesize
+      headers.delete('Content-Length') || headers.delete('content-length') || headers.delete('CONTENT_LENGTH') || bytesize
     end
 
     def body
