@@ -54,7 +54,7 @@ module Lamby
     end
 
     def content_type
-      headers.delete('Content-Type') || headers.delete('content-type') || headers.get_header('CONTENT_TYPE')
+      headers.delete('Content-Type') || headers.delete('content-type') || headers.delete('CONTENT_TYPE')
     end
 
     def content_length

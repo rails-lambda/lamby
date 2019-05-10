@@ -1,5 +1,13 @@
 # Keep A Changelog!
 
+
+## v0.4.1
+
+#### Fixed
+
+* Fix type in v0.4.0 fix below.
+
+
 ## v0.4.0
 
 #### Fixed
