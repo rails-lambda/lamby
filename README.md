@@ -41,7 +41,7 @@ end
 
 #### Create SAM Template
 
-Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md) `template.yaml` file that expresses your function's resources and how it receives events from API Gateway. Please use this full [doc/template.yaml](doc/template.yaml) file hosted here as a starting point. The basic template accomplishes the following.
+Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md) `template.yaml` file (at the root of your project) that expresses your function's resources and how it receives events from API Gateway. Please use this full [doc/template.yaml](doc/template.yaml) file hosted here as a starting point. The basic template accomplishes the following.
 
 * Defines a `RailsEnv` input parameter.
   - Applies this to the `RAILS_ENV` environment variable.
