@@ -6,7 +6,7 @@ Parameters:
 
   RailsEnv:
     Type: String
-    Default: development
+    Default: production
     AllowedValues:
       - staging
       - production
