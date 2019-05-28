@@ -1,13 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-set -euo pipefail
-IFS=$'\n\t'
-set -vx
+set -e
 
 bundle install
 
-if [ "$(pipenv --version)" != "" ]; then
-  pipenv install
-else
-  echo "WARNING: pipenv not found in \$PATH. Skipping pipenv install"
-fi
+pipenv install

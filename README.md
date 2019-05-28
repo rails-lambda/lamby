@@ -22,22 +22,27 @@ Add the Lamby gem to your Rails project's `Gemfile`. Recommend only requiring La
 gem 'lamby', require: false
 ```
 
-#### Create Handler
+#### Install Needed Files
 
-Create an `app.rb` file that will be the source for the Lambda's handler. Example:
+Lamby provides a simple Rake task to install the files needed for AWS Lambda to run your Rails application.
 
-```ruby
-require_relative 'config/boot'
-require 'lamby'
-require_relative 'config/application'
-require_relative 'config/environment'
-
-$app = Rack::Builder.new { run Rails.application }.to_app
-
-def handler(event:, context:)
-  Lamby.handler $app, event, context
-end
+```shell
+$ ./bin/rake -r lamby lamby:install:api_gateway
 ```
+
+This will install the following files.
+
+* `app.rb` - Entry point for the Lambda handler.
+* `template.yaml` - Your AWS Serverless Application Model (SAM) template.
+* `bin/build` - Configurable script to build your project with SAM.
+* `bin/deploy` - Configurable script to deploy your app to with SAM.
+
+
+
+
+
+
+
 
 #### Create SAM Template
 
@@ -54,14 +59,7 @@ Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob
   - Defines events from API above for both root and greedy proxy.
 * Simple `Outputs` that echos the resources you created.
 
-#### Git Ignores
 
-Ensure both `/.aws-sam` and `/vendor/bundle` are added to `.gitignore`. AWS SAM uses the `.aws-sam` directory to build your project. No file there should be committed to source control.
-
-```shell
-$ echo '/.aws-sam' >> .gitignore
-$ echo '/vendor/bundle' >> .gitignore
-```
 
 #### Get Running
 
@@ -69,6 +67,18 @@ To run your Lambda locally or deploy it, please read the following docs.
 
 * [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
 * [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Additional Documentation
 
