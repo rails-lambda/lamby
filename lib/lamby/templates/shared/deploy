@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+export RAILS_ENV=${RAILS_ENV:="production"}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:=us-east-1}
+export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="lamby.cloudformation.$(whoami)"}
+
+./bin/build
+
+sam package \
+  --region ${AWS_DEFAULT_REGION} \
+  --template-file ./.aws-sam/build/template.yaml \
+  --output-template-file ./.aws-sam/build/packaged.yaml \
+  --s3-bucket $CLOUDFORMATION_BUCKET \
+  --s3-prefix "APPNAMEHERE-${RAILS_ENV}"
+
+sam deploy \
+  --template-file ./.aws-sam/build/packaged.yaml \
+  --stack-name "APPNAMEHERE-${RAILS_ENV}-${AWS_DEFAULT_REGION}" \
+  --capabilities "CAPABILITY_IAM" \
+  --parameter-overrides \
+    RailsEnv=${RAILS_ENV}

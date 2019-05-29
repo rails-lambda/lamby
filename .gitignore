@@ -5,3 +5,11 @@
 /pkg/
 /spec/reports/
 /tmp/
+test/dummy_app/.gitignore
+test/dummy_app/app.rb
+test/dummy_app/template.yaml
+test/dummy_app/bin/build
+test/dummy_app/bin/deploy
+test/dummy_app/tmp
+test/dummy_app/log/**/*
+test/dummy_app/public/**/*

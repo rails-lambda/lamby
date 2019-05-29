@@ -1,31 +1,20 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
-
-cd "$(dirname "$0")/.."
 
 if [ -f "Brewfile" ] && [ "$(uname -s)" = "Darwin" ]; then
   brew bundle check || {
     echo "==> Installing Homebrew dependencies..."
     brew bundle --verbose
   }
-else
-  echo "Skipping because bootstrap is currently macOS depentant."
-  exit 1
 fi
 
-echo "==> Setting up python..."
-if [ "$(which pyenv)" != "" ] && [ "$(which pipenv)" != "" ]; then
-  brew bootstrap-pyenv-python
-else
-  echo "Skipping because pyenv/pipenv were not found."
-  exit 1;
-fi
+rbenv install \
+  --skip-existing \
+  $(cat .ruby-version)
 
-echo "==> Setting up ruby..."
-if [ "$(which rbenv)" != "" ] && [ "$(which ruby-build)" != "" ]; then
-  brew bootstrap-rbenv-ruby
-else
-  echo "Skipping because rbenv/ruby-build were not found."
-  exit 1;
-fi
+CFLAGS="-I$(brew --prefix zlib)/include" \
+LDFLAGS="-L$(brew --prefix zlib)/lib" \
+pyenv install \
+  --skip-existing \
+  $(cat .python-version)

@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+# Clean any previous bundle/builds.
+rm -rf ./.aws-sam/build
+
+# Ensure native extensions built for platform.
+sam build --use-container
+
+# [HOOK] Environments & Configuration
+# https://github.com/customink/lamby/issues/28
+
+# [HOOK] Asset Hosts & Precompiling
+# https://github.com/customink/lamby/issues/29
+
+# Clean un-needed artifacts.
+pushd ./.aws-sam/build/RailsFunction/
+rm -rf .aws-sam \
+  .git \
+  log \
+  test \
+  tmp
+popd

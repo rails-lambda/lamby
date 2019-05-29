@@ -1,15 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Hello Rails Lambda
+Description: APPNAMEHERE Lambda
 
 Parameters:
 
   RailsEnv:
     Type: String
-    Default: development
+    Default: production
     AllowedValues:
-      - development
-      - test
       - staging
       - production
 
@@ -82,5 +80,5 @@ Outputs:
     Value: !Sub "https://${RailsApi}.execute-api.${AWS::Region}.amazonaws.com/${RailsEnv}/"
 
   RailsFunctionArn:
-    Description: Lambda Function ARN
+    Description: Lambda ARN
     Value: !GetAtt RailsFunction.Arn
