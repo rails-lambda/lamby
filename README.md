@@ -105,7 +105,7 @@ ENV['RAILS_MASTER_KEY'] =
   Lamby::SsmParameterStore.get!('/config/my_awesome_lambda/env/RAILS_MASTER_KEY')
 ```
 
-Finally, updated your `template.yaml` CloudFormation/SAM file by adding this to the `Properties` section of your `RailsFunction`. This addition allows your Lambda's runtime policy to be able to read configs from SSM Parameter store.
+Finally, updated your `template.yaml` CloudFormation/SAM file by adding this to the `Properties` section of your `RailsFunction`. This addition allows your Lambda's runtime policy to read configs from SSM Parameter store.
 
 ```yaml
 Policies:
