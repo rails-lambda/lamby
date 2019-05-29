@@ -12,7 +12,7 @@ say 'Adding to .gitignore...'
 FileUtils.touch app_file('.gitignore')
 append_to_file app_file('.gitignore'), <<-GITIGNORE.strip_heredoc
   # Lamby
-  '/.aws-sam'
+  /.aws-sam
 GITIGNORE
 
 say 'Creating ./bin files for build and deploy...'

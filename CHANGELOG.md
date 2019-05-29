@@ -2,6 +2,14 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+
+## v0.5.1
+
+#### Fixed
+
+* The .gitignore file template. Fix .aws-sam dir.
+
+
 ## v0.5.0
 
 #### Added
