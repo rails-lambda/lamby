@@ -15,8 +15,8 @@ sam package \
   --s3-prefix "APPNAMEHERE-${RAILS_ENV}"
 
 sam deploy \
-    --template-file ./.aws-sam/build/packaged.yaml \
-    --stack-name "APPNAMEHERE-${RAILS_ENV}-${AWS_DEFAULT_REGION}" \
-    --capabilities "CAPABILITY_IAM" \
-    --parameter-overrides \
-      RailsEnv=${RAILS_ENV}
+  --template-file ./.aws-sam/build/packaged.yaml \
+  --stack-name "APPNAMEHERE-${RAILS_ENV}-${AWS_DEFAULT_REGION}" \
+  --capabilities "CAPABILITY_IAM" \
+  --parameter-overrides \
+    RailsEnv=${RAILS_ENV}

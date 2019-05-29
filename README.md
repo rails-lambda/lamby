@@ -14,17 +14,59 @@ end
 
 ## Getting Started
 
+A simple Hello Rails application example using Lamby.
+
+#### Installing AWS CLI & SAM
+
+This is fairly easy on Macs using Homebrew. For other platforms or first time installers, please follow the [full guides](https://github.com/customink/lamby/issues/18) and configure your AWS CLI before proceeding.
+
+```shell
+$ brew install awscli
+$ brew tap aws/tap
+$ brew install aws-sam-cli
+```
+
+#### New Rails Application
+
+Lamby works with existing Rails projects. In theory, any version. In our getting started example, let's create a new application. Here we skip any frameworks not needed, notable ActiveRecord.
+
+```shell
+$ rbenv local 2.5.5
+$ gem install rails -v 6.0.0.rc1
+$ rails new my_awesome_lambda \
+  --skip-action-mailer --skip-action-mailbox --skip-action-text \
+  --skip-active-record --skip-active-storage --skip-puma \
+  --skip-action-cable --skip-spring --skip-listen --skip-turbolinks \
+  --skip-system-test --skip-bootsnap --skip-webpack-install
+$ cd my_awesome_lambda
+```
+
+Add a root to the `routes.rb` file which maps to an `index` action in the application controller and return a simple Hello Rails H1 tag.
+
+```ruby
+Rails.application.routes.draw do
+  root to: 'application#index'
+end
+
+class ApplicationController < ActionController::Base
+  def index
+    render html: '<h1>Hello Rails</h1>'.html_safe
+  end
+end
+```
+
 #### Add The Gem
 
-Add the Lamby gem to your Rails project's `Gemfile`. Recommend only requiring Lamby in your `app.rb` so your local development or test logs still work.
+Add the Lamby gem to your Rails project's `Gemfile`. Recommend only requiring Lamby in your `app.rb` so your local development or test environment logs still work.
 
 ```ruby
 gem 'lamby', require: false
+gem 'aws-sdk-ssm'
 ```
 
 #### Install Needed Files
 
-Lamby provides a simple Rake task to install the files needed for AWS Lambda to run your Rails application.
+Lamby provides a simple Rake task to install the files needed for AWS Lambda to run your application.
 
 ```shell
 $ ./bin/rake -r lamby lamby:install:api_gateway
@@ -33,51 +75,43 @@ $ ./bin/rake -r lamby lamby:install:api_gateway
 This will install the following files.
 
 * `app.rb` - Entry point for the Lambda handler.
-* `template.yaml` - Your AWS Serverless Application Model (SAM) template.
-* `bin/build` - Configurable script to build your project with SAM.
-* `bin/deploy` - Configurable script to deploy your app to with SAM.
+* `template.yaml` - Your AWS Serverless Application Model ([SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md)) template.
+* `bin/build` - Configurable bash script to build your project with SAM.
+* `bin/deploy` - Configurable bash script to deploy your app to with SAM.
 
+#### Create CloudFormation S3 Bucket
 
+The default name for the bucket in the `deploy` script would include your computer's username. You can change this in your script (WHICH WE RECOMMEND) or use the `CLOUDFORMATION_BUCKET` environment varable. Assuming you stick with the default:
 
+```shell
+aws s3 mb "s3://lamby.cloudformation.$(whoami)"
+```
 
+#### Configuration
 
+We recommend using [Rails Credentials](https://guides.rubyonrails.org/security.html#environmental-security) by setting the `RAILS_MASTER_KEY` environment variable in your `app.rb` file. The value be read from AWS Systems Manager [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) which Lamby has a client wrapper for. To set that value, use the following AWS CLI command.
 
+```shell
+aws ssm put-parameter \
+  --name "/config/my_awesome_lambda/env/RAILS_MASTER_KEY" \
+  --type "SecureString" \
+  --value $(cat config/master.key)
+```
 
+Update your `app.rb` file and add this line right after `require 'lamby'`.
 
-#### Create SAM Template
+```ruby
+ENV['RAILS_MASTER_KEY'] =
+  Lamby::SsmParameterStore.get!('/config/my_awesome_lambda/env/RAILS_MASTER_KEY')
+```
 
-Create an [AWS SAM](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md) `template.yaml` file (at the root of your project) that expresses your function's resources and how it receives events from API Gateway. Please use this full [doc/template.yaml](doc/template.yaml) file hosted here as a starting point. The basic template accomplishes the following.
+#### First Deploy!
 
-* Defines a `RailsEnv` input parameter.
-  - Applies this to the `RAILS_ENV` environment variable.
-* Creates a API Gateway resource named `RailsApi`.
-  - Ensures that the stage name is set to the Rails env.
-  - Using inline Swagger, define a root `/` via GET and greedy proxy `/{resource+}` via ANY.
-  - Allow any binary media type to be a valid response.
-* Creates a Lambda function resource named `RailsFunction`.
-  - Sets the handler to `app.handler`. File above.
-  - Defines events from API above for both root and greedy proxy.
-* Simple `Outputs` that echos the resources you created.
+Now your Rails app is ready to be deployed to AWS Lambda via CloudFormation & SAM.
 
-
-
-#### Get Running
-
-To run your Lambda locally or deploy it, please read the following docs.
-
-* [Installing AWS CLI and AWS SAM](https://github.com/customink/lamby/issues/18)
-* [Bin Scripts - Setup, Build, Server, & Deploy](https://github.com/customink/lamby/issues/17)
-
-
-
-
-
-
-
-
-
-
-
+```shell
+$ ./bin/deploy
+```
 
 
 ## Additional Documentation

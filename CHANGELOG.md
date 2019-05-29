@@ -2,6 +2,13 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v0.5.0
+
+#### Added
+
+* Template generators for first install. Ex: `./bin/rake -r lamby lamby:install:api_gateway`.
+* New `Lamby::SsmParameterStore.get!` helper.
+
 
 ## v0.4.1
 

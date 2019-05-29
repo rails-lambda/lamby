@@ -15,6 +15,15 @@ module Lamby
         new(path).get!.to_dotenv
       end
 
+      def get!(path)
+        parts = path.from(1).split('/')
+        env = parts.pop
+        path = "/#{parts.join('/')}"
+        new(path).get!.params.detect do |p|
+          p.env == env
+        end.try(:value)
+      end
+
     end
 
     def initialize(path, options = {})

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (0.4.1)
+    lamby (0.5.0)
       rack
       rails
 
