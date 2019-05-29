@@ -89,7 +89,7 @@ aws s3 mb "s3://lamby.cloudformation.$(whoami)"
 
 #### Configuration
 
-We recommend using [Rails Credentials](https://guides.rubyonrails.org/security.html#environmental-security) by setting the `RAILS_MASTER_KEY` environment variable in your `app.rb` file. The value be read from AWS Systems Manager [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) which Lamby has a client wrapper for. To set that value, use the following AWS CLI command.
+We recommend getting started using [Rails Credentials](https://guides.rubyonrails.org/security.html#environmental-security) by setting the `RAILS_MASTER_KEY` environment variable in your `app.rb` file. The value be read from AWS Systems Manager [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-paramstore.html) which Lamby has a client wrapper for. To set the master key value, use the following AWS CLI command.
 
 ```shell
 aws ssm put-parameter \
@@ -105,12 +105,37 @@ ENV['RAILS_MASTER_KEY'] =
   Lamby::SsmParameterStore.get!('/config/my_awesome_lambda/env/RAILS_MASTER_KEY')
 ```
 
+Finally, updated your `template.yaml` CloudFormation/SAM file by adding this to the `Properties` section of your `RailsFunction`. This addition allows your Lambda's runtime policy to be able to read configs from SSM Parameter store.
+
+```yaml
+Policies:
+  - Version: "2012-10-17"
+    Statement:
+      - Effect: Allow
+        Action:
+          - ssm:GetParameter
+          - ssm:GetParameters
+          - ssm:GetParametersByPath
+          - ssm:GetParameterHistory
+        Resource:
+          - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/config/my_awesome_lambda/*
+```
+
 #### First Deploy!
 
 Now your Rails app is ready to be deployed to AWS Lambda via CloudFormation & SAM.
 
 ```shell
 $ ./bin/deploy
+```
+
+To see your newly created Lambda's API Gateway URL, log into the AWS Console or run the following command. This will describe the CloudFormation stack we just deployed and the `Outputs` from that template.
+
+```shell
+aws cloudformation describe-stacks \
+  --stack-name "awesomebotlambda-production-us-east-1" | \
+  grep OutputValue | \
+  grep https
 ```
 
 
