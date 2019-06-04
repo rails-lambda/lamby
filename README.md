@@ -133,7 +133,7 @@ To see your newly created Lambda's API Gateway URL, log into the AWS Console or 
 
 ```shell
 aws cloudformation describe-stacks \
-  --stack-name "awesomebotlambda-production-us-east-1" | \
+  --stack-name "my_awesome_lambda-production-us-east-1" | \
   grep OutputValue | \
   grep https
 ```
