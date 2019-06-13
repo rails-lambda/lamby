@@ -5,6 +5,8 @@ cache: bundler
 rvm:
   - 2.5.5
 before_install:
+  - sudo apt-get install python3-pip python3-dev
+  - pip3 install pipenv
   - sudo gem install bundler -v 1.17.3
   - bin/setup
 script:
