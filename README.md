@@ -5,7 +5,8 @@
 
 <img src="https://user-images.githubusercontent.com/2381/59363668-89edeb80-8d03-11e9-9985-2ce14361b7e3.png" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
 
-<br><br>
+<p></p>
+
 The goal of this project is to provide minimal code to allow your Rails application to respond to incoming [AWS Lambda Function Handler in Ruby](https://docs.aws.amazon.com/lambda/latest/dg/ruby-handler.html) `event` and `context` objects in the Lambda handler. We support integration with API Gateway and are currently working on Application Load Balancer support.
 
 ```ruby
