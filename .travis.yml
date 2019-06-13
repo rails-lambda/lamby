@@ -6,7 +6,7 @@ rvm:
   - 2.5.5
 install:
   - which pyenv
-  - ls ~/.pyenv/plugins
+  - mkdir -P ~/.pyenv/plugins/python-build
   - cd ~/.pyenv/plugins/python-build && git pull
   - pyenv install --skip-existing $(cat .python-version)
   - sudo apt-get install python3-pip python3-dev
@@ -15,3 +15,4 @@ install:
   - bin/setup
 script:
   - bin/test
+`
