@@ -8,7 +8,7 @@ install:
   - which pyenv
   # - find / -name "python-build"
   # - mkdir -p ~/.pyenv/plugins/python-build
-  - cd /opt/pyenv/plugins/python-build && git pull
+  - cd /opt/pyenv/plugins/python-build && git pull origin master
   - pyenv install --skip-existing $(cat .python-version)
   - sudo apt-get install python3-pip python3-dev
   - pip3 install pipenv
