@@ -6,6 +6,8 @@ rvm:
   - 2.5.5
 install:
   - which pyenv
+  - ls ~/.pyenv/plugins
+  - cd ~/.pyenv/plugins/python-build && git pull
   - pyenv install --skip-existing $(cat .python-version)
   - sudo apt-get install python3-pip python3-dev
   - pip3 install pipenv
