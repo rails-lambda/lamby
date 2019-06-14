@@ -5,7 +5,7 @@ cache: bundler
 rvm:
   - 2.5.5
 install:
-  - cd /opt/pyenv/plugins/python-build && git pull origin master
+  - pushd /opt/pyenv/plugins/python-build && git pull origin master && popd
 before_script:
   - ls -lAGp
   - pyenv install --skip-existing $(cat .python-version)
