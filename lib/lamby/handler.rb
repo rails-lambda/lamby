@@ -3,17 +3,17 @@ module Lamby
 
     class << self
 
-      def call(app, event, context)
-        new(app, event, context).call.response
+      def call(app, event, context, options = {})
+        new(app, event, context, options).call.response
       end
 
     end
 
-    def initialize(app, event, context)
+    def initialize(app, event, context, options = {})
       @app = app
       @event = event
       @context = context
-      @rack = Lamby::Rack.new event, context
+      @options = options
       @called = false
     end
 
@@ -46,11 +46,20 @@ module Lamby
 
     private
 
+    def rack
+      @rack ||= case @options[:rack]
+      when :api
+        Lamby::RackApi.new @event, @context
+      else
+        Lamby::RackAlb.new @event, @context
+      end
+    end
+
     def call_app
       if Debug.on?(@event)
-        Debug.call @event, @context, @rack.env
+        Debug.call @event, @context, rack.env
       else
-        @app.call @rack.env
+        @app.call rack.env
       end
     end
 

@@ -1,5 +1,5 @@
 module Lamby
-  class Rack
+  class RackAlb
 
     include SamHelpers
 
@@ -25,11 +25,11 @@ module Lamby
         ::Rack::SCRIPT_NAME => '',
         ::Rack::PATH_INFO => event['path'] || '',
         ::Rack::QUERY_STRING => query_string,
-        ::Rack::SERVER_NAME => headers['Host'],
-        ::Rack::SERVER_PORT => headers['X-Forwarded-Port'],
-        ::Rack::SERVER_PROTOCOL => server_protocol,
+        ::Rack::SERVER_NAME => headers['host'],
+        ::Rack::SERVER_PORT => headers['x-forwarded-port'],
+        ::Rack::SERVER_PROTOCOL => 'HTTP/1.1',
         ::Rack::RACK_VERSION => ::Rack::VERSION,
-        ::Rack::RACK_URL_SCHEME => 'https',
+        ::Rack::RACK_URL_SCHEME => headers['x-forwarded-proto'],
         ::Rack::RACK_INPUT => StringIO.new(body || ''),
         ::Rack::RACK_ERRORS => $stderr,
         ::Rack::RACK_MULTITHREAD => false,
@@ -80,10 +80,6 @@ module Lamby
 
     def base64_encoded?
       event['isBase64Encoded']
-    end
-
-    def server_protocol
-      event.dig('requestContext', 'protocol') || 'HTTP/1.1'
     end
 
     def request_id

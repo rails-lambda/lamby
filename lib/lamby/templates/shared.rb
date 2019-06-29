@@ -10,10 +10,6 @@ def tpl_file(path)
   "#{__dir__}/#{inst_name}/#{path}"
 end
 
-def shr_file(path)
-  "#{__dir__}/shared/#{path}"
-end
-
 def appname
   Rails.application.class.parent.name
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (0.5.1)
+    lamby (0.6.0)
       rack
       rails
 
@@ -133,9 +133,9 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    websocket-driver (0.7.0)
+    websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.3)
+    websocket-extensions (0.1.4)
 
 PLATFORMS
   ruby

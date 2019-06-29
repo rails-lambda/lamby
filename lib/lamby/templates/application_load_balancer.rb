@@ -1,7 +1,7 @@
-$LAMBY_INSTALLER_NAME = 'api_gateway'
+$LAMBY_INSTALLER_NAME = 'application_load_balancer'
 load 'lamby/templates/shared.rb'
 
-say '==> Running Lamby API Gateway installer...'
+say '==> Running Lamby Application Load Balancer installer...'
 
 say 'Copying files...'
 copy_file tpl_file('app.rb'), app_file('app.rb')

@@ -9,7 +9,7 @@ class IntegrationTest < LambySpec
     assert File.exists?(dummy_handler)
     File.read(dummy_handler).must_include <<-RUBY.strip_heredoc
       def handler(event:, context:)
-        Lamby.handler $app, event, context
+        Lamby.handler $app, event, context, rack: :api
       end
     RUBY
     # Template
