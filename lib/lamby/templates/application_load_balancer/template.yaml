@@ -79,7 +79,7 @@ Resources:
 Outputs:
 
   RailsLoadBalancerDNSNAme:
-      Value: !GetAtt RailsLoadBalancer.DNSName
+    Value: !GetAtt RailsLoadBalancer.DNSName
 
   RailsFunctionArn:
     Description: Lambda ARN
