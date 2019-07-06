@@ -79,6 +79,7 @@ Resources:
 Outputs:
 
   RailsLoadBalancerDNSNAme:
+    Description: Application Load Balancer DNS Name
     Value: !GetAtt RailsLoadBalancer.DNSName
 
   RailsFunctionArn:
