@@ -71,7 +71,7 @@ module Lamby
     end
 
     def headers
-      event['headers'] || {}
+      event['multiValueHeaders'] || event['headers'] || {}
     end
 
     def query_string
