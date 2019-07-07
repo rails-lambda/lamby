@@ -62,7 +62,6 @@ module Lamby
       string = query.map do |key, value|
         value.map{ |v| "#{key}=#{v}" }.join('&')
       end.flatten.join('&')
-      ::Rack::Utils.parse_nested_query(string)
     end
 
   end
