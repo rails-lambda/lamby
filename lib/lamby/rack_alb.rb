@@ -9,8 +9,11 @@ module Lamby
       event.key? 'multiValueHeaders'
     end
 
-    def response
-      {}
+    def response(handler)
+      multiValueHeaders = handler.headers.transform_values { |v| Array.wrap(v) } if multi_value?
+      statusDescription = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
+      { multiValueHeaders: multiValueHeaders,
+        statusDescription: statusDescription }.compact
     end
 
     private

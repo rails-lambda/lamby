@@ -18,7 +18,7 @@ module Lamby
       @env ||= env_base.merge!(env_headers)
     end
 
-    def response
+    def response(_handler)
       {}
     end
 
