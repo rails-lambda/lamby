@@ -20,7 +20,7 @@ module Lamby
     def response
       { statusCode: status,
         headers: headers,
-        body: body }
+        body: body }.merge(rack.response)
     end
 
     def status

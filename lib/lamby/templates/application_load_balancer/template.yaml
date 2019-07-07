@@ -31,6 +31,9 @@ Resources:
     DependsOn: RailsFunctionInvokePermission
     Properties:
       TargetType: lambda
+      TargetGroupAttributes:
+        - Key: lambda.multi_value_headers.enabled
+          Value: true
       Targets:
         - Id: !GetAtt RailsFunction.Arn
 
