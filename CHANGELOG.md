@@ -6,6 +6,8 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 #### Fixed
 
+* ALB query params & binary responses. Fixes #38.
+
 
 ## v0.6.0
 

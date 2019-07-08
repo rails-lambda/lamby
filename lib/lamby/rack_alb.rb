@@ -10,10 +10,15 @@ module Lamby
     end
 
     def response(handler)
-      multiValueHeaders = handler.headers.transform_values { |v| Array.wrap(v) } if multi_value?
-      statusDescription = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
-      { multiValueHeaders: multiValueHeaders,
-        statusDescription: statusDescription }.compact
+      hhdrs = handler.headers
+      multivalue_headers = hhdrs.transform_values { |v| Array.wrap(v) } if multi_value?
+      status_description = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
+      base64_encode = hhdrs['Content-Transfer-Encoding'] == 'binary' || hhdrs['X-Lamby-Base64'] == '1'
+      body = Base64.encode64(handler.body) if base64_encode
+      { multiValueHeaders: multivalue_headers,
+        statusDescription: status_description,
+        isBase64Encoded: base64_encode,
+        body: body }.compact
     end
 
     private
