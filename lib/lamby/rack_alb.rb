@@ -14,7 +14,7 @@ module Lamby
       multivalue_headers = hhdrs.transform_values { |v| Array.wrap(v) } if multi_value?
       status_description = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
       base64_encode = hhdrs['Content-Transfer-Encoding'] == 'binary' || hhdrs['X-Lamby-Base64'] == '1'
-      body = Base64.encode64(handler.body) if base64_encode
+      body = Base64.strict_encode64(handler.body) if base64_encode
       { multiValueHeaders: multivalue_headers,
         statusDescription: status_description,
         isBase64Encoded: base64_encode,
