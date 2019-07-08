@@ -1,21 +1,24 @@
 module Lamby
-  class RackAlb
+  class RackAlb < Lamby::Rack
 
-    include SamHelpers
-
-    LAMBDA_EVENT = 'lambda.event'.freeze
-    LAMBDA_CONTEXT = 'lambda.context'.freeze
-    HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze
-
-    attr_reader :event, :context
-
-    def initialize(event, context)
-      @event = event
-      @context = context
+    def alb?
+      true
     end
 
-    def env
-      @env ||= env_base.merge!(env_headers)
+    def multi_value?
+      event.key? 'multiValueHeaders'
+    end
+
+    def response(handler)
+      hhdrs = handler.headers
+      multivalue_headers = hhdrs.transform_values { |v| Array.wrap(v) } if multi_value?
+      status_description = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
+      base64_encode = hhdrs['Content-Transfer-Encoding'] == 'binary' || hhdrs['X-Lamby-Base64'] == '1'
+      body = Base64.strict_encode64(handler.body) if base64_encode
+      { multiValueHeaders: multivalue_headers,
+        statusDescription: status_description,
+        isBase64Encoded: base64_encode,
+        body: body }.compact
     end
 
     private
@@ -45,45 +48,25 @@ module Lamby
       end
     end
 
-    def env_headers
-      headers.transform_keys do |key|
-        "HTTP_#{key.to_s.upcase.tr '-', '_'}"
-      end.tap do |hdrs|
-        hdrs[HTTP_X_REQUESTID] = request_id
-      end
-    end
-
-    def content_type
-      headers.delete('Content-Type') || headers.delete('content-type') || headers.delete('CONTENT_TYPE')
-    end
-
-    def content_length
-      bytesize = body.bytesize.to_s if body
-      headers.delete('Content-Length') || headers.delete('content-length') || headers.delete('CONTENT_LENGTH') || bytesize
-    end
-
-    def body
-      @body ||= if event['body'] && base64_encoded?
-        Base64.decode64 event['body']
-      else
-        event['body']
-      end
-    end
-
     def headers
-      event['headers'] || {}
+      @headers ||= multi_value? ? headers_multi : super
+    end
+
+    def headers_multi
+      (event['multiValueHeaders'] || {}).transform_values do |v|
+        v.is_a?(Array) ? v.first : v
+      end
     end
 
     def query_string
-      @query_string ||= event['queryStringParameters'].try(:to_query)
+      @query_string ||= multi_value? ? query_string_multi : super
     end
 
-    def base64_encoded?
-      event['isBase64Encoded']
-    end
-
-    def request_id
-      context.aws_request_id
+    def query_string_multi
+      query = event['multiValueQueryStringParameters'] || {}
+      string = query.map do |key, value|
+        value.map{ |v| "#{key}=#{v}" }.join('&')
+      end.flatten.join('&')
     end
 
   end

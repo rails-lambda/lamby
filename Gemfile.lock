@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (0.6.0)
+    lamby (1.0.0)
       rack
       rails
 
@@ -87,7 +87,7 @@ GEM
     minitest (5.11.3)
     mocha (1.8.0)
       metaclass (~> 0.0.1)
-    nio4r (2.3.1)
+    nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     pry (0.12.2)

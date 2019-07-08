@@ -20,7 +20,7 @@ module Lamby
     def response
       { statusCode: status,
         headers: headers,
-        body: body }
+        body: body }.merge(rack_response)
     end
 
     def status
@@ -53,6 +53,10 @@ module Lamby
       else
         Lamby::RackAlb.new @event, @context
       end
+    end
+
+    def rack_response
+      rack.response(self)
     end
 
     def call_app

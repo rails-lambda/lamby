@@ -5,7 +5,7 @@ module Lamby
     extend self
 
     def on?(event)
-      params = event['queryStringParameters']
+      params = event['multiValueQueryStringParameters'] || event['queryStringParameters']
       (Rails.env.development? || ENV['LAMBY_DEBUG']) && params && params['debug'] == '1'
     end
 
