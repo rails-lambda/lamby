@@ -7,11 +7,11 @@
 
 <p>&nbsp;</p>
 
-The goal of this project is to provide minimal code to allow your Rails application to respond to incoming [AWS Lambda Function Handler in Ruby](https://docs.aws.amazon.com/lambda/latest/dg/ruby-handler.html) `event` and `context` objects in the Lambda handler. We support integration with API Gateway and are currently working on Application Load Balancer support.
+The goal of this project is to provide minimal code to allow your Rails application to respond to incoming [AWS Lambda Function Handler in Ruby](https://docs.aws.amazon.com/lambda/latest/dg/ruby-handler.html) `event` and `context` objects in the Lambda handler. We support Application Load Balancer integration or API Gateway.
 
 ```ruby
 def handler(event:, context:)
-  Lamby.handler $app, event, context
+  Lamby.handler $app, event, context, rack: :alb
 end
 ```
 
