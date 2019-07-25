@@ -27,7 +27,7 @@ https://lamby.custominktech.com/docs/installing_aws_sam
 
 ## Contributing
 
-After checking out the repo, run `./bin/setup` to install dependencies. Then, run `./bin/test` to run the tests. **NOTE: There are no tests now but adding them is on our TODO list.**
+After checking out the repo, run `./bin/setup` to install dependencies. Then, run `./bin/test` to run the tests.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
