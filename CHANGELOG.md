@@ -2,6 +2,13 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v1.0.1
+
+#### Changed
+
+* Links in bin/build templates to point to lamby.custominktech.com site.
+
+
 ## v1.0.0
 
 #### Fixed

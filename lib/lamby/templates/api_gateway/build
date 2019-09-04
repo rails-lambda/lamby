@@ -8,10 +8,10 @@ rm -rf ./.aws-sam/build
 sam build --use-container
 
 # [HOOK] Environments & Configuration
-# https://github.com/customink/lamby/issues/28
+# https://lamby.custominktech.com/docs/environment_and_configuration
 
 # [HOOK] Asset Hosts & Precompiling
-# https://github.com/customink/lamby/issues/29
+# https://lamby.custominktech.com/docs/asset_host_and_precompiling
 
 # Clean un-needed artifacts.
 pushd ./.aws-sam/build/RailsFunction/
