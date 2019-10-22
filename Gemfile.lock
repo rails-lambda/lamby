@@ -88,7 +88,7 @@ GEM
     mocha (1.8.0)
       metaclass (~> 0.0.1)
     nio4r (2.4.0)
-    nokogiri (1.10.3)
+    nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     pry (0.12.2)
       coderay (~> 1.1.0)
