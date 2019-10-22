@@ -32,9 +32,9 @@ module Lamby
       @options = options
     end
 
-    def to_env
+    def to_env(overwrite: true)
       params.each do |param|
-        ENV[param.env] = param.value
+        overwrite ? ENV[param.env] = param.value : ENV[param.env] ||= param.value
       end
     end
 

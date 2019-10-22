@@ -8,14 +8,32 @@ class SsmParameterStoreTest < LambySpec
 
   after { clear! }
 
-  it '#to_env' do
-    envs = klass.new path
-    stub_params(envs)
-    refute ENV.key?('FOO')
-    refute ENV.key?('BAR')
-    envs.to_env
-    ENV['FOO'].must_equal 'foo'
-    ENV['BAR'].must_equal 'bar'
+  describe '#to_env' do
+    before do
+      ENV['FOO'] = 'test'
+    end
+
+    it 'overwrites existing environment variables by default' do
+      envs = klass.new path
+      stub_params(envs)
+      assert ENV.key?('FOO')
+      refute ENV.key?('BAR')
+      envs.to_env
+
+      ENV['FOO'].must_equal 'foo'
+      ENV['BAR'].must_equal 'bar'
+    end
+
+    it 'does not overwrite existing environment variables when overwrite flag set to false' do
+      envs = klass.new path
+      stub_params(envs)
+      assert ENV.key?('FOO')
+      refute ENV.key?('BAR')
+      envs.to_env(overwrite: false)
+
+      ENV['FOO'].must_equal 'test'
+      ENV['BAR'].must_equal 'bar'
+    end
   end
 
   it '#to_dotenv' do

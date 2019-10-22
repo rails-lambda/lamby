@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v1.0.2
+
+#### Changed
+
+* Adds an optional 'overwrite' parameter to #to_env.
+
 ## v1.0.1
 
 #### Changed
