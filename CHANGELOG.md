@@ -2,6 +2,13 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v1.0.3
+
+#### Changed
+
+* Change shebangs to `#!/usr/bin/env bash`
+
+
 ## v1.0.2
 
 #### Changed
