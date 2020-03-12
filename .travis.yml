@@ -11,8 +11,6 @@ before_script:
   - pyenv install --skip-existing $(cat .python-version)
   - sudo apt-get install python3-pip python3-dev
   - pip3 install pipenv
-  - which bundle
-  - bundle install
-  - pipenv install
+  - bin/setup
 script:
   - bin/test
