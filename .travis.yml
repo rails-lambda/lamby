@@ -12,6 +12,7 @@ before_script:
   - sudo apt-get install python3-pip python3-dev
   - pip3 install pipenv
   - sudo gem install bundler -v 1.17.3
-  - bin/setup
+  - bundle install
+  - pipenv install
 script:
   - bin/test
