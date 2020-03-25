@@ -19,9 +19,8 @@ class SsmParameterStoreTest < LambySpec
       assert ENV.key?('FOO')
       refute ENV.key?('BAR')
       envs.to_env
-
-      ENV['FOO'].must_equal 'foo'
-      ENV['BAR'].must_equal 'bar'
+      expect(ENV['FOO']).must_equal 'foo'
+      expect(ENV['BAR']).must_equal 'bar'
     end
 
     it 'does not overwrite existing environment variables when overwrite flag set to false' do
@@ -30,9 +29,8 @@ class SsmParameterStoreTest < LambySpec
       assert ENV.key?('FOO')
       refute ENV.key?('BAR')
       envs.to_env(overwrite: false)
-
-      ENV['FOO'].must_equal 'test'
-      ENV['BAR'].must_equal 'bar'
+      expect(ENV['FOO']).must_equal 'test'
+      expect(ENV['BAR']).must_equal 'bar'
     end
   end
 
@@ -40,7 +38,7 @@ class SsmParameterStoreTest < LambySpec
     envs = klass.new path, dotenv_file: file
     stub_params(envs)
     envs.to_dotenv
-    File.read(file).must_equal <<-EOF.strip_heredoc
+    expect(File.read(file)).must_equal <<-EOF.strip_heredoc
       export FOO=foo
       export BAR=bar
     EOF

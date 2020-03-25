@@ -1,5 +1,5 @@
 
-# Lamby [![Build Status](https://travis-ci.org/customink/lamby.svg?branch=master)](https://travis-ci.org/customink/lamby)
+# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions)
 
 <h2>Simple Rails &amp; AWS Lambda Integration</h2>
 
@@ -27,7 +27,13 @@ https://lamby.custominktech.com/docs/installing_aws_sam
 
 ## Contributing
 
-After checking out the repo, run `./bin/setup` to install dependencies. Then, run `./bin/test` to run the tests.
+After checking out the repo, run:
+
+```shell
+$ ./bin/bootstrap
+$ ./bin/setup
+$ ./bin/test
+```
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 

@@ -7,6 +7,8 @@ require 'dummy_app/init'
 require 'test_helper/dummy_app_helpers'
 require 'test_helper/stream_helpers'
 
+Rails.backtrace_cleaner.remove_silencers!
+
 class LambySpec < Minitest::Spec
   include TestHelpers::DummyAppHelpers,
           TestHelpers::StreamHelpers

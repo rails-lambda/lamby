@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+echo '== Installing dependencies =='
+bundle config set --local path 'vendor/bundle'
+bundle install

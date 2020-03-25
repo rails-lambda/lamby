@@ -5,6 +5,7 @@
 /pkg/
 /spec/reports/
 /tmp/
+/vendor/bundle
 test/dummy_app/.gitignore
 test/dummy_app/app.rb
 test/dummy_app/template.yaml

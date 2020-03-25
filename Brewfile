@@ -1,5 +1,0 @@
-cask 'docker'
-brew 'zlib'
-brew 'rbenv'
-brew 'pyenv'
-brew 'pipenv'

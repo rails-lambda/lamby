@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 set -e
 
-bundle install
-pipenv install
+docker-compose run \
+  cicd \
+  ./bin/_setup

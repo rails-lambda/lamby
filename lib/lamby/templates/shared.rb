@@ -11,5 +11,7 @@ def tpl_file(path)
 end
 
 def appname
-  Rails.application.class.parent.name
+  k = Rails.application.class
+  p = k.respond_to?(:module_parent) ? k.module_parent : k.parent
+  p.name
 end
