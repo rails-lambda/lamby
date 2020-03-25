@@ -3,6 +3,4 @@ set -e
 
 export RAILS_ENV="test"
 
-docker-compose run \
-  cicd \
-  ./bin/_test
+bundle exec rake test

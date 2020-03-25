@@ -1,20 +1,6 @@
-#!/usr/bin/env bash
-
+#!/bin/bash
 set -e
 
-if [ -f "Brewfile" ] && [ "$(uname -s)" = "Darwin" ]; then
-  brew bundle check || {
-    echo "==> Installing Homebrew dependencies..."
-    brew bundle --verbose
-  }
-fi
-
-rbenv install \
-  --skip-existing \
-  $(cat .ruby-version)
-
-CFLAGS="-I$(brew --prefix zlib)/include" \
-LDFLAGS="-L$(brew --prefix zlib)/lib" \
-pyenv install \
-  --skip-existing \
-  $(cat .python-version)
+echo '== Building containers =='
+docker pull lambci/lambda:build-ruby2.5
+docker-compose build

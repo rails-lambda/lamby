@@ -2,6 +2,6 @@
 
 set -e
 
-pipenv --rm
+rm -rf ./vendor/bundle
 
 ./bin/setup

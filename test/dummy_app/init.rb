@@ -26,47 +26,8 @@ module Dummy
     config.dependency_loading = true
     config.preload_frameworks = true
     config.eager_load = true
-    config.active_record.sqlite3.represent_boolean_as_integer = true
 
   end
 end
 
 Dummy::Application.initialize!
-
-
-
-
-
-
-# require 'rails'
-# require 'rails/all'
-# require 'lamby'
-
-# I18n.enforce_available_locales = true
-
-# module Dummy
-#   class Application < ::Rails::Application
-
-#     config.root = File.join __FILE__, '..'
-#     config.secret_key_base = '012345678901234567890123456789'
-#     config.active_support.deprecation = :stderr
-#     config.cache_store = :null_store
-#     config.consider_all_requests_local = true
-#     config.eager_load = false
-#     config.active_support.test_order = :random
-#     config.assets.compress = false
-#     config.assets.cache_store = :file_store
-#     config.assets.debug = true
-#     config.assets.precompile += []
-#     config.assets.digest = true
-#     if ENV['RAILS_ENV'] == 'test'
-#       config.cache_classes = true
-#       config.eager_load = true
-#       config.consider_all_requests_local       = true
-#       config.action_controller.perform_caching = false
-#     end
-
-#   end
-# end
-
-# Dummy::Application.initialize!
