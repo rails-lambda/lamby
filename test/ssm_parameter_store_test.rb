@@ -44,13 +44,6 @@ class SsmParameterStoreTest < LambySpec
     EOF
   end
 
-  it 'debug' do
-    skip unless debug?
-    puts klass.new(path).get!.params.inspect
-    puts klass.new(path, label: 'live').get!.params.inspect
-  end
-
-
   private
 
   def stub_params(envs)

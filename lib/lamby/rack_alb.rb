@@ -53,20 +53,17 @@ module Lamby
     end
 
     def headers_multi
-      (event['multiValueHeaders'] || {}).transform_values do |v|
-        v.is_a?(Array) ? v.first : v
-      end
-    end
-
-    def query_string
-      @query_string ||= multi_value? ? query_string_multi : super
-    end
-
-    def query_string_multi
-      query = event['multiValueQueryStringParameters'] || {}
-      string = query.map do |key, value|
-        value.map{ |v| "#{key}=#{v}" }.join('&')
-      end.flatten.join('&')
+      Hash[(event['multiValueHeaders'] || {}).map do |k,v|
+        if v.is_a?(Array)
+          if k == 'x-forwarded-for'
+            [k, v.join(', ')]
+          else
+            [k, v.first]
+          end
+        else
+          [k,v]
+        end
+      end]
     end
 
   end

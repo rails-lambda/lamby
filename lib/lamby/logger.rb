@@ -1,19 +1,23 @@
 require 'logger'
 
-ENV['RAILS_LOG_TO_STDOUT'] = '1'
+unless ENV['LAMBY_TEST']
 
-module Lamby
-  module Logger
+  ENV['RAILS_LOG_TO_STDOUT'] = '1'
 
-    def initialize(*args)
-      args[0] = STDOUT
-      super(*args)
+  module Lamby
+    module Logger
+
+      def initialize(*args)
+        args[0] = STDOUT
+        super(*args)
+      end
+
     end
-
   end
-end
 
-Logger.prepend Lamby::Logger
+  Logger.prepend Lamby::Logger
+
+end
 
 # TODO: Railtie initializer
 # Rails.application.config.logger = ActiveSupport::TaggedLogging.new(

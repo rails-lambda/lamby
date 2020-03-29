@@ -70,7 +70,16 @@ module Lamby
     end
 
     def query_string
-      @query_string ||= event['queryStringParameters'].try(:to_query)
+      @query_string ||= if event.key?('rawQueryString')
+        event['rawQueryString']
+      elsif event.key?('multiValueQueryStringParameters')
+        query = event['multiValueQueryStringParameters'] || {}
+        query.map do |key, value|
+          value.map{ |v| "#{key}=#{v}" }.join('&')
+        end.flatten.join('&')
+      else
+        event['queryStringParameters'].try(:to_query)
+      end
     end
 
     def base64_encoded?
