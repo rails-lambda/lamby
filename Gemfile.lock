@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (1.0.3)
+    lamby (2.0.0)
       rack
       rails
 
@@ -97,6 +97,8 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
+    minitest-focus (1.1.2)
+      minitest (>= 4, < 6)
     mocha (1.11.2)
     nio4r (2.5.2)
     nokogiri (1.10.9)
@@ -159,6 +161,7 @@ DEPENDENCIES
   bundler
   lamby!
   minitest
+  minitest-focus
   mocha
   pry
   rake

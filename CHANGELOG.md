@@ -2,6 +2,15 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.0.0
+
+#### Added
+
+* Lots of backfill tests for:
+  - Application Load Balancers
+  - API Gateway REST API
+
+
 ## v1.0.3
 
 #### Changed
