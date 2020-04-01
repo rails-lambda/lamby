@@ -1,4 +1,4 @@
-FROM lambci/lambda:build-ruby2.5
+FROM lambci/lambda:build-ruby2.7
 
 # Lock down AWS SAM version.
 RUN pip install awscli && \

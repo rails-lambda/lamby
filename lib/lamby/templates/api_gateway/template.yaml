@@ -51,7 +51,7 @@ Resources:
     Properties:
       CodeUri: .
       Handler: app.handler
-      Runtime: ruby2.5
+      Runtime: ruby2.7
       MemorySize: 512
       Timeout: 30
       Environment:
