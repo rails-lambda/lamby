@@ -48,10 +48,14 @@ module Lamby
 
     def rack
       @rack ||= case @options[:rack]
-      when :api
-        Lamby::RackApi.new @event, @context
-      else
+      when :rest, :api
+        Lamby::RackRest.new @event, @context
+      when :alb
         Lamby::RackAlb.new @event, @context
+      when :http
+        Lamby::RackHttp.new @event, @context
+      else
+        raise ArgumentError, 'You must provide a :rack option. One of :http, :rest, :alb'
       end
     end
 

@@ -1,12 +1,12 @@
 require 'test_helper'
 
-class RackApiTest < LambySpec
+class RackRestTest < LambySpec
 
   let(:context) { TestHelpers::LambdaContext.new }
 
   it 'env' do
     event = TestHelpers::Events::Rest.create
-    rack = Lamby::RackApi.new event, context
+    rack = Lamby::RackRest.new event, context
     expect(rack.env['REQUEST_METHOD']).must_equal             'GET'
     expect(rack.env['SCRIPT_NAME']).must_equal                ''
     expect(rack.env['PATH_INFO']).must_equal                  '/'

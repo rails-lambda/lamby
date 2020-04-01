@@ -4,6 +4,13 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v2.0.0
 
+#### Changed
+
+* The `Lamby.handler` must have a `:rack` option. One of `:http`, `:rest`, `:alb`.
+* Renamed template generators to match options above.
+* The `lamby:install` task now defaults to HTTP API.
+* Changed the name of `:api` rack option to `:rest`.
+
 #### Added
 
 * Lots of backfill tests for:

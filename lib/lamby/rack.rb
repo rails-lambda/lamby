@@ -6,6 +6,7 @@ module Lamby
     LAMBDA_EVENT = 'lambda.event'.freeze
     LAMBDA_CONTEXT = 'lambda.context'.freeze
     HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze
+    HTTP_COOKIE = 'HTTP_COOKIE'.freeze
 
     attr_reader :event, :context
 
@@ -20,14 +21,6 @@ module Lamby
 
     def response(_handler)
       {}
-    end
-
-    def api?
-      false
-    end
-
-    def alb?
-      false
     end
 
     def multi_value?

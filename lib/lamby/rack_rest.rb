@@ -1,9 +1,5 @@
 module Lamby
-  class RackApi < Lamby::Rack
-
-    def api?
-      true
-    end
+  class RackRest < Lamby::Rack
 
     private
 

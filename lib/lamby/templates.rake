@@ -1,6 +1,7 @@
 installers = {
-  'API Gateway' => :api_gateway,
-  'Application Load Balancer' => :application_load_balancer
+  'API Gateway (HTTP API)' => :http,
+  'API Gateway (REST API)' => :rest,
+  'Application Load Balancer' => :alb
 }.freeze
 
 namespace :lamby do
@@ -32,5 +33,5 @@ namespace :lamby do
   end
 
   desc "Install Lamby files for #{installers.first.first}"
-  task install: 'install:application_load_balancer'
+  task install: 'install:http'
 end

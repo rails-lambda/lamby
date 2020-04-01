@@ -1,7 +1,7 @@
-$LAMBY_INSTALLER_NAME = 'application_load_balancer'
+$LAMBY_INSTALLER_NAME = 'rest'
 load 'lamby/templates/shared.rb'
 
-say '==> Running Lamby Application Load Balancer installer...'
+say '==> Running Lamby API Gateway (REST API) installer...'
 
 say 'Copying files...'
 copy_file tpl_file('app.rb'), app_file('app.rb')
