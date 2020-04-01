@@ -1,3 +1,4 @@
+ENV['RUBYOPT'] = '-W:no-deprecated -W:no-experimental'
 require "bundler/gem_tasks"
 require "rake/testtask"
 

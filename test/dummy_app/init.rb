@@ -1,7 +1,14 @@
 ENV['RAILS_ENV'] ||= 'test'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../../Gemfile', __FILE__)
 require 'bundler/setup'
-require 'rails/all'
+require 'rails'
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'sprockets/railtie'
+require 'rails/test_unit/railtie'
 Bundler.require(:default, Rails.env)
 
 module Dummy
