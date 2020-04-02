@@ -52,10 +52,8 @@ module Lamby
         Lamby::RackRest.new @event, @context
       when :alb
         Lamby::RackAlb.new @event, @context
-      when :http
-        Lamby::RackHttp.new @event, @context
       else
-        raise ArgumentError, 'You must provide a :rack option. One of :http, :rest, :alb'
+        Lamby::RackHttp.new @event, @context
       end
     end
 
