@@ -26,10 +26,10 @@ Resources:
           RAILS_ENV: !Ref RailsEnv
       FunctionName: !Join [ '', [ 'APPNAMEHERE-', !Ref RailsEnv, '-', !Ref 'AWS::Region' ] ]
       Events:
-        MyAwesomeLambdaHttpApiProxy:
+        RailsApiProxy:
           Type: HttpApi
           Properties:
-            ApiId: !Ref MyAwesomeLambdaHttpApi
+            ApiId: !Ref RailsApi
       AutoPublishAlias: live
 
   RailsApi:
