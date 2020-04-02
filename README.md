@@ -11,7 +11,7 @@ The goal of this project is to provide minimal code to allow your Rails applicat
 
 ```ruby
 def handler(event:, context:)
-  Lamby.handler $app, event, context, rack: :alb
+  Lamby.handler $app, event, context, rack: :http
 end
 ```
 
