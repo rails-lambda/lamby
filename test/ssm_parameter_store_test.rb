@@ -39,8 +39,8 @@ class SsmParameterStoreTest < LambySpec
     stub_params(envs)
     envs.to_dotenv
     expect(File.read(file)).must_equal <<-EOF.strip_heredoc
-      export FOO=foo
-      export BAR=bar
+      FOO=foo
+      BAR=bar
     EOF
   end
 

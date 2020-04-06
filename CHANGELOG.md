@@ -4,18 +4,20 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v2.0.0
 
+Support for new API Gateway HTTP APIs!!!
+
 #### Changed
 
 * The `Lamby.handler` must have a `:rack` option. One of `:http`, `:rest`, `:alb`.
 * Renamed template generators to match options above.
 * The `lamby:install` task now defaults to HTTP API.
 * Changed the name of `:api` rack option to `:rest`.
+* Removed `export` from Dotenv files. Better Docker compatability.
 
 #### Added
 
-* Lots of backfill tests for:
-  - Application Load Balancers
-  - API Gateway REST API
+* New reack handler for HTTP API v1 and v2.
+* Lots of backfill tests for, ALBs & REST APIs.
 
 
 ## v1.0.3
