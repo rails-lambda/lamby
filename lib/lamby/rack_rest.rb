@@ -1,6 +1,14 @@
 module Lamby
   class RackRest < Lamby::Rack
 
+    def response(handler)
+      if handler.base64_encodeable?
+        { isBase64Encoded: true, body: handler.body64 }
+      else
+        super
+      end
+    end
+
     private
 
     def env_base

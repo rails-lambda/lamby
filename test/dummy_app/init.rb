@@ -1,4 +1,5 @@
 ENV['RAILS_ENV'] ||= 'test'
+ENV["RAILS_SERVE_STATIC_FILES"] = '1'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../../Gemfile', __FILE__)
 require 'bundler/setup'
 require 'rails'
@@ -21,6 +22,11 @@ module Dummy
     config.secret_key_base = '012345678901234567890123456789'
     config.active_support.test_order = :random
     config.logger = Logger.new('/dev/null')
+    config.public_file_server.enabled = true
+    config.public_file_server.headers = {
+      'Cache-Control' => "public, max-age=#{30.days.seconds.to_i}",
+      'X-Lamby-Base64' => '1'
+    }
     # Mimic production environment.
     config.consider_all_requests_local = false
     config.action_dispatch.show_exceptions = true

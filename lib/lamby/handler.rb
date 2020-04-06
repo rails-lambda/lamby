@@ -44,6 +44,17 @@ module Lamby
       self
     end
 
+    def base64_encodeable?
+      @headers && (
+        @headers['Content-Transfer-Encoding'] == 'binary' ||
+        @headers['X-Lamby-Base64'] == '1'
+      )
+    end
+
+    def body64
+      Base64.strict_encode64(body)
+    end
+
     private
 
     def rack

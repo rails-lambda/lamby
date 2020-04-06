@@ -24,4 +24,10 @@ class LambySpec < Minitest::Spec
   after do
     delete_dummy_files
   end
+
+  private
+
+  def encode64(v)
+    Base64.strict_encode64(v)
+  end
 end

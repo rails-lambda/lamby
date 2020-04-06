@@ -41,6 +41,10 @@ module TestHelpers
       File.read dummy_root.join('app/images/1.png')
     end
 
+    def dummy_app_image_public
+      File.read dummy_root.join('public/1-public.png')
+    end
+
     def delete_dummy_files
       FileUtils.rm_rf dummy_gitignore
       FileUtils.rm_rf dummy_handler

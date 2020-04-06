@@ -22,8 +22,21 @@ class HandlerTest < LambySpec
       )
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
-      expect(result[:body]).must_equal dummy_app_image
+      expect(result[:body]).must_equal encode64(dummy_app_image)
       expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:isBase64Encoded]).must_equal true
+      # Public file server.
+      event = TestHelpers::Events::HttpV2.create(
+        'rawPath' => '/production/1-public.png',
+        'requestContext' => { 'http' => {'path' => '/production/1-public.png'} }
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
+      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
+      expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
+      expect(result[:isBase64Encoded]).must_equal true
     end
 
     it 'post - login' do
@@ -71,8 +84,20 @@ class HandlerTest < LambySpec
       )
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
-      expect(result[:body]).must_equal dummy_app_image
+      expect(result[:body]).must_equal encode64(dummy_app_image)
       expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      # Public file server.
+      event = TestHelpers::Events::HttpV1.create(
+        'path' => '/production/1-public.png',
+        'requestContext' => { 'path' => '/production/1-public.png' }
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
+      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
+      expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
+      expect(result[:isBase64Encoded]).must_equal true
     end
 
     it 'post - login' do
@@ -121,8 +146,20 @@ class HandlerTest < LambySpec
       )
       result = Lamby.handler app, event, context, rack: :rest
       expect(result[:statusCode]).must_equal 200
-      expect(result[:body]).must_equal dummy_app_image
+      expect(result[:body]).must_equal encode64(dummy_app_image)
       expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      # Public file server.
+      event = TestHelpers::Events::Rest.create(
+        'path' => '/1-public.png',
+        'requestContext' => { 'path' => '/1-public.png' }
+      )
+      result = Lamby.handler app, event, context, rack: :rest
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
+      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
+      expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
+      expect(result[:isBase64Encoded]).must_equal true
     end
 
     it 'post - login' do
@@ -168,8 +205,16 @@ class HandlerTest < LambySpec
       event = TestHelpers::Events::Alb.create 'path' => '/image'
       result = Lamby.handler app, event, context, rack: :alb
       expect(result[:statusCode]).must_equal 200
-      expect(result[:body]).must_equal Base64.strict_encode64(dummy_app_image)
+      expect(result[:body]).must_equal encode64(dummy_app_image)
       expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      event = TestHelpers::Events::Alb.create 'path' => '/1-public.png'
+      result = Lamby.handler app, event, context, rack: :alb
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
+      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
+      expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
+      expect(result[:isBase64Encoded]).must_equal true
     end
 
     it 'get - exception' do
