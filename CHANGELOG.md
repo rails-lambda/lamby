@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.0.1
+
+#### Changed
+
+* Remove Rails runtime dep. Only rack is needed.
+
 ## v2.0.0
 
 Support for new API Gateway HTTP APIs!!!

@@ -1,9 +1,8 @@
 PATH
   remote: .
   specs:
-    lamby (2.0.0)
+    lamby (2.0.1)
       rack
-      rails
 
 GEM
   remote: https://rubygems.org/
@@ -163,6 +162,7 @@ DEPENDENCIES
   minitest-focus
   mocha
   pry
+  rails
   rake
 
 BUNDLED WITH
