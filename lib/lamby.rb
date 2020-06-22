@@ -10,8 +10,11 @@ require 'lamby/rack_rest'
 require 'lamby/rack_http'
 require 'lamby/debug'
 require 'lamby/handler'
-require 'rails/railtie'
-require 'lamby/railtie'
+
+if defined?(Rails)
+  require 'rails/railtie'
+  require 'lamby/railtie'
+end
 
 module Lamby
 
