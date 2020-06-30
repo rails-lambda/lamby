@@ -6,7 +6,7 @@ module Lamby
 
     def on?(event)
       params = event['multiValueQueryStringParameters'] || event['queryStringParameters']
-      (Rails.env.development? || ENV['LAMBY_DEBUG']) && params && params['debug'] == '1'
+      ENV['LAMBY_DEBUG'] && params && params['debug'] == '1'
     end
 
     def call(event, context, env)

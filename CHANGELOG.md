@@ -3,6 +3,13 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## Unreleased
+
+#### Changed
+
+* Remove depdency on `activesupport` for rack-only applications.
+* **breaking change** - Remove dependency on Rails for debug mode. No longer factor `Rails.env.development?` into the debug condition.
+
 ## v2.1.0
 
 #### Changed
@@ -29,7 +36,7 @@ Support for new API Gateway HTTP APIs!!!
 
 #### Added
 
-* New reack handler for HTTP API v1 and v2.
+* New rack handler for HTTP API v1 and v2.
 * Lots of backfill tests for, ALBs & REST APIs.
 
 
