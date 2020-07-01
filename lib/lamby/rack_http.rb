@@ -38,7 +38,7 @@ module Lamby
 
     def env_headers
       super.tap do |hdrs|
-        if event['cookies'].present?
+        if !event['cookies'].to_s.empty?
           hdrs[HTTP_COOKIE] = event['cookies'].join('; ')
         end
       end

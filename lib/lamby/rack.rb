@@ -71,7 +71,8 @@ module Lamby
           value.map{ |v| "#{key}=#{v}" }.join('&')
         end.flatten.join('&')
       else
-        event['queryStringParameters'].try(:to_query)
+        query = event['queryStringParameters']
+        query && Rack::Utils.build_query(query)
       end
     end
 

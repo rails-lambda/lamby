@@ -6,7 +6,7 @@ module Lamby
 
     def on?(event)
       params = event['multiValueQueryStringParameters'] || event['queryStringParameters']
-      ENV['LAMBY_DEBUG'] && params && params['debug'] == '1'
+      (development? && ENV['LAMBY_DEBUG']) && params && params['debug'] == '1'
     end
 
     def call(event, context, env)
@@ -40,6 +40,13 @@ module Lamby
           </body>
         </html>
       HTML
+    end
+
+    def development?
+      ENV
+        .slice('RACK_ENV', 'RAILS_ENV')
+        .values
+        .any? { |v| v.casecmp('development').zero? }
     end
 
   end
