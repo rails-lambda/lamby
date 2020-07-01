@@ -71,9 +71,18 @@ module Lamby
           value.map{ |v| "#{key}=#{v}" }.join('&')
         end.flatten.join('&')
       else
-        query = event['queryStringParameters']
-        query && Rack::Utils.build_query(query)
+        build_query_string
       end
+    end
+
+    def build_query_string
+      return if event['queryStringParameters'].nil?
+
+      Rack::Utils.build_nested_query(
+        event.fetch('queryStringParameters')
+      )
+        .gsub('[', '%5B')
+        .gsub(']', '%5D')
     end
 
     def base64_encoded?

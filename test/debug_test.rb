@@ -11,14 +11,20 @@ class DebugTest < LambySpec
     end
 
     before do
-      @old_env = ENV
-      ENV['LAMBY_DEBUG'] = '1'
+      @old_rack_env = ENV['RACK_ENV']
+      @old_rails_env = ENV['RAILS_ENV']
+      ENV['RACK_ENV'] = rack_env
+      ENV['RAILS_ENV'] = rails_env
     end
 
-    after { ENV.replace(@old_env) }
+    after do
+      ENV['RACK_ENV'] = @old_rack_env
+      ENV['RAILS_ENV'] = @old_rails_env
+    end
 
     describe 'when RACK_ENV == development' do
-      before { ENV['RACK_ENV'] = 'development' }
+      let(:rack_env) { 'development' }
+      let(:rails_env) { nil }
 
       describe 'when the debug param is 1' do
         let(:debug_param) { '1' }
@@ -38,7 +44,8 @@ class DebugTest < LambySpec
     end
 
     describe 'when RAILS_ENV == development' do
-      before { ENV['RAILS_ENV'] = 'development' }
+      let(:rack_env) { 'production' }
+      let(:rails_env) { 'development' }
 
       describe 'when the debug param is 1' do
         let(:debug_param) { '1' }
