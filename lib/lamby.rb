@@ -1,7 +1,6 @@
 require 'lamby/logger'
 require 'rack'
 require 'base64'
-require 'active_support/all'
 require 'lamby/version'
 require 'lamby/sam_helpers'
 require 'lamby/rack'

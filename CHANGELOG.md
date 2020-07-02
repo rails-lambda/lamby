@@ -3,6 +3,20 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## Unreleased
+
+#### Changed
+
+* Remove dependency on `activesupport` for rack-only applications.
+* Remove ActiveSupport artifacts:
+  - Replace `strip_heredoc` with `<<~HEREDOC`.
+  - Remove instances of `Object#try`, replace with `&.`.
+  - Use `Rack::Utils.build_nested_query` in place of `Object#to_query`.
+  - Replace `Object#present?` with `to_s.empty?`.
+  - Replace `Array.wrap` with `Array[obj].compact.flatten`.
+* Add a check against the `RAILS_ENV` AND `RACK_ENV` environment
+  variables prior to enabling debug mode.
+
 ## v2.1.0
 
 #### Changed
@@ -29,7 +43,7 @@ Support for new API Gateway HTTP APIs!!!
 
 #### Added
 
-* New reack handler for HTTP API v1 and v2.
+* New rack handler for HTTP API v1 and v2.
 * Lots of backfill tests for, ALBs & REST APIs.
 
 

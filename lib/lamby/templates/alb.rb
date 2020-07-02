@@ -10,7 +10,7 @@ gsub_file app_file('template.yaml'), /APPNAMEHERE/, appname
 
 say 'Adding to .gitignore...'
 FileUtils.touch app_file('.gitignore')
-append_to_file app_file('.gitignore'), <<-GITIGNORE.strip_heredoc
+append_to_file app_file('.gitignore'), <<~GITIGNORE
   # Lamby
   /.aws-sam
 GITIGNORE

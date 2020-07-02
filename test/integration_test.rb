@@ -7,7 +7,7 @@ class IntegrationTest < LambySpec
     expect(out).must_include 'API Gateway (HTTP API) installer'
     # Handler
     assert File.exists?(dummy_handler)
-    expect(File.read(dummy_handler)).must_include <<-RUBY.strip_heredoc
+    expect(File.read(dummy_handler)).must_include <<~RUBY
       def handler(event:, context:)
         Lamby.handler $app, event, context, rack: :http
       end
@@ -30,7 +30,7 @@ class IntegrationTest < LambySpec
     expect(out).must_include 'API Gateway (REST API) installer'
     # Handler
     assert File.exists?(dummy_handler)
-    expect(File.read(dummy_handler)).must_include <<-RUBY.strip_heredoc
+    expect(File.read(dummy_handler)).must_include <<~RUBY
       def handler(event:, context:)
         Lamby.handler $app, event, context, rack: :rest
       end

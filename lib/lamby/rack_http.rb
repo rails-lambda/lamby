@@ -38,14 +38,18 @@ module Lamby
 
     def env_headers
       super.tap do |hdrs|
-        if event['cookies'].present?
-          hdrs[HTTP_COOKIE] = event['cookies'].join('; ')
+        if cookies.any?
+          hdrs[HTTP_COOKIE] = cookies.join('; ')
         end
       end
     end
 
     def request_method
       event.dig('requestContext', 'http', 'method') || event['httpMethod']
+    end
+
+    def cookies
+      event['cookies'] || []
     end
 
     # Using custom domain names with v1.0 yields a good `path` parameter sans

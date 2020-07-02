@@ -19,9 +19,10 @@ module Lamby
         parts = path.from(1).split('/')
         env = parts.pop
         path = "/#{parts.join('/')}"
-        new(path).get!.params.detect do |p|
+        param = new(path).get!.params.detect do |p|
           p.env == env
-        end.try(:value)
+        end
+        param&.value
       end
 
     end
@@ -44,7 +45,7 @@ module Lamby
 
     def get!
       get_all!
-      get_history! if label.present?
+      get_history! unless label.to_s.empty?
       self
     end
 
@@ -98,7 +99,7 @@ module Lamby
         with_decryption: true,
         max_results: MAX_RESULTS
       }.tap { |options|
-        token = @all_response.try(:next_token)
+        token = @all_response&.next_token
         options[:next_token] = token if token
       }
     end
@@ -137,7 +138,7 @@ module Lamby
         with_decryption: true,
         max_results: MAX_RESULTS
       }.tap { |options|
-        token = @hist_response.try(:next_token)
+        token = @hist_response&.next_token
         options[:next_token] = token if token
       }
     end
