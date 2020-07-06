@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.2.1
+
+#### Changed
+
+* More ActiveSupport removal from SsmParameterStore.
+
 ## v2.2.0
 
 #### Changed

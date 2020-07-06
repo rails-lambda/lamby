@@ -16,7 +16,7 @@ module Lamby
       end
 
       def get!(path)
-        parts = path.from(1).split('/')
+        parts = path[1..-1].split('/')
         env = parts.pop
         path = "/#{parts.join('/')}"
         param = new(path).get!.params.detect do |p|
