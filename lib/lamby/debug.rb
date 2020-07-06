@@ -43,7 +43,7 @@ module Lamby
     end
 
     def development?
-      ENV
+      ENV.to_h
         .slice('RACK_ENV', 'RAILS_ENV')
         .values
         .any? { |v| v.to_s.casecmp('development').zero? }

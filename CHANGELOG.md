@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.2.2
+
+#### Changed
+
+* More ActiveSupport removal. Better ENV.to_h.
+
 ## v2.2.1
 
 #### Changed
