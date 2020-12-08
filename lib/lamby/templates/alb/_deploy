@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -e
+
+export RAILS_ENV=${RAILS_ENV:="production"}
+export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:=us-east-1}
+export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="lamby.cloudformation.$(whoami)"}
+
+# https://github.com/aws/aws-sam-cli/issues/2447
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+export IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/myorg/APPNAMEHERE"
+
+./bin/_build
+
+export VPCID=${VPCID:=$(
+  aws ec2 describe-vpcs \
+    --output text \
+    --filters 'Name=state,Values=available' \
+    --query 'Vpcs[0].VpcId'
+)}
+
+export SUBNETS=${SUBNETS:=$(
+  aws ec2 describe-subnets \
+    --output text \
+    --filters "Name=state,Values=available,Name=vpc-id,Values=$VPCID" \
+    --query 'Subnets[*].SubnetId' | \
+    tr -s '[:blank:]' ','
+)}
+
+sam build \
+  --parameter-overrides \
+  RailsEnv="${RAILS_ENV}"
+
+echo "== SAM package..."
+sam package \
+  --region "$AWS_DEFAULT_REGION" \
+  --template-file ./.aws-sam/build/template.yaml \
+  --output-template-file ./.aws-sam/build/packaged.yaml \
+  --image-repository "$IMAGE_REPOSITORY" \
+  --s3-bucket "${CLOUDFORMATION_BUCKET}" \
+  --s3-prefix "APPNAMEHERE-${RAILS_ENV}"
+
+echo "== SAM deploy..."
+sam deploy \
+  --region "$AWS_DEFAULT_REGION" \
+  --template-file ./.aws-sam/build/packaged.yaml \
+  --stack-name "APPNAMEHERE-${RAILS_ENV}" \
+  --image-repository "$IMAGE_REPOSITORY" \
+  --capabilities "CAPABILITY_IAM" \
+  --parameter-overrides \
+    RailsEnv="${RAILS_ENV}" \
+    VpcId=${VPCID} \
+    Subnets=${SUBNETS}

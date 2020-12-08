@@ -28,14 +28,14 @@ Resources:
 
   RailsLoadBalancerTargetGroup:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
-    DependsOn: RailsFunctionInvokePermission
+    DependsOn: RailsLambdaInvokePermission
     Properties:
       TargetType: lambda
       TargetGroupAttributes:
         - Key: lambda.multi_value_headers.enabled
           Value: true
       Targets:
-        - Id: !GetAtt RailsFunction.Arn
+        - Id: !GetAtt RailsLambda.Arn
 
   RailsLoadBalancerHttpListener:
     Type: 'AWS::ElasticLoadBalancingV2::Listener'
@@ -58,26 +58,26 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
 
-  RailsFunctionInvokePermission:
+  RailsLambdaInvokePermission:
     Type: AWS::Lambda::Permission
     Properties:
-      FunctionName: !GetAtt RailsFunction.Arn
+      FunctionName: !GetAtt RailsLambda.Arn
       Action: 'lambda:InvokeFunction'
       Principal: elasticloadbalancing.amazonaws.com
 
-  RailsFunction:
+  RailsLambda:
     Type: AWS::Serverless::Function
+    Metadata:
+      DockerContext: ./.lamby/RailsLambda
+      Dockerfile: Dockerfile
     Properties:
-      CodeUri: .
-      Handler: app.handler
-      Runtime: ruby2.7
       MemorySize: 512
       Timeout: 30
       Environment:
         Variables:
           RAILS_ENV: !Ref RailsEnv
       FunctionName: !Join [ '', [ 'APPNAMEHERE-', !Ref RailsEnv, '-', !Ref 'AWS::Region' ] ]
-      AutoPublishAlias: live
+      PackageType: Image
 
 Outputs:
 
@@ -85,6 +85,6 @@ Outputs:
     Description: Application Load Balancer DNS Name
     Value: !GetAtt RailsLoadBalancer.DNSName
 
-  RailsFunctionArn:
+  RailsLambdaArn:
     Description: Lambda ARN
-    Value: !GetAtt RailsFunction.Arn
+    Value: !GetAtt RailsLambda.Arn

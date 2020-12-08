@@ -26,11 +26,15 @@ module TestHelpers
     end
 
     def dummy_bin_build
-      dummy_root.join 'bin/build'
+      dummy_root.join 'bin/_build'
     end
 
     def dummy_bin_deploy
       dummy_root.join 'bin/deploy'
+    end
+
+    def dummy_bin__deploy
+      dummy_root.join 'bin/_deploy'
     end
 
     def dummy_gitignore

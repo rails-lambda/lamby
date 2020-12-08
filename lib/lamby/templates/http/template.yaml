@@ -13,12 +13,12 @@ Parameters:
 
 Resources:
 
-  RailsFunction:
+  RailsLambda:
     Type: AWS::Serverless::Function
+    Metadata:
+      DockerContext: ./.lamby/RailsLambda
+      Dockerfile: Dockerfile
     Properties:
-      CodeUri: .
-      Handler: app.handler
-      Runtime: ruby2.7
       MemorySize: 512
       Timeout: 30
       Environment:
@@ -30,7 +30,7 @@ Resources:
           Type: HttpApi
           Properties:
             ApiId: !Ref RailsApi
-      AutoPublishAlias: live
+      PackageType: Image
 
   RailsApi:
     Type: AWS::Serverless::HttpApi
@@ -43,6 +43,6 @@ Outputs:
     Description: API Gateway Endpoint
     Value: !Sub "https://${RailsApi}.execute-api.${AWS::Region}.amazonaws.com/${RailsEnv}/"
 
-  RailsFunctionArn:
+  RailsLambdaArn:
     Description: Lambda ARN
-    Value: !GetAtt RailsFunction.Arn
+    Value: !GetAtt RailsLambda.Arn
