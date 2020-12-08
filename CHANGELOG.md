@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.5.0
+
+#### Changed
+
+* Install files to favor containers.
+
 ## v2.2.2
 
 #### Changed

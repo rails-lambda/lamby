@@ -18,11 +18,12 @@ class IntegrationTest < LambySpec
     expect(File.read(dummy_template)).must_include 'Description: Dummy Lambda'
     # Bin Files
     assert File.exists?(dummy_bin_build)
-    expect(File.read(dummy_bin_build)).must_include 'sam build --use-container'
+    expect(File.read(dummy_bin_build)).must_include 'bundle install'
     assert File.exists?(dummy_bin_deploy)
-    expect(File.read(dummy_bin_deploy)).must_include 'sam package'
-    expect(File.read(dummy_bin_deploy)).must_include '--s3-prefix "dummy-${RAILS_ENV}"'
-    expect(File.read(dummy_bin_deploy)).must_include '--stack-name "dummy-${RAILS_ENV}-${AWS_DEFAULT_REGION}"'
+    assert File.exists?(dummy_bin__deploy)
+    expect(File.read(dummy_bin__deploy)).must_include 'sam package'
+    expect(File.read(dummy_bin__deploy)).must_include '--image-repository "$IMAGE_REPOSITORY"'
+    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "dummy-${RAILS_ENV}"'
   end
 
   it 'lamby:install:rest' do
@@ -41,11 +42,12 @@ class IntegrationTest < LambySpec
     expect(File.read(dummy_template)).must_include 'Description: Dummy Lambda'
     # Bin Files
     assert File.exists?(dummy_bin_build)
-    expect(File.read(dummy_bin_build)).must_include 'sam build --use-container'
+    expect(File.read(dummy_bin_build)).must_include 'bundle install'
     assert File.exists?(dummy_bin_deploy)
-    expect(File.read(dummy_bin_deploy)).must_include 'sam package'
-    expect(File.read(dummy_bin_deploy)).must_include '--s3-prefix "dummy-${RAILS_ENV}"'
-    expect(File.read(dummy_bin_deploy)).must_include '--stack-name "dummy-${RAILS_ENV}-${AWS_DEFAULT_REGION}"'
+    assert File.exists?(dummy_bin__deploy)
+    expect(File.read(dummy_bin__deploy)).must_include 'sam package'
+    expect(File.read(dummy_bin__deploy)).must_include '--image-repository "$IMAGE_REPOSITORY"'
+    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "dummy-${RAILS_ENV}'
   end
 
 end

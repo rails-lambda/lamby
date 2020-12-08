@@ -28,7 +28,7 @@ Resources:
             x-amazon-apigateway-any-method:
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsFunction.Arn}:live/invocations
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsLambda.Arn}:live/invocations
                 httpMethod: POST
                 type: aws_proxy
           /{resource+}:
@@ -40,18 +40,18 @@ Resources:
                   type: string
               x-amazon-apigateway-integration:
                 uri:
-                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsFunction.Arn}:live/invocations
+                  Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${RailsLambda.Arn}:live/invocations
                 httpMethod: POST
                 type: aws_proxy
         x-amazon-apigateway-binary-media-types:
           - '*/*'
 
-  RailsFunction:
+  RailsLambda:
     Type: AWS::Serverless::Function
+    Metadata:
+      DockerContext: ./.lamby/RailsLambda
+      Dockerfile: Dockerfile
     Properties:
-      CodeUri: .
-      Handler: app.handler
-      Runtime: ruby2.7
       MemorySize: 512
       Timeout: 30
       Environment:
@@ -71,7 +71,7 @@ Resources:
             Path: /{resource+}
             Method: ANY
             RestApiId: !Ref RailsApi
-      AutoPublishAlias: live
+      PackageType: Image
 
 Outputs:
 
@@ -79,6 +79,6 @@ Outputs:
     Description: API Gateway Endpoint
     Value: !Sub "https://${RailsApi}.execute-api.${AWS::Region}.amazonaws.com/${RailsEnv}/"
 
-  RailsFunctionArn:
+  RailsLambdaArn:
     Description: Lambda ARN
-    Value: !GetAtt RailsFunction.Arn
+    Value: !GetAtt RailsLambda.Arn

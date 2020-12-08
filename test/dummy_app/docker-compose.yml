@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  cicd:
+    build:
+      context: .
+      dockerfile: Dockerfile-build
+    environment:
+      - RAILS_ENV=${RAILS_ENV-development}
+      - AWS_PROFILE=${AWS_PROFILE-default}
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION-us-east-1}
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+    volumes:
+      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
+      - ~/.aws:/root/.aws:delegated
+      - ~/.ssh/known_hosts:/root/.ssh/known_hosts
+      - .:/var/task:delegated
+      - /var/run/docker.sock:/var/run/docker.sock
