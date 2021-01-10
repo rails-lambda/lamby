@@ -31,6 +31,10 @@ echo "== Asset Hosts & Precompiling =="
 #   RAILS_GROUPS=assets \
 #   ./bin/rails assets:precompile
 
+echo "== Webpack & Precompiling =="
+#NODE_ENV='production' \
+# ./bin/rails webpacker:compile
+
 echo "== Cleanup Unused Files & Directories =="
 rm -rf \
   log \
