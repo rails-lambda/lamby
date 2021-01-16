@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.5.1
+
+#### Fixed
+
+* Quoting in describe-subnets #62 Thanks @atwoodjw
+
 ## v2.5.0
 
 #### Changed
