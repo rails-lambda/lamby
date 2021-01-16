@@ -21,7 +21,7 @@ export VPCID=${VPCID:=$(
 export SUBNETS=${SUBNETS:=$(
   aws ec2 describe-subnets \
     --output text \
-    --filters "Name=state,Values=available,Name=vpc-id,Values=$VPCID" \
+    --filters 'Name=state,Values=available' "Name=vpc-id,Values=$VPCID" \
     --query 'Subnets[*].SubnetId' | \
     tr -s '[:blank:]' ','
 )}
