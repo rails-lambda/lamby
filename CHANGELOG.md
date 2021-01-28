@@ -3,6 +3,10 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.5.2
+
+* SSM file always overwrites. Fixes #65.
+
 ## v2.5.1
 
 #### Fixed
