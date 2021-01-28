@@ -40,7 +40,7 @@ module Lamby
     end
 
     def to_dotenv
-      File.open(dotenv_file, 'w') { |f| f.write(dotenv_contents) }
+      File.open(dotenv_file, 'a') { |f| f.write(dotenv_contents) }
     end
 
     def get!
