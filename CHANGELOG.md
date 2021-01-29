@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.5.3
+
+#### Fixed
+
+* Base64 encode response body if the rack response is gzip or brotli compressed.
+
 ## v2.5.2
 
 * SSM file always overwrites. Fixes #65.
