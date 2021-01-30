@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (2.5.2)
+    lamby (2.5.3)
       rack
 
 GEM
@@ -166,4 +166,4 @@ DEPENDENCIES
   rake
 
 BUNDLED WITH
-   2.1.4
+   2.2.7
