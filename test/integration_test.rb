@@ -21,9 +21,10 @@ class IntegrationTest < LambySpec
     expect(File.read(dummy_bin_build)).must_include 'bundle install'
     assert File.exists?(dummy_bin_deploy)
     assert File.exists?(dummy_bin__deploy)
+    expect(File.read(dummy_bin__deploy)).must_include 'DEPLOYMENT_NAME="myorg/dummy"'
     expect(File.read(dummy_bin__deploy)).must_include 'sam package'
     expect(File.read(dummy_bin__deploy)).must_include '--image-repository "$IMAGE_REPOSITORY"'
-    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "dummy-${RAILS_ENV}"'
+    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "${DEPLOYMENT_NAME/\//-}-${RAILS_ENV}"'
   end
 
   it 'lamby:install:rest' do
@@ -45,9 +46,10 @@ class IntegrationTest < LambySpec
     expect(File.read(dummy_bin_build)).must_include 'bundle install'
     assert File.exists?(dummy_bin_deploy)
     assert File.exists?(dummy_bin__deploy)
+    expect(File.read(dummy_bin__deploy)).must_include 'DEPLOYMENT_NAME="myorg/dummy"'
     expect(File.read(dummy_bin__deploy)).must_include 'sam package'
     expect(File.read(dummy_bin__deploy)).must_include '--image-repository "$IMAGE_REPOSITORY"'
-    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "dummy-${RAILS_ENV}'
+    expect(File.read(dummy_bin__deploy)).must_include '--stack-name "${DEPLOYMENT_NAME/\//-}-${RAILS_ENV}"'
   end
 
 end

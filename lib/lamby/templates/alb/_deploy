@@ -1,14 +1,24 @@
 #!/usr/bin/env bash
 set -e
 
+export DEPLOYMENT_NAME="myorg/APPNAMEHERE"
 export RAILS_ENV=${RAILS_ENV:="production"}
 export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:=us-east-1}
-export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="lamby.cloudformation.$(whoami)"}
+export CLOUDFORMATION_BUCKET=${CLOUDFORMATION_BUCKET:="lamby.cloudformation.${DEPLOYMENT_NAME/\//-}"}
 
 # https://github.com/aws/aws-sam-cli/issues/2447
 export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-export IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/myorg/APPNAMEHERE"
+export IMAGE_REPOSITORY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${DEPLOYMENT_NAME}"
 
+echo '== Creating ECR repository =='
+echo 'You can safely ignore any RepositoryAlreadyExistsException errors...'
+aws ecr create-repository \
+  --repository-name "$DEPLOYMENT_NAME" \
+  --image-tag-mutability MUTABLE \
+  --image-scanning-configuration scanOnPush=true \
+  --region "$AWS_DEFAULT_REGION" || true
+
+# Build our application code into a deployment folder
 ./bin/_build
 
 export VPCID=${VPCID:=$(
@@ -37,13 +47,13 @@ sam package \
   --output-template-file ./.aws-sam/build/packaged.yaml \
   --image-repository "$IMAGE_REPOSITORY" \
   --s3-bucket "${CLOUDFORMATION_BUCKET}" \
-  --s3-prefix "APPNAMEHERE-${RAILS_ENV}"
+  --s3-prefix "${DEPLOYMENT_NAME/\//-}-${RAILS_ENV}"
 
 echo "== SAM deploy..."
 sam deploy \
   --region "$AWS_DEFAULT_REGION" \
   --template-file ./.aws-sam/build/packaged.yaml \
-  --stack-name "APPNAMEHERE-${RAILS_ENV}" \
+  --stack-name "${DEPLOYMENT_NAME/\//-}-${RAILS_ENV}" \
   --image-repository "$IMAGE_REPOSITORY" \
   --capabilities "CAPABILITY_IAM" \
   --parameter-overrides \
