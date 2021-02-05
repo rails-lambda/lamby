@@ -3,6 +3,10 @@ set -e
 
 export RAILS_ENV=${RAILS_ENV:=production}
 
+if [[ "$OSTYPE" == *"darwin"* ]]; then
+  export SSH_AUTH_SOCK=/run/host-services/ssh-auth.sock
+fi
+
 docker-compose run \
    -e CLOUDFORMATION_BUCKET \
    cicd \
