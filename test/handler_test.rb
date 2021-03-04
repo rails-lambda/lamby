@@ -15,6 +15,18 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
 
+    it 'get - multiple cookies' do
+      event = TestHelpers::Events::HttpV2.create(
+        'rawPath' => '/production/cooks',
+        'requestContext' => { 'http' => {'path' => '/production/cooks'} }
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:headers]['Set-Cookie']).must_be_nil
+      expect(result[:cookies]).must_equal ["1=1; path=/", "2=2; path=/"]
+      expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
+    end
+
     it 'get - image' do
       event = TestHelpers::Events::HttpV2.create(
         'rawPath' => '/production/image',
@@ -75,6 +87,18 @@ class HandlerTest < LambySpec
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
+    end
+
+    it 'get - multiple cookies' do
+      event = TestHelpers::Events::HttpV1.create(
+        'path' => '/production/cooks',
+        'requestContext' => { 'path' => '/production/cooks'}
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:headers]['Set-Cookie']).must_be_nil
+      expect(result[:multiValueHeaders]['Set-Cookie']).must_equal ["1=1; path=/", "2=2; path=/"]
+      expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
     end
 
     it 'get - image' do
@@ -139,6 +163,18 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
 
+    it 'get - multiple cookies' do
+      event = TestHelpers::Events::Rest.create(
+        'path' => '/cooks',
+        'requestContext' => { 'path' => '/cooks'}
+      )
+      result = Lamby.handler app, event, context, rack: :rest
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:headers]['Set-Cookie']).must_be_nil
+      expect(result[:multiValueHeaders]['Set-Cookie']).must_equal ["1=1; path=/", "2=2; path=/"]
+      expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
+    end
+
     it 'get - image' do
       event = TestHelpers::Events::Rest.create(
         'path' => '/image',
@@ -201,6 +237,15 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
 
+    it 'get - multiple cookies' do
+      event = TestHelpers::Events::Alb.create 'path' => '/cooks'
+      result = Lamby.handler app, event, context, rack: :rest
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:headers]['Set-Cookie']).must_be_nil
+      expect(result[:multiValueHeaders]['Set-Cookie']).must_equal ["1=1; path=/", "2=2; path=/"]
+      expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
+    end
+
     it 'get - image' do
       event = TestHelpers::Events::Alb.create 'path' => '/image'
       result = Lamby.handler app, event, context, rack: :alb
@@ -233,7 +278,7 @@ class HandlerTest < LambySpec
   private
 
   def session_cookie(result)
-    cookies = result[:headers]['Set-Cookie']
+    cookies = (result[:cookies] || result[:multiValueHeaders]['Set-Cookie'])[0]
     cookies.split('; ').detect { |x| x =~ /session=/ }
   end
 

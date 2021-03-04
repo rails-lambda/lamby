@@ -3,6 +3,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.6.0
+
+#### Fixed
+
+* Support multiple Set-Cookie headers for all rest types.
+
 ## v2.5.3
 
 #### Fixed
