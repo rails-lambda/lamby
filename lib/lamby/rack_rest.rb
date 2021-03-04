@@ -6,6 +6,11 @@ module Lamby
         { isBase64Encoded: true, body: handler.body64 }
       else
         super
+      end.tap do |r|
+        if cookies = handler.set_cookies
+          r[:multiValueHeaders] ||= {}
+          r[:multiValueHeaders]['Set-Cookie'] = cookies
+        end
       end
     end
 

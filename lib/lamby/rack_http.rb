@@ -6,6 +6,15 @@ module Lamby
         { isBase64Encoded: true, body: handler.body64 }
       else
         super
+      end.tap do |r|
+        if cookies = handler.set_cookies
+          if payload_version_one?
+            r[:multiValueHeaders] ||= {}
+            r[:multiValueHeaders]['Set-Cookie'] = cookies
+          else
+            r[:cookies] = cookies
+          end
+        end
       end
     end
 
@@ -79,6 +88,9 @@ module Lamby
         'HTTP/1.1'
     end
 
+    def payload_version_one?
+      event['version'] == '1.0'
+    end
 
   end
 end

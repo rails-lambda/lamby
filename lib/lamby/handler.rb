@@ -31,6 +31,13 @@ module Lamby
       @headers
     end
 
+    def set_cookies
+      return @set_cookies if defined?(@set_cookies)
+      @set_cookies = if @headers && @headers['Set-Cookie']
+        @headers.delete('Set-Cookie').split("\n")
+      end
+    end
+
     def body
       @rbody ||= ''.tap do |rbody|
         @body.each { |part| rbody << part }
@@ -40,6 +47,7 @@ module Lamby
     def call
       return self if @called
       @status, @headers, @body = call_app
+      set_cookies
       @called = true
       self
     end

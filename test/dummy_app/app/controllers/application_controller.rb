@@ -26,6 +26,12 @@ class ApplicationController < ActionController::Base
     raise 'hell'
   end
 
+  def cooks
+    cookies['1'] = '1'
+    cookies['2'] = '2'
+    render :index
+  end
+
   private
 
   def logged_in?

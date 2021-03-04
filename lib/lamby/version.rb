@@ -1,3 +1,3 @@
 module Lamby
-  VERSION = '2.5.3'
+  VERSION = '2.6.0'
 end
