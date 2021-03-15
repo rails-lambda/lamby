@@ -40,7 +40,7 @@ module Lamby
 
     def body
       @rbody ||= ''.tap do |rbody|
-        @body.each { |part| rbody << part }
+        @body.each { |part| rbody << part if part }
       end
     end
 
