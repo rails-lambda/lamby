@@ -52,11 +52,11 @@ module Lamby
       self
     end
 
-    def base64_encodeable?
-      @headers && (
-        @headers['Content-Transfer-Encoding'] == 'binary' ||
-        content_encoding_compressed? ||
-        @headers['X-Lamby-Base64'] == '1'
+    def base64_encodeable?(hdrs = @headers)
+      hdrs && (
+        hdrs['Content-Transfer-Encoding'] == 'binary' ||
+        content_encoding_compressed?(hdrs) ||
+        hdrs['X-Lamby-Base64'] == '1'
       )
     end
 
@@ -89,8 +89,8 @@ module Lamby
       end
     end
 
-    def content_encoding_compressed?
-      content_encoding_header = @headers['Content-Encoding'] || ''
+    def content_encoding_compressed?(hdrs)
+      content_encoding_header = hdrs['Content-Encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
     end
   end
