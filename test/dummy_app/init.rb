@@ -24,7 +24,7 @@ module Dummy
     config.logger = Logger.new('/dev/null')
     config.public_file_server.enabled = true
     config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{30.days.seconds.to_i}",
+      'Cache-Control' => "public, max-age=2592000",
       'X-Lamby-Base64' => '1'
     }
     # Mimic production environment.
