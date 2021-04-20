@@ -4,6 +4,10 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.6.2
+
+- Fixed Rack::Deflate usage with an ALB.
+
 ## v2.6.1
 
 #### Fixed

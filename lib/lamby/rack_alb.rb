@@ -16,7 +16,7 @@ module Lamby
         multivalue_headers['Set-Cookie'] = handler.set_cookies if handler.set_cookies
       end
       status_description = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
-      base64_encode = hhdrs['Content-Transfer-Encoding'] == 'binary' || hhdrs['X-Lamby-Base64'] == '1'
+      base64_encode = handler.base64_encodeable?(hhdrs)
       body = Base64.strict_encode64(handler.body) if base64_encode
       { multiValueHeaders: multivalue_headers,
         statusDescription: status_description,
