@@ -72,7 +72,7 @@ module Lamby
       @rack = begin
         type = rack_option
         klass = Lamby::Rack.lookup type, @event
-        klass ? klass.new(@event, @context) : false
+        (klass && klass.handle?(@event)) ? klass.new(@event, @context) : false
       end
     end
 
@@ -90,6 +90,8 @@ module Lamby
         Debug.call @event, @context, rack.env
       elsif rack?
         @app.call rack.env
+      elsif runner?
+        Runner.call(@event)
       elsif lambdakiq?
         Lambdakiq.handler(@event)
       elsif event_bridge?
@@ -116,6 +118,10 @@ module Lamby
 
     def lambdakiq?
       defined?(::Lambdakiq) && ::Lambdakiq.job?(@event)
+    end
+
+    def runner?
+      Runner.handle?(@event)
     end
   end
 end

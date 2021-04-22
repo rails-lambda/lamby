@@ -305,6 +305,42 @@ class HandlerTest < LambySpec
 
   end
 
+  describe 'runner' do
+
+    it 'migrate pattern runs' do
+      event = { 'lamby' => { 'runner' => './bin/rake db:migrate' } }
+      out = capture(:stdout) { @result = Lamby.handler app, event, context, rack: :http }
+      expect(out).must_match %r{Don't know how to build task 'db:migrate'}
+      expect(@result[:statusCode]).must_equal 1
+      expect(@result[:headers]).must_equal({})
+      expect(@result[:body]).must_equal ""
+    end
+
+    it 'raises an UnknownCommandPattern error for unknown patterns' do
+      event = { 'lamby' => { 'runner' => 'ls -lAGp' } }
+      error = assert_raises Lamby::Runner::UnknownCommandPattern do
+        Lamby.handler app, event, context
+      end
+      expect(error.message).must_equal 'ls -lAGp'
+    end
+
+    it 'can push other command patterns' do
+      # Using Regular Expression
+      Lamby.config.runner_patterns.push %r{\A/bin/foo.*}
+      event = { 'lamby' => { 'runner' => '/bin/foo hello' } }
+      error = assert_raises Errno::ENOENT do
+        Lamby.handler app, event, context
+      end
+      expect(error.message).must_match 'No such file or directory'
+      # Using String Equality
+      Lamby.config.runner_patterns.push './bin/rake some:task'
+      event = { 'lamby' => { 'runner' => './bin/rake some:task' } }
+      out = capture(:stdout) { Lamby.handler app, event, context }
+      expect(out).must_match "Don't know how to build task"
+    end
+
+  end
+
   private
 
   def session_cookie(result)

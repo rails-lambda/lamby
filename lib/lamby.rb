@@ -9,6 +9,7 @@ require 'lamby/rack_alb'
 require 'lamby/rack_rest'
 require 'lamby/rack_http'
 require 'lamby/debug'
+require 'lamby/runner'
 require 'lamby/handler'
 
 if defined?(Rails)
