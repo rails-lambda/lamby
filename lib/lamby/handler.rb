@@ -47,7 +47,7 @@ module Lamby
     def call
       return self if @called
       @status, @headers, @body = call_app
-      set_cookies
+      set_cookies if rack?
       @called = true
       self
     end
@@ -84,6 +84,8 @@ module Lamby
     def call_app
       if Debug.on?(@event)
         Debug.call @event, @context, rack.env
+      elsif runner?
+        Runner.call(@event)
       else
         @app.call rack.env
       end
@@ -92,6 +94,14 @@ module Lamby
     def content_encoding_compressed?(hdrs)
       content_encoding_header = hdrs['Content-Encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
+    end
+
+    def runner?
+      Runner.handle?(@event)
+    end
+
+    def rack?
+      !runner?
     end
   end
 end

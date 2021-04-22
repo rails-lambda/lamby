@@ -275,6 +275,19 @@ class HandlerTest < LambySpec
 
   end
 
+  describe 'runner' do
+
+    it 'pwd' do
+      event = { 'lamby' => { 'runner' => 'pwd' } }
+      out = capture(:stdout) { @result = Lamby.handler app, event, context, rack: :http }
+      expect(out).must_match %r{/var/task}
+      expect(@result[:statusCode]).must_equal 0
+      expect(@result[:headers]).must_equal({})
+      expect(@result[:body]).must_equal ""
+    end
+
+  end
+
   private
 
   def session_cookie(result)
