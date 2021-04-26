@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.6.3
+
+#### Added
+
+- Bootsnap setup convenience require.
+
 ## v2.6.2
 
 - Fixed Rack::Deflate usage with an ALB.
