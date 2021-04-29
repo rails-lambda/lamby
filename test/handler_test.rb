@@ -275,6 +275,36 @@ class HandlerTest < LambySpec
 
   end
 
+  describe 'event_bridge' do
+
+    let(:event) do
+      {
+        "version" => "0",
+        "id"=>"0874bcac-1dac-2393-637f-201025f217b0",
+        "detail-type"=>"orderCreated",
+        "source"=>"com.myorg.stores",
+        "account"=>"123456789012",
+        "time"=>"2021-04-29T13:51:41Z",
+        "region"=>"us-east-1",
+        "resources"=>[],
+        "detail"=>{"id" => "123"}
+      }
+    end
+
+    it 'has a configurable proc' do
+      expect(Lamby.config.event_bridge_handler).must_be_instance_of Proc
+      Lamby.config.event_bridge_handler = lambda { |e,c| "#{e}#{c}" }
+      r = Lamby.config.event_bridge_handler.call(1,2)
+      expect(r).must_equal '12'
+    end
+
+    it 'basic event puts to log' do
+      out = capture(:stdout) { @result = Lamby.handler app, event, context }
+      expect(out).must_match %r{0874bcac-1dac-2393-637f-201025f217b0}
+    end
+
+  end
+
   private
 
   def session_cookie(result)

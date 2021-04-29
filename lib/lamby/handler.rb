@@ -47,7 +47,7 @@ module Lamby
     def call
       return self if @called
       @status, @headers, @body = call_app
-      set_cookies
+      set_cookies if rack?
       @called = true
       self
     end
@@ -78,20 +78,34 @@ module Lamby
     end
 
     def rack_response
-      rack.response(self)
+      rack? ? rack.response(self) : {}
     end
 
     def call_app
       if Debug.on?(@event)
         Debug.call @event, @context, rack.env
-      else
+      elsif rack?
         @app.call rack.env
+      elsif event_bridge?
+        Lamby.config.event_bridge_handler.call @event, @context
+        [200, {}, StringIO.new('')]
+      else
+        [404, {}, StringIO.new('')]
       end
     end
 
     def content_encoding_compressed?(hdrs)
       content_encoding_header = hdrs['Content-Encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
+    end
+
+    def rack?
+      @event.key?('httpMethod') || @event.dig('requestContext', 'http')
+    end
+
+    def event_bridge?
+      Lamby.config.event_bridge_handler &&
+        @event.key?('source') && @event.key?('detail') && @event.key?('detail-type')
     end
   end
 end

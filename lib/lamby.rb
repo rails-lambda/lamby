@@ -2,6 +2,7 @@ require 'lamby/logger'
 require 'rack'
 require 'base64'
 require 'lamby/version'
+require 'lamby/config'
 require 'lamby/sam_helpers'
 require 'lamby/rack'
 require 'lamby/rack_alb'
@@ -21,6 +22,10 @@ module Lamby
 
   def handler(app, event, context, options = {})
     Handler.call(app, event, context, options)
+  end
+
+  def config
+    Lamby::Config.config
   end
 
   autoload :SsmParameterStore, 'lamby/ssm_parameter_store'
