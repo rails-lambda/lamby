@@ -18,6 +18,7 @@ class LambySpec < Minitest::Spec
           TestHelpers::StreamHelpers
 
   before do
+    Lamby.config.reconfigure
     delete_dummy_files
   end
 

@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.7.0
+
+#### Added
+
+- Support EventBridge events in handler with default proc to log.
+
 ## v2.6.3
 
 #### Added
