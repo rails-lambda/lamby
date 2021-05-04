@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.7.1
+
+#### Removed
+
+- Bootsnap setup convenience require.
+
 ## v2.7.0
 
 #### Added
