@@ -50,6 +50,8 @@ module Lamby
       set_cookies if rack?
       @called = true
       self
+    ensure
+      @body.close if @body.respond_to? :close
     end
 
     def base64_encodeable?(hdrs = @headers)
