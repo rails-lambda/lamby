@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.8.0
+
+#### Fixed
+
+- Perform rack body closing hooks on request #85
+
 ## v2.7.1
 
 #### Removed
