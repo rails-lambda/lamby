@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v2.8.1
+
+#### Added
+
+- Automatically handle `Lambdakiq.jobs?(event)`.
+
 ## v2.8.0
 
 #### Fixed
