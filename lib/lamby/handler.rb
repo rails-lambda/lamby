@@ -87,6 +87,8 @@ module Lamby
         Debug.call @event, @context, rack.env
       elsif rack?
         @app.call rack.env
+      elsif lambdakiq?
+        Lambdakiq.handler(@event)
       elsif event_bridge?
         Lamby.config.event_bridge_handler.call @event, @context
         [200, {}, StringIO.new('')]
@@ -107,6 +109,10 @@ module Lamby
     def event_bridge?
       Lamby.config.event_bridge_handler &&
         @event.key?('source') && @event.key?('detail') && @event.key?('detail-type')
+    end
+
+    def lambdakiq?
+      defined?(::Lambdakiq) && ::Lambdakiq.job?(@event)
     end
   end
 end
