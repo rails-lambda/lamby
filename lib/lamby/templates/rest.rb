@@ -10,13 +10,13 @@ gsub_file app_file('template.yaml'), /APPNAMEHERE/, appname
 copy_file tpl_file('Dockerfile'), app_file('Dockerfile')
 copy_file tpl_file('Dockerfile-build'), app_file('Dockerfile-build')
 copy_file tpl_file('docker-compose.yml'), app_file('docker-compose.yml')
+gsub_file app_file('docker-compose.yml'), /APPNAMEHERE/, appname.downcase
 
 say 'Adding to .gitignore...'
 FileUtils.touch app_file('.gitignore')
 append_to_file app_file('.gitignore'), <<~GITIGNORE
   # Lamby
   /.aws-sam
-  /.lamby
 GITIGNORE
 
 say 'Creating ./bin files for build and deploy...'

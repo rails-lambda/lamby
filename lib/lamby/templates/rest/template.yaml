@@ -49,7 +49,7 @@ Resources:
   RailsLambda:
     Type: AWS::Serverless::Function
     Metadata:
-      DockerContext: ./.lamby/RailsLambda
+      DockerContext: .
       Dockerfile: Dockerfile
     Properties:
       MemorySize: 512

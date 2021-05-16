@@ -1,17 +1,19 @@
 version: '3.7'
 services:
-  cicd:
+  APPNAMEHERE:
     build:
-      context: .
+      context: '.'
       dockerfile: Dockerfile-build
+    entrypoint: ./bin/entrypoint
     environment:
       - RAILS_ENV=${RAILS_ENV-development}
+      - SAM_CLI_TELEMETRY=0
       - AWS_PROFILE=${AWS_PROFILE-default}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION-us-east-1}
-      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+      - CI=${CI}
     volumes:
-      - ${SSH_AUTH_SOCK}:${SSH_AUTH_SOCK}
-      - ~/.aws:/root/.aws:delegated
-      - ~/.ssh/known_hosts:/root/.ssh/known_hosts
-      - .:/var/task:delegated
+      - ${PWD}:/var/task
+      - ${HOME}/.aws:/root/.aws
       - /var/run/docker.sock:/var/run/docker.sock

@@ -8,5 +8,5 @@ require_relative 'config/environment'
 $app = Rack::Builder.new { run Rails.application }.to_app
 
 def handler(event:, context:)
-  Lamby.handler $app, event, context, rack: :alb
+  Lamby.handler $app, event, context
 end

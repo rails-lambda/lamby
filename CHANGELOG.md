@@ -10,6 +10,10 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 - Automatically handle `Lambdakiq.jobs?(event)`.
 
+#### Changed
+
+- Updated template files to latest lambda container standards.
+
 ## v2.8.0
 
 #### Fixed

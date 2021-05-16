@@ -1,20 +1,15 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -e
 
-echo '== Simulate SAM Build Directory =='
-RESOURCE="RailsLambda"
-SAM_TEMP=$(mktemp -d -t sam.XXXXXX)
-rm -rf ./.lamby ./.aws-sam
-cp -r . "$SAM_TEMP"
-mkdir -p ./.lamby
-cp -r "$SAM_TEMP" "./.lamby/$RESOURCE"
-pushd "./.lamby/$RESOURCE"
-
-echo '== Cleaning Dev Dependencies =='
-rm -rf ./.bundle \
-       ./vendor/bundle
+if [ "$CI" != "true" ]; then
+  echo "== Cleaning dev dependencies for local deploy. Run ./bin/setup again afterward! =="
+  rm -rf ./.bundle \
+         ./vendor/bundle \
+         ./node_modules
+fi
 
 echo '== Bundle For Deployment =='
+bundle lock --add-platform x86_64-linux
 bundle config --local deployment true
 bundle config --local without 'development test'
 bundle config --local path './vendor/bundle'
@@ -27,14 +22,4 @@ echo "== Environments & Configuration =="
 #   LAMBY_SSM_PARAMS_PATH="/APPNAMEHERE/${RAILS_ENV}/env"
 
 echo "== Asset Hosts & Precompiling =="
-# NODE_ENV='production' \
-#   RAILS_GROUPS=assets \
-#   ./bin/rails assets:precompile
-
-echo "== Cleanup Unused Files & Directories =="
-rm -rf \
-  log \
-  node_modules \
-  test \
-  tmp \
-  vendor/bundle/ruby/2.7.0/cache
+NODE_ENV='production' ./bin/rails assets:precompile

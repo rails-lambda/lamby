@@ -21,6 +21,18 @@ module TestHelpers
       dummy_root.join 'app.rb'
     end
 
+    def dummy_compose
+      dummy_root.join 'docker-compose.yml'
+    end
+
+    def dummy_docker
+      dummy_root.join 'Dockerfile'
+    end
+
+    def dummy_docker_build
+      dummy_root.join 'Dockerfile-build'
+    end
+
     def dummy_template
       dummy_root.join 'template.yaml'
     end
@@ -52,9 +64,13 @@ module TestHelpers
     def delete_dummy_files
       FileUtils.rm_rf dummy_gitignore
       FileUtils.rm_rf dummy_handler
+      FileUtils.rm_rf dummy_compose
+      FileUtils.rm_rf dummy_docker
+      FileUtils.rm_rf dummy_docker_build
       FileUtils.rm_rf dummy_template
       FileUtils.rm_rf dummy_bin_build
       FileUtils.rm_rf dummy_bin_deploy
+      FileUtils.rm_rf dummy_bin__deploy
     end
 
     # Runners
