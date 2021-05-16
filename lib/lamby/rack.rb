@@ -7,6 +7,22 @@ module Lamby
     LAMBDA_CONTEXT = 'lambda.context'.freeze
     HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze
     HTTP_COOKIE = 'HTTP_COOKIE'.freeze
+    
+    class << self
+
+      def lookup(type, event)
+        types[type] || types.values.detect { |t| t.handle?(event) }
+      end
+
+      # Order is important. REST is hardest to isolated with handle? method.
+      def types
+        { alb:  RackAlb,
+          http: RackHttp,
+          rest: RackRest,
+          api:  RackRest }
+      end
+
+    end
 
     attr_reader :event, :context
 

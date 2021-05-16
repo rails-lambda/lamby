@@ -1,4 +1,3 @@
-
 # Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions)
 
 <h2>Simple Rails &amp; AWS Lambda Integration</h2>
@@ -11,7 +10,7 @@ The goal of this project is to provide minimal code to allow your Rails applicat
 
 ```ruby
 def handler(event:, context:)
-  Lamby.handler $app, event, context, rack: :http
+  Lamby.handler $app, event, context
 end
 ```
 
@@ -19,11 +18,9 @@ end
 
 https://lamby.custominktech.com/docs/quick_start
 
-
 ## Full Documentation
 
 https://lamby.custominktech.com/docs/installing_aws_sam
-
 
 ## Contributing
 
@@ -36,7 +33,6 @@ $ ./bin/test
 ```
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
 
 ## Code of Conduct
 
