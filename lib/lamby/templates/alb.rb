@@ -24,10 +24,10 @@ copy_file tpl_file('_build'), app_file('bin/_build')
 gsub_file app_file('bin/_build'), /APPNAMEHERE/, appname.downcase
 chmod app_file('bin/_build'), 0755
 copy_file tpl_file('deploy'), app_file('bin/deploy')
+gsub_file app_file('bin/deploy'), /APPNAMEHERE/, appname.downcase
 chmod app_file('bin/deploy'), 0755
 copy_file tpl_file('_deploy'), app_file('bin/_deploy')
 gsub_file app_file('bin/_deploy'), /APPNAMEHERE/, appname.downcase
 chmod app_file('bin/_deploy'), 0755
-gsub_file app_file('bin/deploy'), /APPNAMEHERE/, appname.downcase
 
 say 'Welcome to AWS Lambda and Rails 🎉', :green
