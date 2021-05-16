@@ -4,4 +4,5 @@ set -e
 export RAILS_ENV="test"
 
 bundle exec rake test
-RACK_DEFLATE_ENABLED=1 bundle exec rake test_deflate
+LAMBY_TEST_DYNAMIC_HANDLER=1 bundle exec rake test
+LAMBY_RACK_DEFLATE_ENABLED=1 bundle exec rake test_deflate

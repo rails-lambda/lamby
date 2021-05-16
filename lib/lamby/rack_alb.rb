@@ -1,6 +1,15 @@
 module Lamby
   class RackAlb < Lamby::Rack
 
+    class << self
+
+      def handle?(event)
+        event.key?('httpMethod') && 
+          event.dig('requestContext', 'elb')
+      end
+
+    end
+
     def alb?
       true
     end

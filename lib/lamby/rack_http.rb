@@ -1,6 +1,16 @@
 module Lamby
   class RackHttp < Lamby::Rack
 
+    class << self
+
+      def handle?(event)
+        event.key?('version') && 
+          ( event.dig('requestContext', 'http') || 
+            event.dig('requestContext', 'httpMethod') )
+      end
+
+    end
+
     def response(handler)
       if handler.base64_encodeable?
         { isBase64Encoded: true, body: handler.body64 }

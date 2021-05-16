@@ -40,7 +40,7 @@ module Dummy
     config.dependency_loading = true
     config.preload_frameworks = true
     config.eager_load = true
-    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater, sync: false if ENV['RACK_DEFLATE_ENABLED']
+    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater, sync: false if ENV['LAMBY_RACK_DEFLATE_ENABLED']
   end
 end
 

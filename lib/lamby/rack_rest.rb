@@ -1,5 +1,13 @@
 module Lamby
   class RackRest < Lamby::Rack
+    
+    class << self
+
+      def handle?(event)
+        event.key?('httpMethod')
+      end
+
+    end
 
     def response(handler)
       if handler.base64_encodeable?

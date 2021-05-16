@@ -68,14 +68,17 @@ module Lamby
     private
 
     def rack
-      @rack ||= case @options[:rack]
-      when :rest, :api
-        Lamby::RackRest.new @event, @context
-      when :alb
-        Lamby::RackAlb.new @event, @context
-      else
-        Lamby::RackHttp.new @event, @context
+      return @rack if defined?(@rack)
+      @rack = begin
+        type = rack_option
+        klass = Lamby::Rack.lookup type, @event
+        klass ? klass.new(@event, @context) : false
       end
+    end
+
+    def rack_option
+      return if ENV['LAMBY_TEST_DYNAMIC_HANDLER']
+      @options[:rack]
     end
 
     def rack_response
@@ -103,7 +106,7 @@ module Lamby
     end
 
     def rack?
-      @event.key?('httpMethod') || @event.dig('requestContext', 'http')
+      rack
     end
 
     def event_bridge?
