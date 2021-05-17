@@ -4,11 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
-## v2.8.1
+## v3.0.0
 
 #### Added
 
 - Automatically handle `Lambdakiq.jobs?(event)`.
+- New event for tasks like DB migrations. #80 #93
 
 #### Changed
 
