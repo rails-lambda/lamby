@@ -43,5 +43,9 @@ module Lamby
       @event_bridge_handler = func
     end
 
+    def runner_patterns
+      Runner::PATTERNS
+    end
+
   end
 end
