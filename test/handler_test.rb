@@ -303,6 +303,16 @@ class HandlerTest < LambySpec
       expect(out).must_match %r{0874bcac-1dac-2393-637f-201025f217b0}
     end
 
+    it 'basic event with Lambdakiq' do
+      require 'lambdakiq'
+
+      out = capture(:stdout) { @result = Lamby.handler app, event, context }
+      expect(out).must_match %r{0874bcac-1dac-2393-637f-201025f217b0}
+
+      # Unload the best we can
+      Object.send(:remove_const, :Lambdakiq)
+      ActiveJob::QueueAdapters.send(:remove_const, 'LambdakiqAdapter')
+    end
   end
 
   describe 'runner' do

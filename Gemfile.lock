@@ -73,6 +73,9 @@ GEM
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
+    aws-sdk-sqs (1.38.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sigv4 (~> 1.1)
     aws-sdk-ssm (1.108.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
@@ -88,6 +91,11 @@ GEM
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jmespath (1.4.0)
+    lambdakiq (1.0.1)
+      activejob
+      aws-sdk-sqs
+      concurrent-ruby
+      railties
     loofah (2.9.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -160,6 +168,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-ssm
   bundler
+  lambdakiq
   lamby!
   minitest
   minitest-focus
