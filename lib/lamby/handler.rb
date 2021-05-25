@@ -117,7 +117,7 @@ module Lamby
     end
 
     def lambdakiq?
-      defined?(::Lambdakiq) && ::Lambdakiq.job?(@event)
+      defined?(::Lambdakiq) && ::Lambdakiq.jobs?(@event)
     end
 
     def runner?
