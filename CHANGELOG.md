@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v3.0.1
+
+#### Fixed
+
+- Fix Lambdakiq integration. Thanks #97.
+
 ## v3.0.0
 
 #### Added
