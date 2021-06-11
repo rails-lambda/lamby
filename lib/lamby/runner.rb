@@ -23,16 +23,18 @@ module Lamby
 
     def initialize(event)
       @event = event
+      @body = ''
     end
 
     def call
       validate!
       status = Open3.popen3(command, chdir: chdir) do |_stdin, stdout, stderr, thread|
-        puts stdout.read
-        puts stderr.read
+        @body << stdout.read
+        @body << stderr.read
+        puts @body
         thread.value.exitstatus
       end
-      [status, {}, StringIO.new('')]
+      [status, {}, StringIO.new(@body)]
     end
 
     def command

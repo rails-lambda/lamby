@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v3.0.2
+
+#### Added
+
+- Runner now returns STDOUT/STDERR as body.
+
 ## v3.0.1
 
 #### Fixed

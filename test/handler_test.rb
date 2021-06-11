@@ -323,7 +323,7 @@ class HandlerTest < LambySpec
       expect(out).must_match %r{Don't know how to build task 'db:migrate'}
       expect(@result[:statusCode]).must_equal 1
       expect(@result[:headers]).must_equal({})
-      expect(@result[:body]).must_equal ""
+      expect(@result[:body]).must_match %r{Don't know how to build task 'db:migrate'}
     end
 
     it 'raises an UnknownCommandPattern error for unknown patterns' do
