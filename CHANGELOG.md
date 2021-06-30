@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v3.0.3
+
+#### Fixed
+
+- Ruby 2.7 Warnings | Logger. Thanks @jessedoyle
+
 ## v3.0.2
 
 #### Added
