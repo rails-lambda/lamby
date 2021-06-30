@@ -7,9 +7,9 @@ unless ENV['LAMBY_TEST']
   module Lamby
     module Logger
 
-      def initialize(*args)
+      def initialize(*args, **kwargs)
         args[0] = STDOUT
-        super(*args)
+        super(*args, **kwargs)
       end
 
     end
