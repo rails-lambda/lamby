@@ -55,7 +55,7 @@ module Lamby
         "HTTP_#{key.to_s.upcase.tr '-', '_'}"
       end.tap do |hdrs|
         hdrs[HTTP_X_REQUESTID] = request_id
-        hdrs[HTTP_X_REQUEST_START] = request_start if request_start
+        hdrs[HTTP_X_REQUEST_START] = "t=#{request_start}" if request_start
       end
     end
 
