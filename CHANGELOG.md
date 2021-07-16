@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v3.1.0
+
+#### Added
+
+- Add X-Request-Start header for New Relic with API Gateway.
+
 ## v3.0.3
 
 #### Fixed
