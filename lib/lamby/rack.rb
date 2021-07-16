@@ -6,6 +6,7 @@ module Lamby
     LAMBDA_EVENT = 'lambda.event'.freeze
     LAMBDA_CONTEXT = 'lambda.context'.freeze
     HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze
+    HTTP_X_REQUEST_START = 'HTTP_X_REQUEST_START'.freeze
     HTTP_COOKIE = 'HTTP_COOKIE'.freeze
     
     class << self
@@ -54,6 +55,7 @@ module Lamby
         "HTTP_#{key.to_s.upcase.tr '-', '_'}"
       end.tap do |hdrs|
         hdrs[HTTP_X_REQUESTID] = request_id
+        hdrs[HTTP_X_REQUEST_START] = request_start if request_start
       end
     end
 
@@ -107,6 +109,11 @@ module Lamby
 
     def request_id
       context.aws_request_id
+    end
+
+    def request_start
+      event.dig('requestContext', 'timeEpoch') || 
+        event.dig('requestContext', 'requestTimeEpoch')
     end
 
   end
