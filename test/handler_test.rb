@@ -14,6 +14,16 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
+    
+    it 'head' do
+      event = TestHelpers::Events::HttpV2.create(
+        'requestContext' => {'http' => {'method' => 'HEAD'}},
+        'body' => nil
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal ""
+    end
 
     it 'get - multiple cookies' do
       event = TestHelpers::Events::HttpV2.create(
@@ -87,6 +97,17 @@ class HandlerTest < LambySpec
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
+    end
+
+    it 'head' do
+      event = TestHelpers::Events::HttpV1.create(
+        'httpMethod' => 'HEAD',
+        'requestContext' => {'httpMethod' => 'HEAD'},
+        'body' => nil
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal ""
     end
 
     it 'get - multiple cookies' do
@@ -163,6 +184,16 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
 
+    it 'head' do
+      event = TestHelpers::Events::Rest.create(
+        'httpMethod' => 'HEAD',
+        'body' => nil
+      )
+      result = Lamby.handler app, event, context, rack: :rest
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal ""
+    end
+
     it 'get - multiple cookies' do
       event = TestHelpers::Events::Rest.create(
         'path' => '/cooks',
@@ -236,6 +267,16 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{<h1>Hello Lamby</h1>}
       expect(result[:body]).must_match %r{<div id="logged_in">false</div>}
     end
+    
+    it 'head' do
+      event = TestHelpers::Events::Alb.create(
+        'httpMethod' => 'HEAD',
+        'body' => nil
+      )
+      result = Lamby.handler app, event, context, rack: :alb
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_equal ""
+    end
 
     it 'get - multiple cookies' do
       event = TestHelpers::Events::Alb.create 'path' => '/cooks'
@@ -305,10 +346,8 @@ class HandlerTest < LambySpec
 
     it 'basic event with Lambdakiq' do
       require 'lambdakiq'
-
       out = capture(:stdout) { @result = Lamby.handler app, event, context }
       expect(out).must_match %r{0874bcac-1dac-2393-637f-201025f217b0}
-
       # Unload the best we can
       Object.send(:remove_const, :Lambdakiq)
       ActiveJob::QueueAdapters.send(:remove_const, 'LambdakiqAdapter')

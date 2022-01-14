@@ -10,6 +10,15 @@ class RackDeflateTest < LambySpec
     result = Lamby.handler app, event, context, rack: :rest
     expect(result[:statusCode]).must_equal 200
   end
+  
+  it 'head - Rest' do
+    event = TestHelpers::Events::Rest.create(
+        'httpMethod' => 'HEAD',
+        'body' => nil
+      )
+    result = Lamby.handler app, event, context, rack: :rest
+    expect(result[:statusCode]).must_equal 200
+  end
 
   it 'get - Rest with redirect' do
     event = TestHelpers::Events::Rest.create(
@@ -27,6 +36,16 @@ class RackDeflateTest < LambySpec
     expect(result[:statusCode]).must_equal 200
   end
 
+  it 'head - HttpV1' do
+    event = TestHelpers::Events::HttpV1.create(
+      'httpMethod' => 'HEAD',
+      'requestContext' => {'httpMethod' => 'HEAD'},
+      'body' => nil
+    )
+    result = Lamby.handler app, event, context, rack: :http
+    expect(result[:statusCode]).must_equal 200
+  end
+
   it 'get - HttpV1 with redirect' do
     event = TestHelpers::Events::HttpV1.create(
       'path' => '/production/redirect_test',
@@ -39,6 +58,15 @@ class RackDeflateTest < LambySpec
 
   it 'get - HttpV2' do
     event = TestHelpers::Events::HttpV2.create
+    result = Lamby.handler app, event, context, rack: :http
+    expect(result[:statusCode]).must_equal 200
+  end
+
+  it 'head - HttpV2' do
+    event = TestHelpers::Events::HttpV2.create(
+      'requestContext' => {'http' => {'method' => 'HEAD'}},
+      'body' => nil
+    )
     result = Lamby.handler app, event, context, rack: :http
     expect(result[:statusCode]).must_equal 200
   end
