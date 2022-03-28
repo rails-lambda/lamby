@@ -14,13 +14,10 @@ module Lamby
       @event = event
       @context = context
       @options = options
-      @called = false
     end
 
     def response
-      { statusCode: status,
-        headers: headers,
-        body: body }.merge(rack_response)
+      @response
     end
 
     def status
@@ -46,10 +43,7 @@ module Lamby
     end
 
     def call
-      return self if @called
-      @status, @headers, @body = call_app
-      set_cookies if rack?
-      @called = true
+      @response ||= call_app
       self
     end
 
@@ -82,21 +76,25 @@ module Lamby
     end
 
     def rack_response
-      rack? ? rack.response(self) : {}
+      { statusCode: status,
+        headers: headers,
+        body: body }.merge(rack.response(self))
     end
 
     def call_app
       if Debug.on?(@event)
         Debug.call @event, @context, rack.env
       elsif rack?
-        @app.call rack.env
+        @status, @headers, @body = @app.call rack.env 
+        set_cookies
+        rack_response
       elsif runner?
-        Runner.call(@event)
+        @status, @headers, @body = Runner.call(@event)
+        { statusCode: status, headers: headers, body: body }
       elsif lambdakiq?
         Lambdakiq.handler(@event)
       elsif event_bridge?
         Lamby.config.event_bridge_handler.call @event, @context
-        [200, {}, StringIO.new('')]
       else
         [404, {}, StringIO.new('')]
       end
