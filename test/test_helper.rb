@@ -10,16 +10,22 @@ require 'test_helper/dummy_app_helpers'
 require 'test_helper/stream_helpers'
 require 'test_helper/lambda_context'
 require 'test_helper/event_helpers'
+require 'test_helper/jobs_helpers'
+require 'test_helper/lambdakiq_helpers'
 
 Rails.backtrace_cleaner.remove_silencers!
+Lambdakiq::Client.default_options.merge! stub_responses: true
 
 class LambySpec < Minitest::Spec
   include TestHelpers::DummyAppHelpers,
-          TestHelpers::StreamHelpers
+          TestHelpers::StreamHelpers,
+          TestHelpers::LambdakiqHelpers
 
   before do
     Lamby.config.reconfigure
     delete_dummy_files
+    lambdakiq_client_reset!
+    lambdakiq_client_stub_responses
   end
 
   after do

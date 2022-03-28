@@ -5,5 +5,5 @@ gemspec
 gem 'rails'
 
 group :test do
-  gem 'lambdakiq', require: false
+  gem 'lambdakiq'
 end
