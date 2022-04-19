@@ -4,6 +4,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v3.1.3
+
+#### Fixed
+
+- The ::Rack::Utils namespace. Fixes #123.
+
 ## v3.1.2
 
 #### Fixed
