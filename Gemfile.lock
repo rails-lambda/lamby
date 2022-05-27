@@ -119,7 +119,7 @@ GEM
       coderay (~> 1.1)
       method_source (~> 1.0)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.3.1)
