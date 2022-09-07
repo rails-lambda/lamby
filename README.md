@@ -2,14 +2,11 @@
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 
-<img src="https://raw.githubusercontent.com/customink/lamby_site/master/app/assets/images/lamby-arch-hero.png" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
-
 Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) for Rack applications.
 
+<img src="https://raw.githubusercontent.com/customink/lamby_site/master/app/assets/images/lamby-arch-hero.png" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
+
 <img src="https://raw.githubusercontent.com/awslabs/aws-lambda-web-adapter/main/docs/images/lambda-adapter-overview.png" alt="Lamby is an AWS Lambda Web Adapter for Rack applications" />
-
-
-<p>&nbsp;</p>
 
 The goal of this project is to provide minimal code to allow your Rails application to respond to incoming [AWS Lambda Function Handler in Ruby](https://docs.aws.amazon.com/lambda/latest/dg/ruby-handler.html) `event` and `context` objects in the Lambda handler. We support Application Load Balancer integration or API Gateway.
 
