@@ -2,7 +2,7 @@
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 
-<img src="https://lamby.custominktech.com/assets/lamby-arch-hero-8145524735898480baa0a4495f4daf87f6e28cedfb8f640d3c04884979117d66.pngg" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
+<img src="https://raw.githubusercontent.com/customink/lamby_site/master/app/assets/images/lamby-arch-hero.png" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
 
 Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) for Rack applications.
 
