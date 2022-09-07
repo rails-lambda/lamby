@@ -1,8 +1,13 @@
 # Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions)
 
-<h2>Simple Rails &amp; AWS Lambda Integration</h2>
+<h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 
-<img src="https://user-images.githubusercontent.com/2381/59363668-89edeb80-8d03-11e9-9985-2ce14361b7e3.png" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
+<img src="https://lamby.custominktech.com/assets/lamby-arch-hero-8145524735898480baa0a4495f4daf87f6e28cedfb8f640d3c04884979117d66.pngg" alt="Lamby: Simple Rails & AWS Lambda Integration" align="right" />
+
+Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) for Rack applications.
+
+<img src="https://raw.githubusercontent.com/awslabs/aws-lambda-web-adapter/main/docs/images/lambda-adapter-overview.png" alt="Lamby is an AWS Lambda Web Adapter for Rack applications" />
+
 
 <p>&nbsp;</p>
 
