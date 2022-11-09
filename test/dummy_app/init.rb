@@ -8,7 +8,6 @@ require 'active_job/railtie'
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'action_view/railtie'
-require 'sprockets/railtie'
 require 'rails/test_unit/railtie'
 Bundler.require(:default, Rails.env)
 
@@ -18,7 +17,6 @@ module Dummy
     # Basic Engine
     config.root = File.join __FILE__, '..'
     config.cache_store = :memory_store
-    config.assets.enabled = false
     config.secret_key_base = '012345678901234567890123456789'
     config.active_support.test_order = :random
     config.logger = Logger.new('/dev/null')
