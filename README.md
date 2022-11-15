@@ -1,4 +1,4 @@
-# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions)
+# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)]([https://github.com/customink/guides/blob/master/shared/codespaces.md](https://github.com/features/codespaces))
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 
