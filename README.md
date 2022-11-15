@@ -1,4 +1,4 @@
-# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)]([https://github.com/customink/guides/blob/master/shared/codespaces.md](https://github.com/features/codespaces))
+# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)](https://github.com/features/codespaces)
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 
@@ -24,7 +24,7 @@ https://lamby.custominktech.com/docs/installing_aws_sam
 
 ## Contributing
 
-After checking out the repo, run:
+After checking out the repo, or creating your [Codespace](https://github.com/features/codespaces), run the following commands.
 
 ```shell
 $ ./bin/bootstrap
