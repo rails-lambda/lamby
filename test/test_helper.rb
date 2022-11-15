@@ -23,13 +23,8 @@ class LambySpec < Minitest::Spec
 
   before do
     Lamby.config.reconfigure
-    delete_dummy_files
     lambdakiq_client_reset!
     lambdakiq_client_stub_responses
-  end
-
-  after do
-    delete_dummy_files
   end
 
   private

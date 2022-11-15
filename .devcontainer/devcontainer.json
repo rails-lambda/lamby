@@ -1,0 +1,20 @@
+{
+  "name": "lamby",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:latest": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:latest": {},
+    "ghcr.io/devcontainers/features/sshd:latest": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true
+      },
+      "extensions": []
+    }
+  },
+  "remoteUser": "vscode"
+}

@@ -1,8 +1,0 @@
-#!/bin/sh
-set -e
-
-export RAILS_ENV=${RAILS_ENV:=production}
-
-docker-compose run \
-  APPNAMEHERE \
-  ./bin/_deploy

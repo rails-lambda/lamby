@@ -1,7 +1,5 @@
-#!/usr/bin/env bash
-
+#!/bin/sh
 set -e
 
 rm -rf ./vendor/bundle
-
 ./bin/setup

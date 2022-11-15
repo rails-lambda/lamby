@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-docker-compose run \
-  cicd \
-  ./bin/_setup
+echo '== Installing dependencies =='
+bundle config set --local path 'vendor/bundle'
+bundle install

@@ -1,5 +1,2 @@
-#!/bin/bash
+#!/bin/sh
 set -e
-
-echo '== Building containers =='
-docker-compose build

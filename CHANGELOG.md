@@ -4,6 +4,16 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.0.0 (unreleased)
+
+#### Removed
+
+- All lamby installer templates.
+
+#### Changed
+
+- Tested Rack 3.x.
+
 ## v3.1.3
 
 #### Fixed
