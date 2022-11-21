@@ -39,6 +39,20 @@ If you have the [Visual Studio Code Dev Container](https://marketplace.visualstu
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+#### Dev Container CLI
+
+You can use the open-source [Dev Container CLI](https://github.com/devcontainers/cli) to mimic what Codespaces and/or VS Code are doing for you. In this way, you can use different editors. You must have Docker installed. Here are the commands to build the dev container and setup/test the project.
+
+```shell
+devcontainer build --workspace-folder .
+devcontainer up --workspace-folder .
+devcontainer run-user-commands --workspace-folder .
+
+devcontainer exec --workspace-folder . ./bin/setup
+devcontainer exec --workspace-folder . ./bin/test-local
+```
+
+
 ## Code of Conduct
 
 Everyone interacting in the Lamby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/customink/lamby/blob/master/CODE_OF_CONDUCT.md).
