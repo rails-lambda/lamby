@@ -49,7 +49,7 @@ devcontainer up --workspace-folder .
 devcontainer run-user-commands --workspace-folder .
 
 devcontainer exec --workspace-folder . ./bin/setup
-devcontainer exec --workspace-folder . ./bin/test-local
+devcontainer exec --workspace-folder . ./bin/test
 ```
 
 
