@@ -24,13 +24,18 @@ https://lamby.custominktech.com/docs/installing_aws_sam
 
 ## Contributing
 
-After checking out the repo, or creating your [Codespace](https://github.com/features/codespaces), run the following commands.
+This project is built for [GitHub Codespcaes](https://github.com/features/codespaces) using the [Development Container](https://containers.dev) specification. Even though Codespaces may not be available to everyone, this project's containers are easy to work for anyone with any editor.
+
+Once you have the repo cloned and setup with a dev container using Codespaces, [VS Code](#using-vs-code), or the [Dev Container CLI](#dev-container-cli), run the following commands. This will install packages, build your project, and run tests without needing to connect to SSM.
 
 ```shell
-$ ./bin/bootstrap
 $ ./bin/setup
 $ ./bin/test
 ```
+
+#### Using VS Code
+
+If you have the [Visual Studio Code Dev Container](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed you can easily clone this repo locally, use the "Open Folder in Container..." command, and use the integrated terminal for your setup and test commands. Example shown below:
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
