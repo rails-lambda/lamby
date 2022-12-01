@@ -20,6 +20,10 @@ module Lamby
 
   extend self
 
+  def command(event, context)
+    handler.new(config.app, event, context)
+  end
+
   def handler(app, event, context, options = {})
     Handler.call(app, event, context, options)
   end

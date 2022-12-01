@@ -4,19 +4,22 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v4.0.0 (unreleased)
 
+### Added
+
+- New `Lamby.config.app` with default Rack builder.
+- The `Lamby.command` to simplify `CMD` with the new config.app from above.
+
 #### Removed
 
 - All lamby installer templates.
 - Remove SAM env checks used during debug mode.
 - Removed showing environment variables in debug mode.
+- Need to `require: false` when adding the Lamby gem to your `Gemfile`. 
+- Dotenv integration. Use [Crypteia](https://github.com/customink/crypteia) now.
 
 #### Changed
 
 - Tested Rack 3.x.
-
-### Removed
-
-- Need to `require: false` when adding the Lamby gem to your `Gemfile`. 
 
 ## v3.1.3
 

@@ -31,7 +31,16 @@ module Lamby
       self
     end
 
+    def rack_app
+      @rack_app ||= Rack::Builder.new { run Rails.application }.to_app
+    end
+
+    def rack_app=(app)
+      @rack_app = app
+    end
+
     def initialize_defaults
+      @rack_app = nil
       @event_bridge_handler = lambda { |event, context| puts(event) }
     end
 
