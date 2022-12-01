@@ -1,8 +1,7 @@
 require 'logger'
 
-unless ENV['LAMBY_TEST']
-
-  ENV['RAILS_LOG_TO_STDOUT'] = '1'
+if ENV['AWS_EXECUTION_ENV']
+  ENV['RAILS_LOG_TO_STDOUT'] = '1' 
 
   module Lamby
     module Logger
@@ -15,13 +14,5 @@ unless ENV['LAMBY_TEST']
     end
   end
 
-  Logger.prepend Lamby::Logger
-
+  Logger.prepend Lamby::Logger unless ENV['LAMBY_TEST']
 end
-
-# TODO: Railtie initializer
-# Rails.application.config.logger = ActiveSupport::TaggedLogging.new(
-#   ActiveSupport::Logger.new(STDOUT).tap { |logger|
-#     logger.formatter = Rails.application.config.log_formatter
-#   }
-# )

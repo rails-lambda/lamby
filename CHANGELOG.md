@@ -14,6 +14,10 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 - Tested Rack 3.x.
 
+### Removed
+
+- Need to `require: false` when adding the Lamby gem to your `Gemfile`. 
+
 ## v3.1.3
 
 #### Fixed

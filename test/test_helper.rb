@@ -1,4 +1,5 @@
 ENV['LAMBY_TEST'] = '1'
+ENV['AWS_EXECUTION_ENV'] = 'AWS_Lambda_Image'
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'lamby'
 require 'pry'
