@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (3.1.3)
+    lamby (4.0.0.beta1)
       rack
 
 GEM
