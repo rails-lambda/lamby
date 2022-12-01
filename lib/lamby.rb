@@ -21,7 +21,7 @@ module Lamby
   extend self
 
   def command(event:, context:)
-    handler(config.app, event, context)
+    handler(config.rack_app, event, context)
   end
 
   def handler(app, event, context, options = {})
