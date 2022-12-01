@@ -20,7 +20,7 @@ module Lamby
 
   extend self
 
-  def command(event, context)
+  def command(event:, context:)
     handler(config.app, event, context)
   end
 
