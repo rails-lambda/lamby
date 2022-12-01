@@ -32,7 +32,7 @@ module Lamby
     end
 
     def rack_app
-      @rack_app ||= Rack::Builder.new { run Rails.application }.to_app
+      @rack_app ||= ::Rack::Builder.new { run ::Rails.application }.to_app
     end
 
     def rack_app=(app)
