@@ -6,13 +6,7 @@ Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-a
 
 <img src="https://raw.githubusercontent.com/customink/lamby_site/master/app/assets/images/lamby-arch-hero.png" alt="Lamby: Simple Rails & AWS Lambda Integration"/>
 
-The goal of this project is to provide minimal code to allow your Rails application to respond to incoming [AWS Lambda Function Handler in Ruby](https://docs.aws.amazon.com/lambda/latest/dg/ruby-handler.html) `event` and `context` objects in the Lambda handler. We support Application Load Balancer integration or API Gateway.
-
-```ruby
-def handler(event:, context:)
-  Lamby.handler $app, event, context
-end
-```
+We support Lambda [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html), [API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) (HTTP or REST, all payload versions), and even  [Application Load Balancer](https://docs.aws.amazon.com/lambda/latest/dg/services-alb.html) integrations.
 
 ## Quick Start
 
@@ -20,7 +14,7 @@ https://lamby.custominktech.com/docs/quick_start
 
 ## Full Documentation
 
-https://lamby.custominktech.com/docs/installing_aws_sam
+https://lamby.custominktech.com
 
 ## Contributing
 
