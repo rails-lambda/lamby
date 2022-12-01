@@ -1,8 +1,5 @@
 module Lamby
   class Rack
-
-    include SamHelpers
-
     LAMBDA_EVENT = 'lambda.event'.freeze
     LAMBDA_CONTEXT = 'lambda.context'.freeze
     HTTP_X_REQUESTID = 'HTTP_X_REQUEST_ID'.freeze

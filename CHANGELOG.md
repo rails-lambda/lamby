@@ -9,6 +9,8 @@ See this http://keepachangelog.com link for information on how we want this docu
 #### Removed
 
 - All lamby installer templates.
+- Remove SAM env checks used during debug mode.
+- Removed showing environment variables in debug mode.
 
 #### Changed
 

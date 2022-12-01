@@ -1,7 +1,5 @@
 module Lamby
   module Debug
-    include Lamby::SamHelpers
-
     extend self
 
     def on?(event)
@@ -33,10 +31,6 @@ module Lamby
             <code>
               #{CGI::escapeHTML(context.inspect)}
             </code>
-            <h2>Environment</h2>
-            <pre>
-              #{sam_local? ? JSON.pretty_generate(ENV.to_h) : 'N/A'}
-            </pre>
           </body>
         </html>
       HTML
