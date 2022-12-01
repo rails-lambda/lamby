@@ -7,7 +7,7 @@ See this http://keepachangelog.com link for information on how we want this docu
 ### Added
 
 - New `Lamby.config.rack_app` with default Rack builder.
-- The `Lamby.command` to simplify `CMD` with the new config.app from above.
+- The `Lamby.cmd` to simplify `CMD` with the new config.app from above.
 
 #### Removed
 
