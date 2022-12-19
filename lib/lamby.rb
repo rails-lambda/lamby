@@ -22,6 +22,8 @@ module Lamby
 
   def cmd(event:, context:)
     handler(config.rack_app, event, context)
+  ensure
+    config.handled_proc.call(event, context)
   end
 
   def handler(app, event, context, options = {})
