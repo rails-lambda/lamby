@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.0.1
+
+### Added
+
+- New `Lamby.config.handled_proc` called with ensure via `Lamby.cmd`
+
 ## v4.0.0
 
 ### Added

@@ -56,5 +56,13 @@ module Lamby
       Runner::PATTERNS
     end
 
+    def handled_proc
+      @handled_proc ||= Proc.new { |_event, _context| }
+    end
+
+    def handled_proc=(proc)
+      @handled_proc = proc
+    end
+
   end
 end
