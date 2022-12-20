@@ -4,7 +4,7 @@
 
 Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) for Rack applications.
 
-<img src="https://raw.githubusercontent.com/customink/lamby_site/master/app/assets/images/lamby-arch-hero.png" alt="Lamby: Simple Rails & AWS Lambda Integration"/>
+<a href="https://lamby.custominktech.com"><img src="https://raw.githubusercontent.com/customink/lamby/master/images/social2.png" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" width="450" style="margin-left:1rem;margin-bottom:1rem;" /></a>
 
 We support Lambda [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/lambda-urls.html), [API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html) (HTTP or REST, all payload versions), and even  [Application Load Balancer](https://docs.aws.amazon.com/lambda/latest/dg/services-alb.html) integrations.
 
