@@ -13,7 +13,7 @@ https://lamby.custominktech.com/docs/quick-start
 
 ## Full Documentation
 
-https://lamby.custominktech.com
+https://lamby.custominktech.com/docs/anatomy
 
 ## Contributing
 
