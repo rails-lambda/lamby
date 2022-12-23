@@ -9,7 +9,7 @@ We support Lambda [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/l
 
 ## Quick Start
 
-https://lamby.custominktech.com/docs/quick_start
+https://lamby.custominktech.com/docs/quick-start
 
 ## Full Documentation
 
