@@ -17,7 +17,7 @@ https://lamby.custominktech.com/docs/anatomy
 
 ## Contributing
 
-This project is built for [GitHub Codespcaes](https://github.com/features/codespaces) using the [Development Container](https://containers.dev) specification. Once you have the repo cloned and setup with a dev container using either Codespaces or [VS Code](#using-vs-code), run the following commands. This will install packages and run tests.
+This project is built for [GitHub Codespaces](https://github.com/features/codespaces) using the [Development Container](https://containers.dev) specification. Once you have the repo cloned and setup with a dev container using either Codespaces or [VS Code](#using-vs-code), run the following commands. This will install packages and run tests.
 
 ```shell
 $ ./bin/setup
