@@ -28,7 +28,7 @@ module Lamby
 
     def call
       validate!
-      status = Open3.popen3(command, chdir: chdir) do |_stdin, stdout, stderr, thread|
+      status = Open3.popen3(env, command, chdir: chdir) do |_stdin, stdout, stderr, thread|
         @body << stdout.read
         @body << stderr.read
         puts @body
@@ -54,6 +54,10 @@ module Lamby
 
     def pattern?
       PATTERNS.any? { |p| p === command }
+    end
+
+    def env
+      Hash[ENV.to_hash.map { |k,v| [k, ENV[k]] }]
     end
 
   end
