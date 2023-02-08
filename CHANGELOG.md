@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.0.2
+
+### Fixed
+
+- Runner's Open3 uses crypteia friendly env.
+
 ## v4.0.1
 
 ### Added
