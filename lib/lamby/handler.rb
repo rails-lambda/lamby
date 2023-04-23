@@ -88,11 +88,13 @@ module Lamby
         @status, @headers, @body = @app.call rack.env 
         set_cookies
         rack_response
+      elsif lambdakiq?
+        Lambdakiq.cmd event: @event, context: @context
+      elsif lambda_cable?
+        LambdaCable.cmd event: @event, context: @context
       elsif runner?
         @status, @headers, @body = Runner.call(@event)
         { statusCode: status, headers: headers, body: body }
-      elsif lambdakiq?
-        Lambdakiq.handler(@event)
       elsif event_bridge?
         Lamby.config.event_bridge_handler.call @event, @context
       else
@@ -120,6 +122,10 @@ module Lamby
 
     def runner?
       Runner.handle?(@event)
+    end
+
+    def lambda_cable?
+      defined?(::LambdaCable) && ::LambdaCable.handle?(@event, @context)
     end
   end
 end

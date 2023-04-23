@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.1.0
+
+### Added 
+
+- Future-ready LambdaCable.cmd handler detection.
+
 ## v4.0.2
 
 ### Fixed
