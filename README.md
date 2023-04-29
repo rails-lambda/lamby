@@ -1,4 +1,4 @@
-# Lamby [![Actions Status](https://github.com/rails-lambda/lamby/workflows/CI/CD/badge.svg)](https://github.com/rails-lambda/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)](https://github.com/features/codespaces)
+# Lamby [![Actions Status](https://github.com/rails-lambda/lamby/workflows/CI/CD/badge.svg)](https://github.com/rails-lambda/lamby/actions) ![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rails-lambda/lamby?quickstart=1)
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 <a href="https://lamby.cloud"><img src="https://raw.githubusercontent.com/rails-lambda/lamby/master/images/social2.png" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" width="450" style="margin-left:1rem;margin-bottom:1rem;" /></a>
