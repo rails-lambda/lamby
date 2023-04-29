@@ -11,7 +11,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: devcontainers/ci@v0.2
+      - uses: devcontainers/ci@v0.3
         with:
           push: always
           imageName: ghcr.io/rails-lambda/lamby-devcontainer
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup & Test
-        uses: devcontainers/ci@v0.2
+        uses: devcontainers/ci@v0.3
         with:
           push: never
           cacheFrom: ghcr.io/rails-lambda/lamby-devcontainer
