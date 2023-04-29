@@ -1,4 +1,4 @@
-# Lamby [![Actions Status](https://github.com/rails-lambda/lamby/workflows/CI/CD/badge.svg)](https://github.com/rails-lambda/lamby/actions) ![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rails-lambda/lamby?quickstart=1)
+# Lamby [![Actions Status](https://github.com/rails-lambda/lamby/workflows/CI/CD/badge.svg)](https://github.com/rails-lambda/lamby/actions) 
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
 <a href="https://lamby.cloud"><img src="https://raw.githubusercontent.com/rails-lambda/lamby/master/images/social2.png" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" width="450" style="margin-left:1rem;margin-bottom:1rem;" /></a>
@@ -16,6 +16,8 @@ https://lamby.cloud/docs/quick-start
 https://lamby.cloud/docs/anatomy
 
 ## Contributing
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rails-lambda/lamby)
 
 This project is built for [GitHub Codespaces](https://github.com/features/codespaces) using the [Development Container](https://containers.dev) specification. Once you have the repo cloned and setup with a dev container using either Codespaces or [VS Code](#using-vs-code), run the following commands. This will install packages and run tests.
 
