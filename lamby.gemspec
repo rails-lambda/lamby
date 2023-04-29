@@ -7,10 +7,10 @@ Gem::Specification.new do |spec|
   spec.name          = "lamby"
   spec.version       = Lamby::VERSION
   spec.authors       = ["Ken Collins"]
-  spec.email         = ["kcollins@customink.com"]
+  spec.email         = ["ken@metaskills.net"]
   spec.summary       = %q{Simple Rails & AWS Lambda Integration using Rack}
   spec.description   = %q{Simple Rails & AWS Lambda Integration using Rack and various utilities.}
-  spec.homepage      = "https://github.com/customink/lamby"
+  spec.homepage      = "https://github.com/rails-lambda/lamby"
   spec.license       = "MIT"
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

@@ -1,7 +1,7 @@
-# Lamby [![Actions Status](https://github.com/customink/lamby/workflows/CI/CD/badge.svg)](https://github.com/customink/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)](https://github.com/features/codespaces)
+# Lamby [![Actions Status](https://github.com/rails-lambda/lamby/workflows/CI/CD/badge.svg)](https://github.com/rails-lambda/lamby/actions) [![Codespaces](https://img.shields.io/badge/Codespaces-✅-black)](https://github.com/features/codespaces)
 
 <h2>Simple Rails &amp; AWS Lambda Integration using Rack</h2>
-<a href="https://lamby.custominktech.com"><img src="https://raw.githubusercontent.com/customink/lamby/master/images/social2.png" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" width="450" style="margin-left:1rem;margin-bottom:1rem;" /></a>
+<a href="https://lamby.cloud"><img src="https://raw.githubusercontent.com/rails-lambda/lamby/master/images/social2.png" alt="Lamby: Simple Rails & AWS Lambda Integration using Rack." align="right" width="450" style="margin-left:1rem;margin-bottom:1rem;" /></a>
 
 Lamby is an [AWS Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) for Rack applications.
 
@@ -9,11 +9,11 @@ We support Lambda [Function URLs](https://docs.aws.amazon.com/lambda/latest/dg/l
 
 ## Quick Start
 
-https://lamby.custominktech.com/docs/quick-start
+https://lamby.cloud/docs/quick-start
 
 ## Full Documentation
 
-https://lamby.custominktech.com/docs/anatomy
+https://lamby.cloud/docs/anatomy
 
 ## Contributing
 
@@ -30,6 +30,6 @@ If you have the [Visual Studio Code Dev Container](https://marketplace.visualstu
 
 ## Code of Conduct
 
-Everyone interacting in the Lamby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/customink/lamby/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Lamby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/rails-lambda/lamby/blob/master/CODE_OF_CONDUCT.md).
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/customink/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/rails-lambda/lamby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
