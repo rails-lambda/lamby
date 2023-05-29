@@ -2,46 +2,51 @@ require 'net/http'
 require 'test_helper'
 
 class ProxyServerTest < LambySpec
+  include Rack::Test::Methods
+
   let(:event)    { TestHelpers::Events::HttpV2.create }
   let(:context)  { TestHelpers::LambdaContext.raw_data }
-  let(:rack_app) { Rack::Builder.new { run lambda { |env| [200, {}, StringIO.new('{"statusCode": 200}')] } }.to_app }
-  let(:proxy)    { Lamby::ProxyServer.new }
+  let(:app)      { Rack::Builder.new { run Lamby::ProxyServer.new }.to_app }
+  let(:json)     { {"event": event, "context": context}.to_json }
 
-  before { Lamby.config.rack_app = rack_app }
-  
   it 'should return a 405 helpful message on GET' do
-    response = proxy.call(env("REQUEST_METHOD" => 'GET'))
-    expect(response[:statusCode]).must_equal 405
-    expect(response[:headers]).must_equal({"Content-Type" => "text/html"})
-    expect(response[:body]).must_include 'Method Not Allowed'
+    response = get '/'
+    expect(response.status).must_equal 405
+    expect(response.headers).must_equal({"Content-Type" => "text/html"})
+    expect(response.body).must_include 'Method Not Allowed'
   end
   
-  it 'should call Lamby.cmd on POST' do
-    response = proxy.call(env)
-    expect(response[:statusCode]).must_equal 200
-    expect(response[:headers]).must_equal({})
-    expect(response[:body]).must_equal '{"statusCode": 200}'
+  it 'should call Lamby.cmd on POST and include full response as JSON' do
+    response = post '/', json, 'CONTENT_TYPE' => 'application/json'
+    expect(response.status).must_equal 200
+    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    response_body = JSON.parse(response.body)
+    expect(response_body['statusCode']).must_equal 200
+    expect(response_body['headers']).must_be_kind_of Hash
+    expect(response_body['body']).must_match 'Hello Lamby'
   end
 
-  private
-
-  def env(options={})
-    json = {"event": event, "context": context}.to_json
-    { 'REQUEST_METHOD' => 'POST',
-      'PATH_INFO' => '/',
-      'QUERY_STRING' => '',
-      'SERVER_NAME' => 'localhost',
-      'SERVER_PORT' => '3000',
-      'HTTP_VERSION' => 'HTTP/1.1',
-      'rack.version' => Rack::VERSION,
-      'rack.input' => StringIO.new(json),
-      'rack.url_scheme' => 'http',
-      'rack.errors' => $stderr,
-      'rack.multithread' => true,
-      'rack.multiprocess' => false,
-      'rack.run_once' => false,
-      'CONTENT_TYPE' => 'application/json',
-      'CONTENT_LENGTH' => json.bytesize.to_s
-    }.merge(options)
+  it 'will return whatever Lamby.cmd does' do
+    Lamby.stubs(:cmd).returns({statusCode: 200})
+    response = post '/', json, 'CONTENT_TYPE' => 'application/json'
+    expect(response.status).must_equal 200
+    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    response_body = JSON.parse(response.body)
+    expect(response_body['statusCode']).must_equal 200
+    expect(response_body['headers']).must_be_nil
+    expect(response_body['body']).must_be_nil
   end
+
+  it 'will use the configured Lamby rack_app' do
+    rack_app = Rack::Builder.new { run lambda { |env| [200, {}, StringIO.new('OK')] } }.to_app
+    Lamby.config.rack_app = rack_app
+    response = post '/', json, 'CONTENT_TYPE' => 'application/json'
+    expect(response.status).must_equal 200
+    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    response_body = JSON.parse(response.body)
+    expect(response_body['statusCode']).must_equal 200
+    expect(response_body['headers']).must_equal({})
+    expect(response_body['body']).must_equal('OK')
+  end
+
 end

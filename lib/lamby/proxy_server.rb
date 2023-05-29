@@ -10,7 +10,7 @@ module Lamby
     def call(env)
       return method_not_allowed unless method_allowed?(env)
       event, context = event_and_context(env)
-      Lamby.cmd event: event, context: context
+      lambda_to_rack Lamby.cmd(event: event, context: context)
     end
 
     private
@@ -26,9 +26,11 @@ module Lamby
     end
 
     def method_not_allowed
-      { statusCode: 405,
-        headers: {"Content-Type" => "text/html"},
-        body: METHOD_NOT_ALLOWED.dup }
+      [405, {"Content-Type" => "text/html"}, [ METHOD_NOT_ALLOWED.dup ]]
+    end
+
+    def lambda_to_rack(response)
+      [ 200, {"Content-Type" => "application/json"}, response.to_json ]
     end
   end
 end
