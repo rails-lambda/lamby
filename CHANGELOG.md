@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.2.0
+
+### Added 
+
+- Local Development Proxy Server. See #164
+
 ## v4.1.1
 
 ### Changed 
