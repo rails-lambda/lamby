@@ -30,7 +30,7 @@ module Lamby
     end
 
     def lambda_to_rack(response)
-      [ 200, {"Content-Type" => "application/json"}, response.to_json ]
+      [ 200, {"Content-Type" => "application/json"}, [ response.to_json ] ]
     end
   end
 end
