@@ -5,7 +5,13 @@ require "rake/testtask"
 Rake::TestTask.new(:test) do |t|
   t.libs << "test"
   t.libs << "lib"
-  t.test_files = FileList["test/**/*_test.rb"]
+  t.test_files = begin
+    if ENV['TEST_FILE']
+      [ENV['TEST_FILE']]
+    else
+      FileList["test/**/*_test.rb"]
+    end
+  end
   t.verbose = false
   t.warning = false
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (4.1.1)
+    lamby (4.2.0)
       rack
 
 GEM
@@ -170,6 +170,7 @@ GEM
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    webrick (1.8.1)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -189,6 +190,7 @@ DEPENDENCIES
   pry
   rails
   rake
+  webrick
 
 BUNDLED WITH
    2.3.26

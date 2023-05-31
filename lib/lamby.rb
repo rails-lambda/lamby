@@ -35,5 +35,7 @@ module Lamby
   end
 
   autoload :SsmParameterStore, 'lamby/ssm_parameter_store'
+  autoload :ProxyContext, 'lamby/proxy_context'
+  autoload :ProxyServer, 'lamby/proxy_server'
 
 end
