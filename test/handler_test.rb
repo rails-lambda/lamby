@@ -391,9 +391,31 @@ class HandlerTest < LambySpec
 
   end
 
+  describe 'command' do
+
+    it 'binding' do
+      event = { 'lamby' => { 'command' => 'binding' } }
+      out = capture(:stdout) { @result = Lamby.handler app, event, context }
+      expect(@result[:statusCode]).must_equal 200
+      expect(@result[:headers]).must_equal({})
+      expect(@result[:body]).must_match %r{#<Binding:.*>}
+    end
+
+    it 'errors' do
+      event = { 'lamby' => { 'command' => 'raise("hell")' } }
+      out = capture(:stdout) { @result = Lamby.handler app, event, context }
+      expect(@result[:statusCode]).must_equal 422
+      expect(@result[:headers]).must_equal({})
+      expect(@result[:body]).must_match %r{#<RuntimeError:hell>}
+    end
+
+  end
+
   describe 'runner' do
-    
+
     it 'migrate pattern runs' do
+      Lamby.config.runner_patterns.clear
+      Lamby.config.runner_patterns.push %r{.*}
       event = { 'lamby' => { 'runner' => './bin/rake db:migrate' } }
       out = capture(:stdout) { @result = Lamby.handler app, event, context, rack: :http }
       expect(out).must_match %r{Don't know how to build task 'db:migrate'}
@@ -403,6 +425,8 @@ class HandlerTest < LambySpec
     end
 
     it 'raises an UnknownCommandPattern error for unknown patterns' do
+      Lamby.config.runner_patterns.clear
+      Lamby.config.runner_patterns.push %r{\A/bin/foo.*}
       event = { 'lamby' => { 'runner' => 'ls -lAGp' } }
       error = assert_raises Lamby::Runner::UnknownCommandPattern do
         Lamby.handler app, event, context
@@ -412,6 +436,7 @@ class HandlerTest < LambySpec
 
     it 'can push other command patterns' do
       # Using Regular Expression
+      Lamby.config.runner_patterns.clear
       Lamby.config.runner_patterns.push %r{\A/bin/foo.*}
       event = { 'lamby' => { 'runner' => '/bin/foo hello' } }
       error = assert_raises Errno::ENOENT do

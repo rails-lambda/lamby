@@ -2,6 +2,16 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.3.0
+
+### Changed
+
+- Default Lamby::Runner::PATTERNS to allow everything.
+
+### Added
+
+- New Lamby::Command for IRB style top level binding evals.
+
 ## v4.2.1
 
 ### Added
