@@ -10,8 +10,8 @@ module Lamby
     class << self
 
       def handle?(event)
-        event.dig 'x-lambda-console', 'runner' ||
-          event.dig 'lamby', 'runner'
+        event.dig('x-lambda-console', 'runner') ||
+          event.dig('lamby', 'runner')
       end
 
       def cmd(event:, context:)
@@ -37,8 +37,8 @@ module Lamby
     end
 
     def command
-      @event.dig 'x-lambda-console', 'runner' ||
-        @event.dig 'lamby', 'runner'
+      @event.dig('x-lambda-console', 'runner') ||
+        @event.dig('lamby', 'runner')
     end
 
     private

@@ -2,7 +2,7 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
-## v4.3.1
+## v4.3.1, v4.3.2
 
 ### Changed
 
