@@ -5,9 +5,7 @@ module Lamby
     class Error < StandardError ; end
     class UnknownCommandPattern < Error ; end
 
-    PATTERNS = [
-      %r{\A\./bin/(rails|rake) db:migrate.*}
-    ]
+    PATTERNS = [%r{.*}]
 
     class << self
 
@@ -15,7 +13,7 @@ module Lamby
         event.dig 'lamby', 'runner'
       end
 
-      def call(event)
+      def cmd(event:, context:)
         new(event).call
       end
 
@@ -34,7 +32,7 @@ module Lamby
         puts @body
         thread.value.exitstatus
       end
-      [status, {}, StringIO.new(@body)]
+      { statusCode: status, headers: {}, body: @body }
     end
 
     def command
