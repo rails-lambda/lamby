@@ -2,6 +2,13 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v4.3.1
+
+### Changed
+
+- Command response will be #inspect for every command.
+- Added x-lambda-console option to the event. 
+
 ## v4.3.0
 
 ### Changed

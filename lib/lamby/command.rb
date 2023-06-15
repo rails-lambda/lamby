@@ -4,7 +4,8 @@ module Lamby
     class << self
 
       def handle?(event)
-        event.dig 'lamby', 'command'
+        event.dig 'x-lambda-console', 'command' ||
+          event.dig 'lamby', 'command'
       end
 
       def cmd(event:, context:)
@@ -20,8 +21,7 @@ module Lamby
 
     def call
       begin
-        body = eval(command, TOPLEVEL_BINDING).to_s
-        body = body.inspect if body =~ /\A"/ && body =~ /"\z/
+        body = eval(command, TOPLEVEL_BINDING).inspect
         { statusCode: 200, headers: {}, body: body }
       rescue Exception => e
         body = "#<#{e.class}:#{e.message}>".tap do |b|
@@ -35,7 +35,8 @@ module Lamby
     end
 
     def command
-      @event.dig 'lamby', 'command'
+      @event.dig 'x-lambda-console', 'command' ||
+        @event.dig 'lamby', 'command'
     end
 
   end
