@@ -391,63 +391,51 @@ class HandlerTest < LambySpec
 
   end
 
-  describe 'command' do
+  describe 'LambdaConsole' do
 
-    it 'binding' do
-      event = { 'lamby' => { 'command' => 'binding' } }
-      out = capture(:stdout) { @result = Lamby.handler app, event, context }
-      expect(@result[:statusCode]).must_equal 200
-      expect(@result[:headers]).must_equal({})
-      expect(@result[:body]).must_match %r{#<Binding:.*>}
-    end
-
-    it 'errors' do
-      event = { 'lamby' => { 'command' => 'raise("hell")' } }
-      out = capture(:stdout) { @result = Lamby.handler app, event, context }
-      expect(@result[:statusCode]).must_equal 422
-      expect(@result[:headers]).must_equal({})
-      expect(@result[:body]).must_match %r{#<RuntimeError:hell>}
-    end
-
-  end
-
-  describe 'runner' do
-
-    it 'migrate pattern runs' do
-      Lamby.config.runner_patterns.clear
+    after do
       Lamby.config.runner_patterns.push %r{.*}
-      event = { 'lamby' => { 'runner' => './bin/rake db:migrate' } }
-      out = capture(:stdout) { @result = Lamby.handler app, event, context, rack: :http }
-      expect(out).must_match %r{Don't know how to build task 'db:migrate'}
-      expect(@result[:statusCode]).must_equal 1
-      expect(@result[:headers]).must_equal({})
-      expect(@result[:body]).must_match %r{Don't know how to build task 'db:migrate'}
     end
 
-    it 'raises an UnknownCommandPattern error for unknown patterns' do
-      Lamby.config.runner_patterns.clear
-      Lamby.config.runner_patterns.push %r{\A/bin/foo.*}
-      event = { 'lamby' => { 'runner' => 'ls -lAGp' } }
-      error = assert_raises Lamby::Runner::UnknownCommandPattern do
-        Lamby.handler app, event, context
-      end
-      expect(error.message).must_equal 'ls -lAGp'
+    it 'run' do
+      event = { 'X_LAMBDA_CONSOLE' => { 'run' => %q|echo 'hello'| } }
+      result = Lamby.handler app, event, context
+      expect(result[:statusCode]).must_equal 0
+      expect(result[:headers]).must_equal({})
+      expect(result[:body]).must_match %r{hello}
     end
 
-    it 'can push other command patterns' do
-      # Using Regular Expression
+    it 'run with error' do
+      event = { 'X_LAMBDA_CONSOLE' => { 'run' => %q|/usr/bin/doesnotexist| } }
+      result = Lamby.handler app, event, context
+      expect(result[:statusCode]).must_equal 1
+      expect(result[:headers]).must_equal({})
+      expect(result[:body]).must_match %r{No such file or directory}
+    end
+
+    it 'run with pattern' do
       Lamby.config.runner_patterns.clear
-      Lamby.config.runner_patterns.push %r{\A/bin/foo.*}
-      event = { 'lamby' => { 'runner' => '/bin/foo hello' } }
-      error = assert_raises Errno::ENOENT do
+      event = { 'X_LAMBDA_CONSOLE' => { 'run' => %q|echo 'hello'| } }
+      error = assert_raises LambdaConsole::Run::UnknownCommandPattern do
         Lamby.handler app, event, context
       end
-      expect(error.message).must_match 'No such file or directory'
-      # Using String Equality
-      Lamby.config.runner_patterns.push './bin/rake some:task'
-      event = { 'lamby' => { 'runner' => './bin/rake some:task' } }
-      out = capture(:stdout) { Lamby.handler app, event, context }
-      expect(out).must_match "Don't know how to build task"
+      expect(error.message).must_equal %|echo 'hello'|
+    end
+
+    it 'interact' do
+      event = { 'X_LAMBDA_CONSOLE' => { 'interact' => 'Object.new' } }
+      result = Lamby.handler app, event, context
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:headers]).must_equal({})
+      expect(result[:body]).must_match %r{#<Object:.*>}
+    end
+
+    it 'interact with error' do
+      event = { 'X_LAMBDA_CONSOLE' => { 'interact' => 'raise("hell")' } }
+      result = Lamby.handler app, event, context
+      expect(result[:statusCode]).must_equal 422
+      expect(result[:headers]).must_equal({})
+      expect(result[:body]).must_match %r{#<RuntimeError:hell>}
     end
 
   end

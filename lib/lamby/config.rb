@@ -53,7 +53,7 @@ module Lamby
     end
 
     def runner_patterns
-      Runner::PATTERNS
+      LambdaConsole::Run::PATTERNS
     end
 
     def handled_proc

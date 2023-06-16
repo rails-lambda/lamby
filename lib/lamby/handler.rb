@@ -92,10 +92,8 @@ module Lamby
         Lambdakiq.cmd event: @event, context: @context
       elsif lambda_cable?
         LambdaCable.cmd event: @event, context: @context
-      elsif command?
-        Lamby::Command.cmd event: @event, context: @context
-      elsif runner?
-        Lamby::Runner.cmd event: @event, context: @context
+      elsif LambdaConsole.handle?(@event)
+        LambdaConsole.handle(@event)
       elsif event_bridge?
         Lamby.config.event_bridge_handler.call @event, @context
       else
@@ -119,14 +117,6 @@ module Lamby
 
     def lambdakiq?
       defined?(::Lambdakiq) && ::Lambdakiq.jobs?(@event)
-    end
-
-    def runner?
-      Lamby::Runner.handle?(@event)
-    end
-
-    def command?
-      Lamby::Command.handle?(@event)
     end
 
     def lambda_cable?

@@ -2,6 +2,15 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.0.0
+
+### Changed
+
+- ⚠️ Breaking Changes ⚠️
+- Remove Lamby::Runner & Lamby::Command in favor of LambdaConsole Ruby gem.
+- New runner pattern exceptions from above. Now: LambdaConsole::Run::UnknownCommandPattern
+- Switch your own runner events to new https://github.com/rails-lambda/lambda-console spec.
+
 ## v4.3.1, v4.3.2
 
 ### Changed
