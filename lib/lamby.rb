@@ -1,6 +1,7 @@
 require 'lamby/logger'
 require 'rack'
 require 'base64'
+require 'lambda-console-ruby'
 require 'lamby/version'
 require 'lamby/config'
 require 'lamby/rack'
@@ -8,8 +9,6 @@ require 'lamby/rack_alb'
 require 'lamby/rack_rest'
 require 'lamby/rack_http'
 require 'lamby/debug'
-require 'lamby/runner'
-require 'lamby/command'
 require 'lamby/handler'
 
 if defined?(Rails)

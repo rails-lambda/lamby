@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    lamby (4.3.3)
+    lamby (5.0.0)
+      lambda-console-ruby
       rack
 
 GEM
@@ -98,6 +99,7 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jmespath (1.6.2)
+    lambda-console-ruby (1.0.0)
     lambdakiq (2.2.0)
       activejob
       aws-sdk-sqs
