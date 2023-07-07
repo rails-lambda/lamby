@@ -41,6 +41,8 @@ module Lamby
 
     def initialize_defaults
       @rack_app = nil
+      @cold_start_metrics = false
+      @metrics_app_name = nil
       @event_bridge_handler = lambda { |event, context| puts(event) }
     end
 
@@ -62,6 +64,22 @@ module Lamby
 
     def handled_proc=(proc)
       @handled_proc = proc
+    end
+
+    def cold_start_metrics?
+      @cold_start_metrics
+    end
+
+    def cold_start_metrics=(bool)
+      @cold_start_metrics = bool
+    end
+
+    def metrics_app_name
+      @metrics_app_name
+    end
+
+    def metrics_app_name=(name)
+      @metrics_app_name = name
     end
 
   end

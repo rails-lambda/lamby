@@ -4,6 +4,7 @@ module Lamby
     class << self
 
       def call(app, event, context, options = {})
+        Lamby::ColdStartMetrics.instrument! if Lamby.config.cold_start_metrics?
         new(app, event, context, options).call.response
       end
 
