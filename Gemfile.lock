@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (5.0.0)
+    lamby (5.1.0)
       lambda-console-ruby
       rack
 
@@ -133,6 +133,8 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.3-aarch64-linux)
       racc (~> 1.4)
+    nokogiri (1.14.3-arm64-darwin)
+      racc (~> 1.4)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -169,6 +171,7 @@ GEM
     rake (13.0.6)
     ruby2_keywords (0.0.5)
     thor (1.2.1)
+    timecop (0.9.6)
     timeout (0.3.2)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -180,6 +183,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  arm64-darwin-22
 
 DEPENDENCIES
   aws-sdk-ssm
@@ -192,6 +196,7 @@ DEPENDENCIES
   pry
   rails
   rake
+  timecop
   webrick
 
 BUNDLED WITH

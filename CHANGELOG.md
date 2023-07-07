@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.1.0
+
+### Added
+
+- New CloudWatch cold start metrics. Defaults to off. Enable with `config.cold_start_metrics = true`.
+
 ## v5.0.0
 
 ### Changed
