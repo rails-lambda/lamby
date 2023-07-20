@@ -86,6 +86,17 @@ class HandlerTest < LambySpec
       expect(result[:body]).must_match %r{We're sorry, but something went wrong.}
       expect(result[:body]).must_match %r{This file lives in public/500.html}
     end
+    
+    it 'get - percent' do
+      event = TestHelpers::Events::HttpV2.create(
+        'rawPath' => '/production/percent/dwef782jkif%3d',
+        'requestContext' => { 'http' => {'path' => '/production/percent/dwef782jkif='} }
+      )
+      result = Lamby.handler app, event, context, rack: :http
+      expect(result[:statusCode]).must_equal 200
+      expect(result[:body]).must_match %r{Params: dwef782jkif=}
+      expect(result[:body]).must_match %r{Request Path: /percent/dwef782jkif%3}
+    end
 
   end
 

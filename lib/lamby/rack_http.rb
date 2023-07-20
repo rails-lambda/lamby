@@ -78,6 +78,7 @@ module Lamby
     def path_info
       stage = event.dig('requestContext', 'stage')
       spath = event.dig('requestContext', 'http', 'path') || event.dig('requestContext', 'path')
+      spath = event['rawPath'] if spath != event['rawPath'] && !payload_version_one?
       spath.sub /\A\/#{stage}/, ''
     end
 

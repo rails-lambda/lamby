@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     raise 'hell'
   end
 
+  def percent
+    render
+  end
+
   def cooks
     cookies['1'] = '1'
     cookies['2'] = '2'
