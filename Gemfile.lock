@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (5.1.0)
+    lamby (5.2.0)
       lambda-console-ruby
       rack
 

@@ -2,6 +2,12 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.2.0
+
+### Fixed
+
+- Safely Pass Percent Symbols in Paths Fixes #170
+
 ## v5.1.0
 
 ### Added
