@@ -40,3 +40,11 @@ module Lamby
   autoload :ProxyServer, 'lamby/proxy_server'
 
 end
+
+# Add signal traps for clean exit
+Signal.trap("TERM") { exit }
+Signal.trap("INT") { exit }
+
+at_exit do
+  puts "Shutdown handled gracefully"
+end
