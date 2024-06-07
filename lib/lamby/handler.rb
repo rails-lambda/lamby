@@ -82,7 +82,9 @@ module Lamby
         body: body }.merge(rack.response(self))
     end
 
+
     def call_app
+      retries ||= 0
       if Debug.on?(@event)
         Debug.call @event, @context, rack.env
       elsif rack?
@@ -99,6 +101,14 @@ module Lamby
         Lamby.config.event_bridge_handler.call @event, @context
       else
         [404, {}, StringIO.new('')]
+      end
+    rescue ActiveRecord::ConnectionNotEstablished => e
+      retries += 1
+      if retries < 3
+        sleep(2 ** retries) # Exponential backoff
+        retry
+      else
+        raise e
       end
     end
 
