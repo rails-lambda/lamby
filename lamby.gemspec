@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'lamby/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "lamby"
+  spec.name          = "lamby_updated"
   spec.version       = Lamby::VERSION
   spec.authors       = ["Ken Collins"]
   spec.email         = ["ken@metaskills.net"]
