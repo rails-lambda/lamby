@@ -40,3 +40,14 @@ module Lamby
   autoload :ProxyServer, 'lamby/proxy_server'
 
 end
+
+# Add signal traps for clean exit
+Signal.trap("TERM") do
+  puts "Received SIGTERM, exiting gracefully..."
+  exit!(0) # exit! ensures no exception is raised
+end
+
+Signal.trap("INT") do
+  puts "Received SIGINT, exiting gracefully..."
+  exit!(0) # exit! ensures no exception is raised
+end
