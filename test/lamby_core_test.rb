@@ -5,7 +5,11 @@ class LambyCoreSpec < LambySpec
     @event = { 'httpMethod' => 'GET', 'path' => '/' }
     @context = TestHelpers::LambdaContext.new
   end
-
+  
+  it 'has a version number' do
+    expect(Lamby::VERSION).wont_be_nil
+  end
+  
   it 'catches SIGTERM signal' do
     assert_raises(SystemExit) do
       Process.kill('TERM', Process.pid)
