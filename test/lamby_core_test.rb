@@ -38,21 +38,7 @@ class LambyCoreSpec < LambySpec
       run lambda { |env| [200, { 'Content-Type' => 'text/plain' }, ['OK']] }
     end.to_app
 
-    event = {
-      'httpMethod' => 'GET',
-      'path' => '/',
-      'headers' => {},
-      'multiValueHeaders' => {},
-      'queryStringParameters' => {},
-      'multiValueQueryStringParameters' => {},
-      'requestContext' => {
-        'elb' => {
-          'targetGroupArn' => 'arn:aws:elasticloadbalancing:us-east-1:123456789012:targetgroup/myawesomelambda/1234567890abcdef'
-        }
-      },
-      'body' => nil,
-      'isBase64Encoded' => false
-    }
+    event = {'httpMethod' => 'GET'}
     result = Lamby.handler(app, event, @context)
 
     assert result.is_a?(Hash), "Expected result to be a Hash, but got #{result.class}"
