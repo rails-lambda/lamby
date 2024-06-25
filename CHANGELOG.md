@@ -2,6 +2,11 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.2.1
+
+- Rack v6 compatibility.
+- Exit gracefully when SIGTERM error happens.
+
 ## v5.2.0
 
 ### Fixed
