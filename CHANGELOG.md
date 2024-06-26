@@ -4,7 +4,7 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v5.2.1
 
-- Rack v6 compatibility.
+- Rack v7 compatibility.
 - Exit gracefully when SIGTERM error happens.
 
 ## v5.2.0
