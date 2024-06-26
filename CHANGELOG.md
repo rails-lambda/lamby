@@ -4,8 +4,8 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v5.2.1
 
-- Rack v7 compatibility.
-- Exit gracefully when SIGTERM error happens.
+- Rack 3.X compatibility, by removing uninitialized constants.
+- Exit gracefully when SIGTERM or SIGINT signal occurs.
 
 ## v5.2.0
 
