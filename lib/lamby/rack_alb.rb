@@ -36,6 +36,7 @@ module Lamby
     private
 
     def env_base
+      rack_version = defined?(::Rack::VERSION) ? ::Rack::VERSION : ::Rack::RELEASE
       { ::Rack::REQUEST_METHOD => event['httpMethod'],
         ::Rack::SCRIPT_NAME => '',
         ::Rack::PATH_INFO => event['path'] || '',
@@ -43,7 +44,7 @@ module Lamby
         ::Rack::SERVER_NAME => headers['host'],
         ::Rack::SERVER_PORT => headers['x-forwarded-port'],
         ::Rack::SERVER_PROTOCOL => 'HTTP/1.1',
-        ::Rack::RACK_VERSION => ::Rack::VERSION,
+        ::Rack::RACK_VERSION => rack_version,
         ::Rack::RACK_URL_SCHEME => headers['x-forwarded-proto'],
         ::Rack::RACK_INPUT => StringIO.new(body || ''),
         ::Rack::RACK_ERRORS => $stderr,

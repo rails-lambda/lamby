@@ -31,6 +31,7 @@ module Lamby
     private
 
     def env_base
+      rack_version = defined?(::Rack::VERSION) ? ::Rack::VERSION : ::Rack::RELEASE
       { ::Rack::REQUEST_METHOD => request_method,
         ::Rack::SCRIPT_NAME => '',
         ::Rack::PATH_INFO => path_info,
@@ -38,7 +39,7 @@ module Lamby
         ::Rack::SERVER_NAME => server_name,
         ::Rack::SERVER_PORT => server_port,
         ::Rack::SERVER_PROTOCOL => server_protocol,
-        ::Rack::RACK_VERSION => ::Rack::VERSION,
+        ::Rack::RACK_VERSION => rack_version,
         ::Rack::RACK_URL_SCHEME => 'https',
         ::Rack::RACK_INPUT => StringIO.new(body || ''),
         ::Rack::RACK_ERRORS => $stderr,
