@@ -2,21 +2,21 @@ module Lamby
   class RackHttp < Lamby::Rack
 
     class << self
-
       def handle?(event)
         event.key?('version') && 
           ( event.dig('requestContext', 'http') || 
             event.dig('requestContext', 'httpMethod') )
       end
-
     end
 
     def response(handler)
-      if handler.base64_encodeable?
-        { isBase64Encoded: true, body: handler.body64 }
-      else
-        super
-      end.tap do |r|
+      response = if handler.base64_encodeable?
+                   { isBase64Encoded: true, body: handler.body64 }
+                 else
+                   super
+                 end
+
+      response.tap do |r|
         if cookies = handler.set_cookies
           if payload_version_one?
             r[:multiValueHeaders] ||= {}
@@ -25,6 +25,9 @@ module Lamby
             r[:cookies] = cookies
           end
         end
+        r[:statusCode] = [handler.status.to_i, 100].max
+        r[:body] ||= handler.body
+        r[:headers] = r[:headers].transform_keys(&:downcase) if r[:headers]
       end
     end
 
@@ -69,10 +72,6 @@ module Lamby
       event['cookies'] || []
     end
 
-    # Using custom domain names with v1.0 yields a good `path` parameter sans
-    # stage. However, v2.0 and others do not. So we are just going to remove stage
-    # no matter waht from other places for both.
-    #
     def path_info
       stage = event.dig('requestContext', 'stage')
       spath = event.dig('requestContext', 'http', 'path') || event.dig('requestContext', 'path')
