@@ -2,23 +2,26 @@ module Lamby
   class RackRest < Lamby::Rack
     
     class << self
-
       def handle?(event)
         event.key?('httpMethod')
       end
-
     end
 
     def response(handler)
-      if handler.base64_encodeable?
-        { isBase64Encoded: true, body: handler.body64 }
-      else
-        super
-      end.tap do |r|
+      response = if handler.base64_encodeable?
+                   { isBase64Encoded: true, body: handler.body64 }
+                 else
+                   super
+                 end
+
+      response.tap do |r|
         if cookies = handler.set_cookies
           r[:multiValueHeaders] ||= {}
           r[:multiValueHeaders]['Set-Cookie'] = cookies
         end
+        r[:statusCode] = [handler.status.to_i, 100].max
+        r[:body] ||= handler.body
+        r[:headers] = r[:headers].transform_keys(&:downcase) if r[:headers]
       end
     end
 

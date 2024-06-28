@@ -2,12 +2,10 @@ module Lamby
   class RackAlb < Lamby::Rack
 
     class << self
-
       def handle?(event)
         event.key?('httpMethod') && 
           event.dig('requestContext', 'elb')
       end
-
     end
 
     def alb?
@@ -21,7 +19,7 @@ module Lamby
     def response(handler)
       hhdrs = handler.headers
       if multi_value?
-        multivalue_headers = hhdrs.transform_values { |v| Array[v].compact.flatten }
+        multivalue_headers = hhdrs.transform_values { |v| Array(v).compact.flatten }
         multivalue_headers['Set-Cookie'] = handler.set_cookies if handler.set_cookies
       end
       status_description = "#{handler.status} #{::Rack::Utils::HTTP_STATUS_CODES[handler.status]}"
@@ -30,7 +28,10 @@ module Lamby
       { multiValueHeaders: multivalue_headers,
         statusDescription: status_description,
         isBase64Encoded: base64_encode,
-        body: body }.compact
+        body: body }.tap do |r|
+          r[:statusCode] = [handler.status.to_i, 100].max
+          r[:headers] = r[:headers].transform_keys(&:downcase) if r[:headers]
+        end.compact
     end
 
     private
