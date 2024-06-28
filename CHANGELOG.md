@@ -2,6 +2,11 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.2.1
+
+- Rack 3.X compatibility, by removing uninitialized constants.
+- Exit gracefully when SIGTERM or SIGINT signal occurs.
+
 ## v5.2.0
 
 ### Fixed
