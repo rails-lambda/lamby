@@ -33,7 +33,7 @@ module Lamby
       return @set_cookies if defined?(@set_cookies)
       set_cookie = @headers.delete("Set-Cookie") || @headers.delete("set-cookie")
       @set_cookies = if @headers && set_cookie
-        set_cookie.split("\n").map(&:strip)
+        Array(set_cookie).flat_map { |cookie| cookie.split("\n").map(&:strip) }
       end
     end
 
