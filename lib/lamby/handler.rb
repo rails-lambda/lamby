@@ -31,14 +31,15 @@ module Lamby
 
     def set_cookies
       return @set_cookies if defined?(@set_cookies)
-      @set_cookies = if @headers && @headers['Set-Cookie']
-        @headers.delete('Set-Cookie').split("\n")
+      set_cookie = @headers.delete("Set-Cookie") || @headers.delete("set-cookie")
+      @set_cookies = if @headers && set_cookie
+        set_cookie.split("\n").map(&:strip)
       end
     end
 
-    def body
+    def body  
       @rbody ||= ''.tap do |rbody|
-        @body.each { |part| rbody << part if part }
+        @body.each { |part| rbody << part.to_s if part }
         @body.close if @body.respond_to? :close
       end
     end
@@ -76,10 +77,22 @@ module Lamby
       @options[:rack]
     end
 
+    # AWS Lambda proxy integrations 2.0
+    # https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html
+    # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.proxy-format
     def rack_response
       { statusCode: status,
-        headers: headers,
+        headers: stringify_values!(headers),
+        cookies: @set_cookies,
         body: body }.merge(rack.response(self))
+    end
+
+
+    def stringify_values!(headers)
+      headers.each do |k, v|
+        headers[k] = v.to_s
+      end
+      headers
     end
 
     def call_app

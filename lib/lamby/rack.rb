@@ -69,7 +69,8 @@ module Lamby
       @body ||= if event['body'] && base64_encoded?
         Base64.decode64 event['body']
       else
-        event['body']
+        body = "" # String
+        event['body'].each { |part| body << part.to_s }
       end
     end
 
