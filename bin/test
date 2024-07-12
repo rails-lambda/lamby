@@ -3,9 +3,9 @@ set -e
 
 export RAILS_ENV="test"
 
-# bundle exec appraisal rails-7.0 rake testv2
-# LAMBY_TEST_DYNAMIC_HANDLER=1 bundle exec appraisal rails-7.0 rake testv2
-# LAMBY_RACK_DEFLATE_ENABLED=1 bundle exec appraisal rails-7.0 rake test_deflatev2
+bundle exec appraisal rails-7.0 rake testv2
+LAMBY_TEST_DYNAMIC_HANDLER=1 bundle exec appraisal rails-7.0 rake testv2
+LAMBY_RACK_DEFLATE_ENABLED=1 bundle exec appraisal rails-7.0 rake test_deflatev2
 
 
 bundle exec appraisal rails-7.1 rake testv3
