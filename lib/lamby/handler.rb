@@ -51,6 +51,7 @@ module Lamby
 
     def base64_encodeable?(hdrs = @headers)
       hdrs && (
+        hdrs['content-transfer-encoding'] == 'binary' ||
         hdrs['Content-Transfer-Encoding'] == 'binary' ||
         content_encoding_compressed?(hdrs) ||
         hdrs['X-Lamby-Base64'] == '1'
@@ -77,9 +78,6 @@ module Lamby
       @options[:rack]
     end
 
-    # AWS Lambda proxy integrations 2.0
-    # https://docs.aws.amazon.com/lambda/latest/dg/urls-invocation.html
-    # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html#http-api-develop-integrations-lambda.proxy-format
     def rack_response
       { statusCode: status,
         headers: stringify_values!(headers),
@@ -116,7 +114,7 @@ module Lamby
     end
 
     def content_encoding_compressed?(hdrs)
-      content_encoding_header = hdrs['Content-Encoding'] || ''
+      content_encoding_header = hdrs['content-encoding'] || hdrs['Content-Encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
     end
 
