@@ -168,7 +168,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
       zeitwerk (~> 2.5)
-    rake (13.0.6)
+    rake (13.2.1)
     ruby2_keywords (0.0.5)
     thor (1.2.1)
     timecop (0.9.6)
