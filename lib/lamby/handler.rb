@@ -116,6 +116,7 @@ module Lamby
     def content_encoding_compressed?(hdrs)
       content_encoding_header = hdrs['Content-Encoding'] || hdrs['content-encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
+      hdrs.delete('content-encoding') if hdrs['content-encoding']
     end
 
     def rack?
