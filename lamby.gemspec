@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.add_dependency 'rack'
   spec.add_dependency 'lambda-console-ruby'
+  spec.add_development_dependency "appraisal"
   spec.add_development_dependency 'aws-sdk-ssm'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
