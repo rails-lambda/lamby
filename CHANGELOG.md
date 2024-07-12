@@ -2,6 +2,11 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.2.2
+
+- Fix Rack 3.X compatibility issues
+- Add Appraisals gem to test rack v2 and v3
+
 ## v5.2.1
 
 - Rack 3.X compatibility, by removing uninitialized constants.
