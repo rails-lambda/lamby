@@ -114,7 +114,7 @@ module Lamby
     end
 
     def content_encoding_compressed?(hdrs)
-      content_encoding_header = hdrs['content-encoding'] || hdrs['Content-Encoding'] || ''
+      content_encoding_header = hdrs['Content-Encoding'] || hdrs['content-encoding'] || ''
       content_encoding_header.split(', ').any? { |h| ['br', 'gzip'].include?(h) }
     end
 
