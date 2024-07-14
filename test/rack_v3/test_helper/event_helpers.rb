@@ -1,8 +1,0 @@
-require 'test_helper/events/base'
-require 'test_helper/events/rest'
-require 'test_helper/events/rest_post'
-require 'test_helper/events/alb'
-require 'test_helper/events/http_v1'
-require 'test_helper/events/http_v1_post'
-require 'test_helper/events/http_v2'
-require 'test_helper/events/http_v2_post'
