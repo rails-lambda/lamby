@@ -2,6 +2,10 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v5.2.2
+
+- Lock down to Rack < 3 in 5-stable branch.
+
 ## v5.2.1
 
 - Rack 3.X compatibility, by removing uninitialized constants.
