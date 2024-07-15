@@ -4,9 +4,11 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v6.0.0
 
-- Add support for Rack v3
-- Drop support for Rack v2
+### Changed
 
+- ⚠️ Breaking Changes ⚠️
+- Remove Rack v2 support. 
+- Added Rack v3 support. 
 
 ## v5.2.1
 
