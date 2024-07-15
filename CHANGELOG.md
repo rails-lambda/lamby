@@ -2,6 +2,14 @@
 
 See this http://keepachangelog.com link for information on how we want this documented formatted.
 
+## v6.0.0
+
+### Changed
+
+- ⚠️ Breaking Changes ⚠️
+- Remove Rack v2 support. 
+- Added Rack v3 support. 
+
 ## v5.2.1
 
 - Rack 3.X compatibility, by removing uninitialized constants.

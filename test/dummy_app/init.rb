@@ -27,7 +27,7 @@ module Dummy
     }
     # Mimic production environment.
     config.consider_all_requests_local = false
-    config.action_dispatch.show_exceptions = true
+    config.action_dispatch.show_exceptions = :all
     # Mimic test environment.
     config.action_controller.perform_caching = false
     config.action_controller.allow_forgery_protection = false

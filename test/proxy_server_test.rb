@@ -12,14 +12,14 @@ class ProxyServerTest < LambySpec
   it 'should return a 405 helpful message on GET' do
     response = get '/'
     expect(response.status).must_equal 405
-    expect(response.headers).must_equal({"Content-Type" => "text/html"})
+    expect(response.headers).must_equal({"content-type"=>"text/html", "content-length"=>"233"})
     expect(response.body).must_include 'Method Not Allowed'
   end
   
   it 'should call Lamby.cmd on POST and include full response as JSON' do
     response = post '/', json, 'CONTENT_TYPE' => 'application/json'
     expect(response.status).must_equal 200
-    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"755"})
     response_body = JSON.parse(response.body)
     expect(response_body['statusCode']).must_equal 200
     expect(response_body['headers']).must_be_kind_of Hash
@@ -30,7 +30,7 @@ class ProxyServerTest < LambySpec
     Lamby.stubs(:cmd).returns({statusCode: 200})
     response = post '/', json, 'CONTENT_TYPE' => 'application/json'
     expect(response.status).must_equal 200
-    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"18"})
     response_body = JSON.parse(response.body)
     expect(response_body['statusCode']).must_equal 200
     expect(response_body['headers']).must_be_nil
@@ -42,7 +42,7 @@ class ProxyServerTest < LambySpec
     Lamby.config.rack_app = rack_app
     response = post '/', json, 'CONTENT_TYPE' => 'application/json'
     expect(response.status).must_equal 200
-    expect(response.headers).must_equal({"Content-Type" => "application/json"})
+    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"58"})
     response_body = JSON.parse(response.body)
     expect(response_body['statusCode']).must_equal 200
     expect(response_body['headers']).must_equal({})

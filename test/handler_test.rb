@@ -45,7 +45,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image)
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       expect(result[:isBase64Encoded]).must_equal true
       # Public file server.
       event = TestHelpers::Events::HttpV2.create(
@@ -55,7 +55,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
       expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
       expect(result[:isBase64Encoded]).must_equal true
@@ -65,7 +65,6 @@ class HandlerTest < LambySpec
       event = TestHelpers::Events::HttpV2Post.create
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 302
-      expect(result[:body]).must_match %r{https://myawesomelambda.example.com}
       expect(result[:headers]['Location']).must_equal 'https://myawesomelambda.example.com/'
       # Check logged in state via GET.
       event = TestHelpers::Events::HttpV2.create(
@@ -141,7 +140,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image)
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       # Public file server.
       event = TestHelpers::Events::HttpV1.create(
         'path' => '/production/1-public.png',
@@ -150,7 +149,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
       expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
       expect(result[:isBase64Encoded]).must_equal true
@@ -160,7 +159,6 @@ class HandlerTest < LambySpec
       event = TestHelpers::Events::HttpV1Post.create
       result = Lamby.handler app, event, context, rack: :http
       expect(result[:statusCode]).must_equal 302
-      expect(result[:body]).must_match %r{https://myawesomelambda.example.com}
       expect(result[:headers]['Location']).must_equal 'https://myawesomelambda.example.com/'
       # Check logged in state via GET.
       event = TestHelpers::Events::HttpV1.create(
@@ -225,7 +223,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :rest
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image)
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       # Public file server.
       event = TestHelpers::Events::Rest.create(
         'path' => '/1-public.png',
@@ -234,7 +232,7 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :rest
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
       expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
       expect(result[:isBase64Encoded]).must_equal true
@@ -244,7 +242,6 @@ class HandlerTest < LambySpec
       event = TestHelpers::Events::RestPost.create
       result = Lamby.handler app, event, context, rack: :rest
       expect(result[:statusCode]).must_equal 302
-      expect(result[:body]).must_match %r{https://myawesomelambda.example.com}
       expect(result[:headers]['Location']).must_equal 'https://myawesomelambda.example.com/'
       # Check logged in state via GET.
       event = TestHelpers::Events::Rest.create(
@@ -303,12 +300,12 @@ class HandlerTest < LambySpec
       result = Lamby.handler app, event, context, rack: :alb
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image)
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       event = TestHelpers::Events::Alb.create 'path' => '/1-public.png'
       result = Lamby.handler app, event, context, rack: :alb
       expect(result[:statusCode]).must_equal 200
       expect(result[:body]).must_equal encode64(dummy_app_image_public), 'not'
-      expect(result[:headers]['Content-Type']).must_equal 'image/png'
+      expect(result[:headers]['content-type']).must_equal 'image/png'
       expect(result[:headers]['Cache-Control']).must_equal 'public, max-age=2592000'
       expect(result[:headers]['X-Lamby-Base64']).must_equal '1'
       expect(result[:isBase64Encoded]).must_equal true

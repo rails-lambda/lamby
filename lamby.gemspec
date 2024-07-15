@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.add_dependency 'rack'
+  spec.add_dependency 'rack', '>= 3.0.0' 
   spec.add_dependency 'lambda-console-ruby'
   spec.add_development_dependency 'aws-sdk-ssm'
   spec.add_development_dependency 'bundler'
