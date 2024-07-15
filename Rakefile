@@ -27,4 +27,4 @@ Rake::TestTask.new(:test_deflate) do |t|
 end
 
 
-task :default => [:testv2, :testv3, :test_deflate]
+task :default => [:test, :test_deflate]
