@@ -82,10 +82,6 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    appraisal (2.5.0)
-      bundler
-      rake
-      thor (>= 0.14.0)
     aws-eventstream (1.2.0)
     aws-partitions (1.752.0)
     aws-sdk-core (3.171.0)
@@ -225,7 +221,6 @@ PLATFORMS
   arm64-darwin-23
 
 DEPENDENCIES
-  appraisal
   aws-sdk-ssm
   bundler
   lambdakiq
