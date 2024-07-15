@@ -16,8 +16,6 @@ Rake::TestTask.new(:test) do |t|
   t.warning = false
 end
 
-
-
 Rake::TestTask.new(:test_deflate) do |t|
   t.libs << "test"
   t.libs << "lib"
@@ -25,6 +23,5 @@ Rake::TestTask.new(:test_deflate) do |t|
   t.verbose = false
   t.warning = false
 end
-
 
 task :default => [:test, :test_deflate]

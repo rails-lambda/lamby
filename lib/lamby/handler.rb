@@ -37,7 +37,7 @@ module Lamby
       end
     end
 
-    def body  
+    def body
       @rbody ||= ''.tap do |rbody|
         @body.each { |part| rbody << part.to_s if part }
         @body.close if @body.respond_to? :close
@@ -84,7 +84,6 @@ module Lamby
         cookies: @set_cookies,
         body: body }.merge(rack.response(self))
     end
-
 
     def stringify_values!(headers)
       headers.each do |k, v|
