@@ -3,7 +3,7 @@ require "bundler/gem_tasks"
 require "rake/testtask"
 
 Rake::TestTask.new(:test) do |t|
-  t.libs << "test/rack_v2"
+  t.libs << "test"
   t.libs << "lib"
   t.test_files = begin
     if ENV['TEST_FILE']
@@ -19,7 +19,7 @@ end
 
 
 Rake::TestTask.new(:test_deflate) do |t|
-  t.libs << "test/rack_v2"
+  t.libs << "test"
   t.libs << "lib"
   t.test_files = FileList["test/rack_deflate_test.rb"]
   t.verbose = false
