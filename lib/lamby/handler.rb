@@ -81,7 +81,6 @@ module Lamby
     def rack_response
       { statusCode: status,
         headers: stringify_values!(headers),
-        cookies: @set_cookies,
         body: body }.merge(rack.response(self))
     end
 
