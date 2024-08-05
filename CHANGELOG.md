@@ -4,6 +4,10 @@ See this http://keepachangelog.com link for information on how we want this docu
 
 ## v6.0.0
 
+- Remove "cookies" header from rack response to conform to Lambda proxy integration requirements.
+
+## v6.0.0
+
 ### Changed
 
 - ⚠️ Breaking Changes ⚠️
