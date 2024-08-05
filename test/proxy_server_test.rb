@@ -19,7 +19,7 @@ class ProxyServerTest < LambySpec
   it 'should call Lamby.cmd on POST and include full response as JSON' do
     response = post '/', json, 'CONTENT_TYPE' => 'application/json'
     expect(response.status).must_equal 200
-    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"755"})
+    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"740"})
     response_body = JSON.parse(response.body)
     expect(response_body['statusCode']).must_equal 200
     expect(response_body['headers']).must_be_kind_of Hash
@@ -42,7 +42,7 @@ class ProxyServerTest < LambySpec
     Lamby.config.rack_app = rack_app
     response = post '/', json, 'CONTENT_TYPE' => 'application/json'
     expect(response.status).must_equal 200
-    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"58"})
+    expect(response.headers).must_equal({"content-type"=>"application/json", "content-length"=>"43"})
     response_body = JSON.parse(response.body)
     expect(response_body['statusCode']).must_equal 200
     expect(response_body['headers']).must_equal({})
