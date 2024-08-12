@@ -5,24 +5,19 @@ on:
       - master
 
 jobs:
-  build_and_release:
-    runs-on: ubuntu-latest
+  release:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup & Release
+        uses: devcontainers/ci@v0.3
         with:
-          ruby-version: 3.1
-
-      - name: Install dependencies
-        run: bundle install
-
-      - name: Build gem
-        run: gem build lamby.gemspec
-
-      - name: Publish gem
-        env:
-          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-        run: gem push ./lamby-*.gem
+          push: never
+          cacheFrom: ghcr.io/rails-lambda/lamby-devcontainer
+          env:
+            RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+          runCmd: |
+            ./bin/setup
+            gem build lamby.gemspec
+            gem push ./lamby-*.gem
