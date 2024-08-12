@@ -19,5 +19,4 @@ jobs:
             RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
           runCmd: |
             ./bin/setup
-            gem build lamby.gemspec
-            gem push ./lamby-*.gem
+            ./bin/release
