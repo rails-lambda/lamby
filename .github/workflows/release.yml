@@ -5,7 +5,7 @@ on:
       - master
 
 jobs:
-  build:
+  build_and_release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,21 +21,6 @@ jobs:
 
       - name: Build gem
         run: gem build lamby.gemspec
-
-      - name: Upload gem artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: lamby-gem
-          path: ./lamby-*.gem
-
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download gem artifact
-        uses: actions/download-artifact@v6
-        with:
-          name: lamby-gem
 
       - name: Publish gem
         env:
