@@ -5,7 +5,19 @@ class HandlerTest < LambySpec
   let(:app)     { Rack::Builder.new { run Rails.application }.to_app }
   let(:context) { TestHelpers::LambdaContext.new }
 
+
   describe 'http-v2' do
+    it 'returns the correct rack response' do
+      event = TestHelpers::Events::HttpV2.create
+      handler = Lamby::Handler.new(app, event, context, rack: :http)
+      handler.call
+      response = handler.send(:rack_response)
+
+      expect(response[:statusCode]).must_equal 200
+      expect(response[:headers]['Content-Type']).must_equal 'text/html; charset=utf-8'
+      expect(response[:body]).must_match %r{<h1>Hello Lamby</h1>}
+      expect(response.keys).must_equal [:statusCode, :headers, :body]
+    end
 
     it 'get' do
       event = TestHelpers::Events::HttpV2.create
@@ -100,6 +112,18 @@ class HandlerTest < LambySpec
   end
 
   describe 'http-v1' do
+
+    it 'returns the correct rack response' do
+      event = TestHelpers::Events::HttpV1.create
+      handler = Lamby::Handler.new(app, event, context, rack: :http)
+      handler.call
+      response = handler.send(:rack_response)
+
+      expect(response[:statusCode]).must_equal 200
+      expect(response[:headers]['Content-Type']).must_equal 'text/html; charset=utf-8'
+      expect(response[:body]).must_match %r{<h1>Hello Lamby</h1>}
+      expect(response.keys).must_equal [:statusCode, :headers, :body]
+    end
 
     it 'get' do
       event = TestHelpers::Events::HttpV1.create
