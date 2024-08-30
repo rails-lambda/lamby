@@ -5,18 +5,22 @@ on:
       - master
 
 jobs:
-  release:
-    runs-on: ubuntu-20.04
+  push:
+    name: Push gem to RubyGems.org
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # IMPORTANT: this permission is mandatory for trusted publishing
+      contents: write # IMPORTANT: this permission is required for `rake release` to push the release tag
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup & Release
-        uses: devcontainers/ci@v0.3
+      # Set up
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          push: never
-          cacheFrom: ghcr.io/rails-lambda/lamby-devcontainer
-          env:
-            RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
-          runCmd: |
-            ./bin/setup
-            ./bin/release
+          bundler-cache: true
+          ruby-version: ruby
+
+      # Release
+      - uses: rubygems/release-gem@v1
