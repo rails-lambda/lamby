@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-
-echo '== Releasing =='
-gem build lamby.gemspec
-gem push ./lamby-*.gem
