@@ -3,7 +3,7 @@ on: [push]
 jobs:
   image:
     name: Image
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v3
       - uses: docker/login-action@v2
@@ -18,7 +18,7 @@ jobs:
           cacheFrom: ghcr.io/rails-lambda/lamby-devcontainer
           runCmd: echo DONE!
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: image
     steps:
       - name: Checkout
