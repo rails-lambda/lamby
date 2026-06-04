@@ -5,7 +5,7 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/node:latest": {},
-    "ghcr.io/devcontainers/features/docker-in-docker:latest": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:latest": { "moby": false },
     "ghcr.io/devcontainers/features/sshd:latest": {}
   },
   "customizations": {
