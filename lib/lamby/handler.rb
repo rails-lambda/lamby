@@ -38,7 +38,7 @@ module Lamby
     end
 
     def body
-      @rbody ||= ''.tap do |rbody|
+      @rbody ||= String.new.tap do |rbody|
         @body.each { |part| rbody << part.to_s if part }
         @body.close if @body.respond_to? :close
       end

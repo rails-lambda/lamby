@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lamby (6.0.1)
+    lamby (7.0.0)
       lambda-console-ruby
       rack (>= 3.0.0)
 
@@ -245,6 +245,7 @@ PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
+  arm64-darwin-25
   x86_64-linux
 
 DEPENDENCIES
@@ -263,4 +264,4 @@ DEPENDENCIES
   webrick
 
 BUNDLED WITH
-   2.3.26
+  4.0.13
