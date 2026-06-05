@@ -255,7 +255,7 @@ DEPENDENCIES
   lamby!
   minitest
   minitest-focus
-  mocha (~> 3.1, >= 0)
+  mocha (~> 3.1)
   pry
   rack (~> 3.2)
   rails (~> 8.1)
