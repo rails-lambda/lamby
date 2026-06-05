@@ -68,7 +68,7 @@ module Lamby
     end
 
     def dotenv_contents
-      params.each_with_object('') do |param, contents|
+      params.each_with_object(String.new) do |param, contents|
         line = "#{param.env}=#{param.value}\n"
         contents << line
       end
